@@ -1,0 +1,52 @@
+/*操作步骤*/
+.procedure-list {
+    list-style: none;
+    display: flex;
+    margin: 60px auto 0;
+    width: 1200px;
+    padding-left: 0px;
+}
+.procedure-list li {
+    position: relative;
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    color: #3A4250;
+}
+.icon-procedure1, .icon-procedure2, .icon-procedure3, .icon-procedure4, .icon-procedure5 {
+    width: 60px;
+    height: 63px;
+    background-position: 0 -82px;
+}
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    background-image: url("../images/icon.png")/*tpa=https://static.cicimap.cn/Promotion/images/icon.png*/;
+    background-repeat: no-repeat;
+}
+.icon-procedure2 {
+    background-position: -72px -82px;
+}
+.icon-procedure3 {
+    background-position: -145px -82px;
+}
+.icon-procedure4 {
+    background-position: -216px -82px;
+}
+.icon-procedure5 {
+    background-position: -286px -82px;
+}
+.procedure-list li:after {
+    content: ' ';
+    position: absolute;
+    top: 29px;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent transparent transparent rgba(42, 159, 246, .5);
+    border-width: 7px 0 7px 11px;
+}
+.procedure-list li:last-child:after {
+    display: none;
+}

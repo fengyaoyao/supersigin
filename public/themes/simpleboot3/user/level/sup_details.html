@@ -1,0 +1,822 @@
+<include file="public@head"/>
+<link rel="stylesheet" href="//at.alicdn.com/t/font_780494_fdjuk9baed7.css">
+<link href="__STATIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<style>
+    .right{float:right}
+    .layui-tab-content{border: 1px solid #ececec;margin-top: -1px;background-color: #fff;}
+    .layui-tab-title .layui-this{background-color: #fff;}
+    .sq-sup{border: 1px solid #ececec;box-shadow: 3px 3px 3px #ececec;margin-bottom: 40px;}
+    .sq-sup__info{background-color: #f5f6f8;display: flex;padding: 30px;align-items: center;}
+    .sq-sup__info .info-logo img{width: 90px;height: 90px;border-radius: 4px;}
+    .sq-sup__info .info-base{margin-left: 20px;}
+    .sq-sup__info .info-base .info-base__item1{font-size: 18px;font-weight: bold;color: #000;margin-bottom: 10px;}
+    .sq-sup__info .info-base .info-base__item2{color: #666;line-height: 24px;}
+    .sq-sup .sq-sup__items{display: flex;padding: 30px;background-color: #fff;}
+    .sq-sup .sq-sup__items dl{flex: 1}
+    .sq-sup .sq-sup__items dl dt{color: #777;margin-bottom: 5px;}
+    .sq-sup .sq-sup__items dl dd{font-size: 18px;}
+	.upload_btu{position: absolute;right:100px;background: linear-gradient(90deg,#348ef1,#49afff);border-radius: 4px;}
+	.layui-form-onswitch{background-color:#1E9FFF;border-color:#1E9FFF}
+	.layui-form-radio>i:hover, .layui-form-radioed>i{color:#1E9FFF}
+	.download-template ul li {
+    float: left;
+    margin-right: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.download-template .t-checked-wrap {
+    width: 125px;
+    height: 155px;
+    position: relative;
+    border: 1px solid #e5e5e5;
+    overflow: hidden;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.download-template .text {
+    color: #157df1;
+}
+.radio {
+    -webkit-appearance: radio;
+	margin: 4px 0 0;
+    line-height: normal;
+	box-sizing: border-box;
+    padding: 0;
+	display: none!important;
+}
+.download-template .t-checked-wrap .t-checked {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,.6);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+.download-template .t-checked-wrap .t-checked .iconfont {
+    color: #fff;
+    font-size: 32px;
+}
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.radios .layui-anim.layui-icon {
+    display: none!important;
+}
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+</style>
+
+<body class="body-white">
+    <div class="templatemo-content">
+        <!-- 我的应用左侧 -->
+        <include file="public@tube"/>
+        <!-- 我的应用左侧 -->
+
+        <!-- begin app详情-->
+        <div class="templatemo-body">
+            <div class="sq-sup">
+                <div class="sq-sup__info">
+                    <div class="info-logo">
+                        <img src="{$assets.img}">
+                    </div>
+                    <div class="info-base">
+                        <p class="info-base__item1">{$assets.name}</p>
+                        <p class="info-base__item2">苹果版本:{$assets.version}</p>
+                        <p class="info-base__item2">安卓版本:{$assets.version}</p>
+                    </div>
+					<button type="button" id="upload_btu" class="layui-btn upload_btu right">更新应用</button>
+                </div>
+
+                <div class="sq-sup__items">
+                    <dl>
+                        <dt>大小</dt>
+                        <dd>{$assets.big}MB</dd>
+                    </dl>
+                    <dl>
+                        <dt>总装机数</dt>
+                        <dd>{$appCount}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Bundle ID</dt>
+                        <dd>{$assets.bundle}</dd>
+                    </dl>
+                    <dl>
+                        <dt>下载地址</dt>
+                        <dd>
+							<i class="fa fa-qrcode imgtip" style="cursor:pointer" value=""></i>
+                            <a href="{:getsite()}/{$assets.er_logo}" target="_blank" style="color:#348ef1;text-decoration:none;">
+                                {:getsite()}/{$assets.er_logo}
+                            </a>
+                        </dd>
+                    </dl>
+                   
+                </div>
+            </div>
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="<?=!isset($tab) || $tab=='edit'?'layui-this':''?>">应用信息</li>
+                    <li id="table_old_li" class="<?=isset($tab) && $tab=='old'?'layui-this':''?>">历史版本</li>
+                    <li id="table_sup_li" class="<?=isset($tab) && $tab=='sup'?'layui-this':''?>">装机记录</li>
+                    <li id="table_down_li" class="<?=isset($tab) && $tab=='down'?'layui-this':''?>">下载记录</li>
+					<li id="table_channel_li" class="<?=isset($tab) && $tab=='channel'?'layui-this':''?>">下载码</li>
+					<li id="table_hb_li" class="<?=isset($tab) && $tab=='hb'?'layui-this':''?>">合并安卓应用</li>
+				    <li id="table_ads_li" class="<?=isset($tab) && $tab=='ads'?'layui-this':''?>">轮播图</li>
+                    
+					<!-- <li id="table_fzb_li" class="<?=isset($tab) && $tab=='fzb'?'layui-this':''?>">反作弊设置</li> -->
+					<li id="table_theme_li" class="<?=isset($tab) && $tab=='theme'?'layui-this':''?>">模板设置</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item <?=!isset($tab) || $tab=='edit'?'layui-show':''?> ">
+                        <form class="layui-form" action="" style="margin-top: 10px">
+							<input type="hidden" name="id" value="{$assets['id']}" />
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">应用状态</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" <?=$assets['status']==1?'checked':''?> name="status" lay-skin="switch" lay-text="开启|关闭">
+                                </div>
+                            </div>
+                            <div class="layui-form-item	">
+                                <label class="layui-form-label">安装方式</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="way" lay-filter="way" value="0" title="公开安装" <?=$assets['way']==0?'checked':''?>>
+									<input type="radio" name="way" lay-filter="way" value="3"  title="验证码安装" <?=$assets['way']==3?'checked':''?>>
+									<input type="radio" name="way" lay-filter="way" value="4"  title="下载码安装" <?=$assets['way']==4?'checked':''?>>
+                                    <input type="radio" name="way" lay-filter="way" value="1"  title="密码安装" <?=$assets['way']==1?'checked':''?>>
+									
+                                </div>
+                            </div>
+							<div class="layui-form-item layui-form-text" id="password" <?=$assets['way']!=1?'hidden':''?>>
+								<label class="layui-form-label">安装密码</label>
+								<div class="layui-input-block">
+									<input type="text" name="pass" value="{$assets['pass']}" placeholder="请设置安装密码" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+                            <div class="layui-form-item layui-form-text" id="money" <?=$assets['way']!=2?'hidden':''?>>
+								<label class="layui-form-label">付费金额</label>
+								<div class="layui-input-block">
+									<input type="number" name="money" value="{$assets['money']}" placeholder="请设置付费金额" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d.]/g,'')" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">下载完后</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="openWay" value="0" title="桌面打开" checked>
+                                    <!--<input type="radio" name="openWay" value="1"  title="直接打开">-->
+                                </div>
+                            </div>
+							
+							<!-- <div class="layui-form-item">
+                                <label class="layui-form-label">消息推送</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="message" value="0" title="需要推送功能，请联系客服" checked disabled>
+                                </div>
+                            </div> -->
+							<div class="layui-form-item">
+                                <label class="layui-form-label">应用图标</label>
+                                <div class="layui-input-block">
+                                  <button type="button" id="upload_icon" class="layui-btn" style="background: linear-gradient(90deg,#348ef1,#49afff);">上传图标</button>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">应用名字</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="name" required value="{$assets['name']}" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">应用介绍</label>
+                                <div class="layui-input-block">
+                                    <textarea name="introduce" placeholder="请输入内容" class="layui-textarea">{$assets['introduce']}</textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">更新说明</label>
+                                <div class="layui-input-block">
+                                    <textarea name="instructions" placeholder="请输入内容" class="layui-textarea">{$assets['instructions']}</textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="form_date">立即提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="table_old" class="layui-tab-item <?=(isset($tab) && $tab=='old')?'layui-show':''?>">
+
+                    </div>
+                    
+					<div id="table_sup"  class="layui-tab-item  <?= isset($tab) && $tab=='sup'?'layui-show':''?>">
+
+                    </div>
+                    
+                    <div id="table_down" class="layui-tab-item <?= isset($tab) && $tab=='down'?'layui-show':''?>">
+                      
+                    </div>
+					<div id="table_channel" class="layui-tab-item <?= isset($tab) && $tab=='channel'?'layui-show':''?>">
+						<form class="layui-form" action="">
+							<div class="layui-form-item">			
+								<div class="layui-input-inline">
+									<input type="text" id="channel_num" name="channel_num" placeholder="创建个数" value=""  autocomplete="off"
+									 class="layui-input" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d]/g,'')">
+								</div>
+								<div class="layui-input-inline">
+									<input type="text" id="channel_count" name="channel_count" placeholder="单个使用次数" value=""  autocomplete="off"
+									 class="layui-input" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d]/g,'')">
+								</div>
+								<div class="layui-input-inline" style="width:auto">
+									<button type="button" id="channel_btn" class="layui-btn" style="background: linear-gradient(90deg,#348ef1,#49afff);">自定义生成</button>
+								</div>
+							</div>
+						</form>
+						<div id="table_channel_t"></div>
+					</div>
+                    <div id="table_hb" class="layui-tab-item <?= isset($tab) && $tab=='hb'?'layui-show':''?>" style="padding: 30px">
+						<form class="layui-form" action="">
+							<div class="layui-form-item">
+								<div class="layui-input-inline " style="width:155px;">
+									<input type="radio" name="x" id="x1" value="Andriod下载地址" title="Andriod下载地址" checked="">
+								</div>
+								
+								<div class="layui-input-inline " style="width:350px;">
+								  <input type="text" id="andriod_url" name="andriod_url" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+								</div>
+								<div class="layui-input-inline">
+								  <button type="button" class="layui-btn"  id="btn_andriod_url" style="background: linear-gradient(90deg,#348ef1,#49afff);">保存</button>
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<div class="layui-input-inline " style="width:155px;">
+									<input name="x" id="x2" type="radio" value="Andriod应用上传" title="Andriod应用上传" >
+								</div>
+								<div class="layui-input-inline">
+								  <button type="button" id="upload" class="layui-btn" style="background: linear-gradient(90deg,#348ef1,#49afff);">上传APK文件</button>
+								</div>
+							</div>
+						</form>
+                    </div>					
+                    <!--轮播图-->
+					<div class="layui-tab-item " >
+					     <form class="layui-form" action="">
+                            <div class="layui-form-item">
+                                <div class="layui-input-inline">
+                                  <button type="button" id="uploadAds" class="layui-btn" style="background: linear-gradient(90deg,#348ef1,#49afff);">上传轮播图</button>
+                                </div>
+                            </div>
+                            <div id="table_ads">
+                            	
+                            </div>
+                        </form>
+					</div>
+<!-- 					<div class="layui-tab-item <?= isset($tab) && $tab=='fzb'?'layui-show':''?>" style="padding: 30px 30px 80px">
+					    <form class="layui-form" action="">
+							<div class="layui-form-item">
+                                <label class="layui-form-label" style="width: 150px;">总限量下载(台):</label>
+                                <div class="layui-input-inline">
+                                   <input type="text" name="warning_num" id="warning_nums" value="{$assets.warning_num}" lay-verify="number" autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-input-inline">
+                                  <button type="button" id="btn_warning" class="layui-btn" style="background: linear-gradient(90deg,#348ef1,#49afff);">保存</button>
+                                </div>
+                            </div>
+                            <label class="layui-form-label" style="color:#999;margin-left: 180px;padding: 9px 0;width: auto">
+                                总限制下载量达到您的预设值时，该应用将会限制下载。您可修改下载上限。（0为不限制）
+                            </label>
+                            
+                            <div class="layui-form-item">
+                                <label class="layui-form-label" style="width: 150px;">每天限量下载(台):</label>
+                                <div class="layui-input-inline">
+                                   <input type="text" name="warning" id="warning_num" value="{$assets.warning}" lay-verify="number" autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-input-inline">
+                                  <button type="button" id="warning" class="layui-btn" style="background: linear-gradient(90deg,#348ef1,#49afff);">保存</button>
+                                </div>
+                            </div>
+                            <label class="layui-form-label" style="color:#999;margin-left: 180px;padding: 9px 0;width: auto">
+                                限制下载量达到您的预设值时，该应用将会限制下载。您可修改下载上限，或等待第二日自动重新上架。（0为不限制）
+                            </label>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label" style="width: 150px;">时间范围（单位秒）:</label>
+                                <div class="layui-input-inline">
+                                   <input type="text" name="warning_iptime" id="warning_iptime" value="{$assets.warning_iptime}" lay-verify="number" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+							<div class="layui-form-item">
+							<label class="layui-form-label" style="width: 150px;">同IP限量下载:</label>
+                                <div class="layui-input-inline">
+                                   <input type="text" name="warning_ipnum" id="warning_ipnum" value="{$assets.warning_ipnum}" lay-verify="number" autocomplete="off" class="layui-input">
+                                </div>
+								<div class="layui-input-inline">
+                                  <button type="button" id="warning_ip" class="layui-btn" style="background: linear-gradient(90deg,#348ef1,#49afff);">保存</button>
+                                </div>
+							</div>
+                            <label class="layui-form-label" style="color:#999;margin-left: 180px;padding: 9px 0;width: auto">
+                              说明：设置了时间范围（单位为秒），同一IP限量下载数，该应用将会限制同一个IP在该时间范围内新设备下载安装。
+                            </label>
+                            <label class="layui-form-label" style="color:#999;margin-left: 180px;padding: 9px 0;width: auto">
+                              比如：时间范围设置600秒，限量下载设置5个，那么同一个ip在600秒内只允许安装5台新设备，全设置0则为不限制。
+                            </label>
+					    </form>
+					</div> -->
+					<div class="layui-tab-item <?= isset($tab) && $tab=='theme'?'layui-show':''?>" style="padding: 30px 30px 80px;min-height:420px;max-width:760px">
+					    <form class="layui-form" id="app_setting_form" action="">
+                            <div class="form-group">
+								<div class="col-sm-10 download-template radios">
+									<ul class="clearfix">
+									<?php for($i=0;$i<7;$i++){?>
+										<li>
+										<div class="t-checked-wrap">
+											<img src="__STATIC__/theme/template-<?= $i;?>.jpg" class="img-responsive">
+											<div class="t-checked" {$assets.theme==$i?'style="display:flex"':''}>
+												<span class="iconfont icon-xuanzhong1"></span>
+											</div>
+										</div>
+										<a href="{:get_site_url()}/{$assets.er_logo}?theme=<?= $i;?>" target="_blank" class="text">样式{$i+1}</a>
+										<input type="radio" name="template" class="radio" value="<?= $i;?>" class="hidden" {$assets.theme==$i?'checked':''}>
+										</li>
+										<?php }?>
+									</ul>
+								</div>
+								<div class="layui-input-inline" style="float:left;clear: both;">
+                                  <button type="button" id="submitButton" class="layui-btn" style="background: linear-gradient(90deg,#348ef1,#49afff);">保存</button>
+                                </div>
+							</div>
+					    </form>
+					</div>
+				</div>
+            </div>
+        </div>
+        <!-- begin app详情-->
+    </div>
+	<!--更新提示框-->
+
+	<div id="update_ios_from" class="sq-upload-app" >
+		<div class="j-form-upload app-form" style="font-size: 10px;" >
+		    <dl style="margin-bottom: 20px;">
+		        <dt>更新过程：</dt>
+		        <dd>上传新包后，用户在使用app时连接服务器会发现有更新，此时由于系统机制，将会退出应用，并弹窗选择是否更新。选择更新后，会在桌面开始下载，根据您的网络情况直到下载完成，再次打开就是新版本的应用。</dd>
+		        <!--<dd>若您选择的强制更新，则用户点击取消后，打开应用会被系统强制退出应用，用户需要再次选择是否更新。</dd>-->
+		        <!--<dd>若您选择的非强制更新，则用户点击取消后，打开应用能继续使用旧版本应用，直到您再次上传一个版本。</dd>-->
+				<dt>更新须知：</dt>
+				<dd>请您确保新ipa包内的bundleid一致，否则在用户手机将会产生两个一样但独立的（bundleid不一样的）应用；</dd>
+				<dd>请您确保新ipa包内的version是数字且递增，系统不能识别诸如1.a.1，或是仅build递增的更新包。</dd>
+		    </dl>
+		    <div>
+		        <button class="j-update-btn  sq-upload-btn">
+		            <i class="layui-icon">&#xe67c;</i>
+		            <span>立即上传</span>
+		        </button>
+		        <input style="display: none" data-id="{$id}" id="j-updata-ipa" data-action="update"  type="file"  name="upload" onchange="uploadIpa(this);">
+		    </div>
+		    <div style="text-align: center;margin-top: 20px;color: #777">
+		        <p>点击按钮选择应用的安装包</p>
+		        <p>(支持IPA文件，单个文件最大支持2GB，支持中断后续传)</p>
+		    </div>
+		
+		    <div class="j-upload-ing" style="display: none">
+		        <div class="layui-progress" style="margin-top: 30px">
+		            <div class="j-upload-progress layui-progress-bar layui-bg-blue"></div>
+		        </div>
+		
+		        <div class="" style="margin-top: 6px;color: #999">
+		            <span>应用上传中，请不要关闭页面</span>
+		            <span class="j-upload-loaded">0M</span>
+		            /
+		            <span class="j-upload-total">0M</span>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</body>
+<div id="enlarge_images" style="position:fixed;display:none;z-index:2;"></div>
+<include file="public@footer"/>
+<script src="__STATIC__/js/table_temp.js"></script>
+<script src="__STATIC__/js/qcode/jquery.qrcode.min.js"></script>
+<script>
+//获取轮播图列表
+function get_ads_list(){
+	var url='/user/tube/get_sup_details_data.html?id={$id}&type=ads';
+	var thead={'url':'轮播图','addtime':'上传时间','action':'操作'};
+	set_table(thead,url,'#table_ads');
+}
+	
+//删除下载
+function delAds(id){
+	$.get('/user/tube/del_ads.html?id='+id,function(res){
+		if (res.code == 1) {
+			get_ads_list();
+		}
+		layer.msg(res.msg);
+	})
+}
+function change_down_num(obj,id){
+	$.get('{:url("tube/edit_code_num")}?id='+id+'&num='+$(obj).val(),function(res){
+		layer.msg(res.msg)
+	});
+	
+}
+var down_num=0;
+function edit_down_num(obj,id){
+	$(obj).addClass('down_num_input_hover');
+	num = $(obj).val();
+	if(down_num != num){
+		$.get('{:url("tube/edit_channel")}?id='+id+'&down_num='+num,function(res){
+			layer.msg(res.msg);
+		})
+	}
+
+}
+
+function edit_down(obj){
+	$(obj).removeClass('down_num_input_hover');
+	down_num = $(obj).val();
+}
+function del(id){
+	$.get('{:url("tube/del_channel")}?id='+id,function(res){
+	if (res.code == 1) {
+		get_channel_list();
+		}
+		layer.msg(res.msg);
+		})
+	}
+
+function get_channel_list(){
+	url = '{:url("tube/channel_list")}?id={$id}';
+	thead = {
+		'id': 'ID',
+		'code': '下载码',
+		'down_num':'安装上限(点击修改,0为不限制)',
+		'count': '使用次数',
+		'create_time': '生成时间',
+		'action':'操作'
+	};
+	table = set_table(thead, url, '#table_channel_t');
+}
+$(function(){
+	jQuery('#enlarge_images').qrcode({
+		render: "canvas",
+		width: 200,
+		height: 200,
+		text: "{:getsite()}/{$assets.er_logo}"
+	});
+	var ei=$('#enlarge_images');
+	var imgtip=$('.imgtip');
+	imgtip.mousemove(function(event){
+		event = event || window.event;
+		var top  = document.body.scrollTop + event.clientY + 10 + "px";
+		var left = document.body.scrollLeft + event.clientX + 10 + "px";
+	
+		var css={
+			'display':'block',
+			'top':top,
+			'left':left,
+		}
+		ei.css(css);
+	})
+	
+	imgtip.mouseout(function(){              
+		var css={
+			'display':'none',
+		}
+		ei.css(css);
+	})
+	imgtip.click(function(){               
+		var css={
+			'display':'none',
+		}
+		ei.css(css);
+	})
+
+	$('#channel_btn').click(function(){
+		num = $('#channel_num').val();
+		if(!num){
+			layer.msg('请输入创建个数');
+			return false;
+		}
+		count = $('#channel_count').val();
+		if(!count){
+			layer.msg('请输入单个使用次数');
+			return false;
+		}
+		$.get("{:url("tube/set_channel")}?id={$id}&num="+num+'&count='+count,function(res){
+			if(res.code==1){
+				get_channel_list();
+			}
+			layer.msg(res.msg);
+		});
+	});
+	
+	$('#channel_btn_rand').click(function(){
+		$.get("{:url("tube/set_channel")}?id={$id}&rand=true",function(res){
+			if(res.code==1){
+				get_channel_list();
+			}
+			layer.msg(res.msg);
+		});
+	});
+	$('#table_channel_li').click(function(){
+		get_channel_list();
+	});
+
+	$(".download-template ul li .t-checked-wrap").click(function () {
+        var i = $(this).parent().index();
+        $(".download-template ul li .t-checked-wrap").find(".t-checked").hide();
+        $(this).find(".t-checked").css("display", "flex");
+        $(".download-template ul li input[type=radio]").prop("checked", false);
+        $(this).parent("li").find("input[type=radio]").prop("checked", true);
+    });
+    $('#submitButton').click(function () {
+        $.post("{:url('tube/sup_details_update')}",{id:{$id},'theme':$('#app_setting_form input:radio:checked').val()},function(res){
+			if(res.code==200){
+				layer.msg('修改成功',{icon:6});
+			}else{
+				layer.msg(res.msg,{icon:5});
+			}
+		});
+    });
+	if('{$tab}' == 'hb'){
+		hb();
+	}
+
+	function hb(){
+		var url='{:url("tube/get_sup_details_data")}?id={$id}&type=hb&bundle={$assets.bundle}';
+		$.get(url,function(res){
+			$('#andriod_url').val(res.andriod_url);
+		});
+	}
+
+	$('#upload_btu').click(function(){
+		layer.open({
+			type     : 1,
+			title    : '更新应用',
+			area     : ['600px', '600px'],
+			content  : $('#update_ios_from'),
+			cancel   : function(index, layero){
+				$('#update_ios_from').css('display','none');
+				layer.close(index)
+				return false;
+			}
+		});
+	});
+
+	$('#table_sup_li').click(function(){
+		var url='{:url("tube/get_sup_details_data")}?id={$id}&type=sup';
+		var thead={'udid':'UDID','version':'APP版本','ip':'IP','channel':'下载码','create_time':'装机时间'};
+		set_table(thead,url,'#table_sup');
+	});
+
+	$('#table_old_li').click(function(){
+		var url='{:url("tube/get_sup_details_data")}?id={$id}&type=old';
+		var thead={'version':'版本','big':'大小(MB)','creattime':'更新时间'};
+		set_table(thead,url,'#table_old');
+	});
+
+	$('#table_down_li').click(function(){
+		var url='{:url("tube/get_sup_details_data")}?id={$id}&type=down';
+		var thead={'device':'设备','version':'APP版本','ip':'下载IP','addtime':'下载时间'};
+		set_table(thead,url,'#table_down');
+	});
+
+	$('.j-update-btn').click(function(){
+		if(!$(this).hasClass('disabled')){
+			$('#j-updata-ipa').trigger('click')
+		}
+	});
+
+	$('#table_hb_li').click(function(){
+		hb();
+	});
+	//轮播图
+	$('#table_ads_li').click(function(){
+		get_ads_list();
+	});
+
+	$('#andriod_url').click(function(){
+		$('#x1').prop("checked", true);
+		layui.form.render();
+	});
+
+	$('#btn_andriod_url').click(function(){
+		var andriod_url = $('#andriod_url').val();
+		$('#x1').prop("checked", true);
+		layui.form.render();
+		$.get('{:url("tube/sup_upload_apk")}?id={$id}&andriod_url='+andriod_url,function(res){
+			if(res.code==200){
+				layer.msg('修改成功',{icon:6});
+			}else{
+				layer.msg('提交成功',{icon:5});
+			}
+		})
+	});
+	$('#btn_warning').click(function(){
+		var warning = $('#warning_nums').val();
+		var data    ={id:{$id},warning_num:warning};
+
+		$.post("{:url('tube/sup_details_update')}",data,function(res){
+			if(res.code==200){
+				layer.msg('修改成功',{icon:6});
+			}else{
+				layer.msg('修改失败',{icon:5});
+			}
+		});
+	});
+
+	$('#warning').click(function(){
+		var warning = $('#warning_num').val();
+		var data    ={id:{$id},warning:warning};
+
+		$.post("{:url('tube/sup_details_update')}",data,function(res){
+			if(res.code==200){
+				layer.msg('修改成功',{icon:6});
+			}else{
+				layer.msg('修改失败',{icon:5});
+			}
+		});
+	});
+
+	$('#warning_ip').click(function(){
+		var warning_iptime = $('#warning_iptime').val();
+		var warning_ipnum = $('#warning_ipnum').val();
+		var data    ={id:{$id},warning_iptime:warning_iptime,'warning_ipnum':warning_ipnum};
+
+		$.post("{:url('tube/sup_details_update')}",data,function(res){
+			if(res.code==200){
+				layer.msg('修改成功',{icon:6});
+			}else{
+				layer.msg(res.msg,{icon:5});
+			}
+		});
+	});
+
+	layui.use(['form','layer','table','upload','element'], function () {
+		var form = layui.form,
+			layer = layui.layer,
+			table = layui.table,
+			upload = layui.upload,
+			element = layui.element;
+
+		//修改提交
+		form.on('submit(form_date)',function(data){
+			data = data.field;
+			$.post("{:url('tube/sup_details_update')}",data,function(res){
+				if(res.code==200){
+					layer.msg('修改成功',{icon:6});
+				}else{
+					layer.msg(res.msg,{icon:5});
+				}
+			});
+			return false;
+		});
+		form.on('radio(way)',function(data){
+			value = data.value;
+			if(value==1){
+				$('#password').show();
+				$('#money').hide();
+			}else if(value==2){
+				$('#money').show();
+				$('#password').hide();
+			}else{
+				$('#money').hide();
+				$('#password').hide();
+			}
+		}); 
+		//创建监听函数
+		var xhrOnProgress=function(fun) {
+			xhrOnProgress.onprogress = fun;
+			return function() {
+				var xhr = $.ajaxSettings.xhr();
+				if (typeof xhrOnProgress.onprogress !== 'function'){
+					return xhr;
+				}
+				if (xhrOnProgress.onprogress && xhr.upload) {
+					xhr.upload.onprogress = xhrOnProgress.onprogress;
+				}
+				return xhr;
+			}
+		}
+		//上传
+		var upload_q = '';
+		var upload_f = '';
+		upload.render({
+			elem    : '#upload',
+			url     : '{:url("tube/sup_upload_apk")}',
+			accept  : 'file',
+			data    :{id:{$id}},
+			exts    :'apk',
+			xhr:xhrOnProgress,
+			progress:function(percent){
+				
+			},
+			before:function(obj){
+				$('#x2').prop("checked", true);
+				upload_f =layer.msg('文件上传至服务器', {
+					icon: 16,
+					shade: 0.3,
+					shadeClose:false,
+					time:0
+				});
+				layui.form.render();
+				$('.layui-progress-bar').css('width','0px');
+				$('.layui-progress').show();
+			},
+			done: function(res){
+				layer.close(upload_q);
+				$('.layui-progress').hide();
+				if(res.code==200){
+					$('#andriod_url').val(res.url);
+					layer.msg(res.msg,{icon:6});
+				}else{
+					layer.msg(res.msg,{icon:5});
+				}
+			}
+		});
+		//上传
+		var upload_a = '';
+		var upload_s = '';
+		upload.render({
+			elem    : '#uploadAds',
+			url     : '/user/tube/sup_upload_ads.html',
+			data    :{id:{$id}},
+			accept  : 'images',                
+			acceptMime:'image/jpg,image/jpeg,image/gif,image/png',
+			exts:'jpg|jpeg|gif|png',
+			multiple:true,
+			number:5,
+			xhr:xhrOnProgress,
+			progress:function(percent){
+				
+			},
+			before:function(obj){
+				upload_s =layer.msg('文件上传至服务器', {
+					icon: 16,
+					shade: 0.3,
+					shadeClose:false,
+					time:0
+				});
+				layui.form.render();
+				$('.layui-progress-bar').css('width','0px');
+				$('.layui-progress').show();
+			},
+			done: function(res){
+				layer.close(upload_a);
+				$('.layui-progress').hide();
+				if(res.code==200){
+					get_ads_list();
+					layer.msg(res.msg,{icon:6});
+				}else{
+					layer.msg(res.msg,{icon:5});
+				}
+			}
+		});
+		//上传Icon
+		var upload_a = '';
+		var upload_s = '';
+		upload.render({
+			elem    : '#upload_icon',
+			url     : '{:url("tube/sup_upload_icon")}',
+			accept  : 'file',
+			data    :{id:{$id}},
+			exts    : 'png|jpg' ,
+			xhr:xhrOnProgress,
+			progress:function(percent){
+				
+			},
+			before:function(obj){
+				upload_s =layer.msg('文件上传至服务器', {
+					icon: 16,
+					shade: 0.3,
+					shadeClose:false,
+					time:0
+				});
+				layui.form.render();
+				$('.layui-progress-bar').css('width','0px');
+				$('.layui-progress').show();
+			},
+			done: function(res){
+				layer.close(upload_a);
+				$('.layui-progress').hide();
+				if(res.code==200){
+					window.location.reload();
+					layer.msg(res.msg,{icon:6});
+				}else{
+					layer.msg(res.msg,{icon:5});
+				}
+			}
+		});
+		form.render()
+	});
+});
+</script>

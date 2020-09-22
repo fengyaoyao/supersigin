@@ -1,0 +1,45 @@
+<include file="public@header"/>
+
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+    .form-control{width:30%!important;}
+</style>
+
+<link rel="stylesheet" href="__TMPL__/public/assets/layui/css/layui.css" media="all">
+</head>
+
+
+
+<body>
+<div class="wrap js-check-wrap" style="height: 200px;">
+
+<button type="button" class="layui-btn" id="test1">
+  <i class="layui-icon">&#xe67c;</i>上传图片
+</button>
+</div>
+<script src="__TMPL__/public/assets/layui/layui.js"></script>
+
+<script type="text/javascript">
+    
+layui.use('upload', function(){
+  var upload = layui.upload;
+   
+  //执行实例
+  var uploadInst = upload.render({
+    elem: '#test1' //绑定元素
+    ,url: '/upload/' //上传接口
+    ,done: function(res){
+      //上传完毕回调
+    }
+    ,error: function(){
+      //请求异常回调
+    }
+  });
+});
+
+</script>
+
+</body>
+</html>

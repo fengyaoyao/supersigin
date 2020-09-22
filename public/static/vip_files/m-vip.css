@@ -1,0 +1,520 @@
+/*html, body {
+    height: auto;
+}
+
+.width, body {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}*/
+
+.main {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainBody {
+    flex: 1;
+    overflow-y: scroll;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mainTab li {
+    float: left;
+    width: 50%;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.mainTab li p {
+    display: inline-block;
+    text-align: center;
+    border-bottom: 2px solid #fff;
+    font-size: 16px;
+    position: relative;
+    padding: 0 10px;
+    padding-bottom: 5px;
+}
+
+.mainTab li.active p {
+    color: #26a5e1;
+    border-bottom: 2px solid #26a5e1;
+}
+
+.mainTab li img {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    transform: rotate(15deg) translate(40%, -40%);
+}
+
+.mainInfo {
+    position: relative;
+    background: url(./bg.jpg) no-repeat top;
+    background-size: 100% auto;
+    padding: 10% 20px 20px 20px;
+    text-align: center;
+}
+
+
+.mainInfo .icon {
+    width: 125px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+}
+
+.mainVip .icon:after {
+    content: '贵宾版';
+    display: none;
+    position: absolute;
+    bottom: auto;
+    right: -15px;
+    top: 12.5px;
+    color: #ffffff;
+    background-color: red;
+    transform: rotate(45deg);
+    width: 75px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.mainVip .icon.wan9917:after {
+    background-color: #86bc65;
+}
+
+.mainInfo .title {
+    font-size: 24px;
+    color: #ffde62;
+    font-weight: bold;
+    margin-top: .5em;
+}
+
+.mainFree .mainInfo .title {
+    color: #ff6630;
+}
+
+.mainInfo .btn {
+    display: block;
+    padding: 10px;
+    font-size: 18px;
+    background-color: #ffde62;
+    color: #95681a;
+    border-radius: 30px;
+    margin-top: 20px;
+}
+
+.mainFree .mainInfo .btn {
+    background-color: #ff6630;
+    color: #ffffff;
+}
+
+.mainInfo .desc {
+    color: #cccccc;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.mainInfo .tips {
+    margin-top: 5px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.mainInfo .tips a {
+    color: #ffde62;
+}
+
+.shade {
+    position: absolute;
+    z-index: 11;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: none;
+}
+
+.vipTips {
+    position: fixed;
+    z-index: 22;
+    width: 80%;
+    height: 80%;
+    max-width: 375px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: none;
+}
+
+.vipTipsContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.vipTipsTitle {
+    position: relative;
+    transform: translateY(-50%);
+    background-color: #ff9b24;
+    font-size: 15px;
+    text-align: center;
+    width: 125px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 35px;
+    border-radius: 5em;
+    color: #ffffff;
+}
+
+.vipTipsContent {
+    padding-left: 10px;
+    padding-right: 10px;
+    flex: 1;
+    overflow-y: scroll;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+    line-height: 1.5;
+}
+
+.vipTipsContent .swiper-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.vipTipsContent .swiper-slide {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.vipTipsContent img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.vipTipsContent p {
+    line-height: 1.75;
+    margin: 0 5px 10px 5px;
+}
+
+.vipTipsContent h1 {
+    font-weight: bold;
+}
+
+.vipTipsBtn {
+    display: block;
+    width: 125px;
+    background-color: #ff9b24;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 5em;
+    color: #ffffff;
+    margin-top: 15px;
+}
+
+.vipTipsInfo {
+    text-align: center;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+
+.vipPay {
+    position: fixed;
+    z-index: 22;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 375px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: none;
+}
+
+.vipPayContainer {
+    background-color: #ffffff;
+    border-radius: 5px;
+    position: relative;
+}
+
+.vipPayClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #fff;
+    color: #ffffff;
+    transform: translate(100%, -100%);
+    text-align: center;
+    line-height: 23px;
+    border-radius: 50%;
+}
+
+.vipPayContent {
+    padding: 20px 12.5px;
+}
+
+.vipPayContent .pay_type li {
+    border-bottom: 1px solid #eee;
+    padding: 7.5px;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.vipPayContent .pay_type li img {
+    height: 20px;
+    margin-right: .25em;
+}
+
+.vipPayContent .pay_type li i {
+    float: right;
+    background-color: #ff9b24;
+    color: #ffffff;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    visibility: hidden;
+}
+
+.vipPayContent .pay_type li.active i {
+    visibility: visible;
+}
+
+.vipPay .amount_type {
+    padding-bottom: 10px;
+}
+
+.vipPay .amount_type li {
+    float: left;
+    width: 45%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.vipPay .amount_type li:first-child {
+    float: left;
+
+}
+
+.vipPay .amount_type li:last-child {
+    float: right;
+}
+
+.vipPay .amount_type li:first-child:after {
+    content: '限时';
+    display: block;
+    position: absolute;
+    bottom: auto;
+    right: -15px;
+    top: 10px;
+    color: #ffffff;
+    background-color: red;
+    transform: rotate(45deg);
+    width: 65px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.vipPay .amount_type li:last-child:after {
+    content: '推荐';
+    display: block;
+    position: absolute;
+    bottom: auto;
+    right: -15px;
+    top: 10px;
+    color: #ffffff;
+    background-color: red;
+    transform: rotate(45deg);
+    width: 65px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.vipPay .amount_type li.active {
+    border: 1px solid red;
+}
+
+.vipPay .amount_type li h1 {
+    font-size: 15px;
+    color: red;
+}
+
+.vipPayBtn {
+    display: block;
+    background-color: #ff9b24;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 5em;
+    color: #ffffff;
+    margin-top: 15px;
+    padding: 7.5px 0;
+    border: none;
+}
+
+.vipPayTips {
+    margin-top: 10px;
+}
+
+.vipPayTips h1 {
+    text-align: center;
+    font-size: 13px;
+}
+
+.vipPayTips h1 .fa {
+    color: #e1a504;
+    font-size: 16px;
+    margin-right: .25em;
+}
+
+.vipPayTips p {
+    font-size: 12px;
+}
+
+.vipPayTips a {
+    color: #1e78eb;
+}
+
+.installStatus {
+    margin-top: 10px;
+    text-align: center;
+    color: #fff;
+    display: none;
+}
+
+.shade-profile {
+    z-index: 22;
+}
+
+.vipTips-profile {
+    z-index: 33;
+    height: auto;
+    overflow: hidden;
+}
+
+.vipTips-profile .vipTipsContainer div {
+    padding: 15px;
+    text-align: center;
+    padding-bottom: 0;
+}
+
+.vipTips-profile h1 {
+    color: #0a7df3;
+    font-size: 16px;
+}
+
+.vipTips-profile p {
+    font-size: 13px;
+}
+
+.vipTips-profile a {
+    background-image: -webkit-linear-gradient(right, #0acffe, #3c7bff);
+    background-image: -webkit-gradient(linear, right top, left top, from(#0acffe), to(#3c7bff));
+    background-image: -moz-linear-gradient(right, #0acffe, #3c7bff);
+    background-image: linear-gradient(to left, #0acffe, #3c7bff);
+    display: block;
+    width: 82%;
+    margin: 15px auto;
+    border: 0;
+    color: #fff;
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
+    font-size: 15px;
+    padding: 9px 0;
+    text-align: center;
+}
+
+.vipInstallProcess {
+    position: fixed;
+    z-index: 917;
+    top: 50%;
+    left: 50%;
+    padding: 15px;
+    width: 275px;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 6px;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    display: none;
+}
+
+.vipInstallProcess li {
+    line-height: 20px;
+    padding: 5px 0;
+}
+
+.vipInstallProcess li .fa {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+}
+
+.vipInstallProcess li span {
+    float: right;
+}
+
+.vipInstallProcess li .fa-refresh {
+    color: #0098dd;
+    display: none;
+}
+
+.vipInstallProcess li .fa-check {
+    background-color: #888888;
+    color: #ffffff;
+}
+
+.vipInstallProcess li.ing .fa-refresh {
+    display: block;
+}
+
+.vipInstallProcess li.ing .fa-check {
+    display: none;
+}
+
+.vipInstallProcess li.ed .fa-refresh {
+    display: none;
+}
+
+.vipInstallProcess li.ed .fa-check {
+    display: block;
+    background-color: #0098dd;
+}
+
+.vipInstallProcess p {
+    color: #0098dd;
+    margin-top: 7.5px;
+    text-align: center;
+}

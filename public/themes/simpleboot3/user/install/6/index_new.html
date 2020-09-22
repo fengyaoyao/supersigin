@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="zh" style="font-size: 330.833%;"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<title>{$result.name} 下载中心</title>
+<link rel="stylesheet" href="__STATIC__/theme/v1/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="__STATIC__/theme/v1/css/style.css">
+<link rel="stylesheet" href="__STATIC__/theme/v1/css/custom.css">
+<link rel="stylesheet" href="__STATIC__/theme/v1/css/appstyle.css">
+<link rel="stylesheet" href="__STATIC__/theme/v1/css/swiper.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_780494_9oilb5iic5f.css">
+<link rel="stylesheet" href="__STATIC__/theme/v1/css/base.css">
+<link rel="stylesheet" href="__STATIC__/theme/v1/css/main.css">
+<link rel="stylesheet" href="__STATIC__/theme/v1/css/h5.css">
+<link rel="shortcut icon" href="__STATIC__/theme/v1/img/fav_ico.png" type="image/x-icon">
+<style>
+.xuanfutishi span{float:left;padding-left:15px;}.xuanfutishi img{float:right;height:15px;margin:12px 15px 0 0;width:15px;}.appicon{border:1px solid #ddd;border-radius:24px;height:120px;width:120px;}.appicon2{border:1px solid #fff;border-radius:24px;height:140px;width:140px;}#codeico{background-color:#efefef;border:2px solid #fff;border-radius:10px;margin:77px;position:absolute;z-index:999;}.one-key-report{background-color:#32b2a7;color:#fff;margin-top:-5px;padding:5px 10px;}.one-key-report-dialog{background-color:#fff;border-radius:10px;box-shadow:0 0 5px rgba(0,0,0,0.5);left:50%;margin-left:-225px;margin-top:-275px;padding:20px;position:fixed;top:50%;width:450px;z-index:99999;}.one-key-report-dialog .dialog-close{position:absolute;right:10px;top:10px;}.one-key-report-dialog .dialog-close i.icon-close{cursor:pointer;font-size:18px;font-weight:700;}.one-key-report-dialog .dialog-close i.icon-close:hover{color:#333;}.one-key-report-dialog .dialog-close .icon-return{color:#32b2a7;display:none;}.one-key-report-dialog .custom-checkbox{cursor:pointer;display:inline-block;line-height:24px;margin-right:40px;padding:2px 2px 2px 25px;position:relative;text-align:left;}.one-key-report-dialog .custom-checkbox:last-child{margin-right:0;}.one-key-report-dialog .custom-checkbox::after,.one-key-report-dialog .custom-checkbox::before{content:" ";display:block;position:absolute;}.one-key-report-dialog .custom-checkbox::after{background-color:#1989fa;border-radius:10px;display:none;height:10px;left:1px;top:7px;width:10px;}.one-key-report-dialog .custom-checkbox::before{background-color:#fff;border:1px solid #1989fa;border-radius:12px;height:12px;left:0;top:6px;width:12px;}.one-key-report-dialog .custom-checkbox.active::after{display:block;}.one-key-report-dialog .content-row{display:table;padding:10px 10px 5px;position:relative;width:100%;}.one-key-report-dialog .content-row input,.one-key-report-dialog .content-row label{display:inline-block;float:left;}.one-key-report-dialog .content-row label{font-size:18px;line-height:34px;margin-right:30px;}.one-key-report-dialog .content-row input{border:1px solid #a9b1b3;border-radius:5px;height:34px;outline:0 none;padding:5px 10px;width:240px;}.one-key-report-dialog .content-row .checkbox-list{clear:both;padding:5px 0;text-align:left;width:100%;}.one-key-report-dialog .content-row textarea{border:1px solid #a9b1b3;border-radius:10px;color:#a9b1b3;font-size:16px;height:200px;outline:0 none;padding:10px;resize:none;width:100%;}.one-key-report-dialog .content-row .btn-report{background-color:#32b2a7;border-radius:15px;color:#fff;float:right;margin-top:-5px;padding:5px 10px;}.one-key-report-dialog .report-feedback,.one-key-report-dialog .report-form{height:100%;position:relative;width:100%;}.one-key-report-dialog .report-sending{background-color:rgba(255,255,255,0.5);color:#000;cursor:default;display:none;font-size:20px;height:100%;left:0;line-height:450px;position:absolute;text-align:center;top:0;width:100%;z-index:100;}.one-key-report-dialog .report-form{display:block;}.one-key-report-dialog .report-feedback{cursor:default;display:none;}.one-key-report-dialog .report-feedback .feedback-thanks{background-color:#efefef;border-radius:20px;height:160px;margin:50px auto 20px;width:160px;}.one-key-report-dialog .report-feedback .feedback-thanks .brace-content{color:#000;margin:0 auto;padding-top:30px;text-align:center;width:110px;}.one-key-report-dialog .report-feedback .feedback-thanks .thanks{color:#000;cursor:default;font-family:"Roboto Slab","Helvetica Neue",Helvetica,"Hiragino Sans GB",Arial,sans-serif;font-size:16px;font-weight:700;letter-spacing:0.8px;margin:15px 0 0;min-height:22px;text-align:center;}.one-key-report-dialog .report-feedback .feedback-thanks .face,.one-key-report-dialog .report-feedback .feedback-thanks .icon-brace-left,.one-key-report-dialog .report-feedback .feedback-thanks .icon-brace-right{display:inline-block;vertical-align:middle;}.one-key-report-dialog .report-feedback .feedback-thanks .icon-brace-left,.one-key-report-dialog .report-feedback .feedback-thanks .icon-brace-right{font-size:80px;}.one-key-report-dialog .report-feedback .feedback-thanks .face .icon-comma-eye{font-size:22px;margin:0 4px;}.one-key-report-dialog .report-feedback .feedback-thanks .face .icon-comma-eye.right{display:inline-block;margin-left:16px;transform:scaleY(0.5);}.one-key-report-dialog .report-feedback .feedback-thanks .face .icon-mouth{display:block;margin-top:15px;transform:rotateZ(-19deg) translateX(2px);}.one-key-report-dialog .report-feedback .feedback-message{color:#1989fa;font-size:30px;text-align:center;}.one-key-report-dialog .report-feedback .feedback-content{color:#858585;font-size:18px;margin-top:40px;}.one-key-report-dialog .report-error{color:red;cursor:default;line-height:34px;padding:0 10px;}.one-key-report-dialog .report-error > div{display:none;}.ad_section{position:fixed;bottom:0;margin-bottom:0;left:50%;margin-left:-365px;}@media (max-width:767px){.ad_section{position:fixed;bottom:0;left:0;margin:auto;}}.floadAd{position:absolute;z-index:999900;display:none;}.floadAd .item{display:block;}.floadAd .item img{vertical-align:bottom;}
+.install-btn.active{background-color:#ccc;}
+.install-btn.active .j-download-progress{text-align:center;display:block;position:absolute;background-color:#157df1;height:100%;left:0;top:0}
+.down_load{overflow:hidden;position:relative}
+.j-down-text{position: relative;z-index:1}
+.iconfont{position:relative;z-index:1;}
+.vipPayBtn1{display:block;background-color:#ff9b24;font-size:15px;text-align:center;border-radius:5em;color:#ffffff;margin-top:15px;padding:7.5px 0;border:none;}
+</style>
+<link href="__STATIC__/vip_files/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="__STATIC__/vip_files/m-vip.css">
+</head>
+<body style="padding-top: 0px;">
+<script src="__STATIC__/theme/v1/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/theme/v1/js/publish/bootstrap_3.3.7.min.js"></script>
+<script type="text/javascript" src="__STATIC__/theme/v1/js/publish/clipboard_1.7.1.min.js"></script>
+<script type="text/javascript" src="__STATIC__/theme/v1/js/publish/markup.js"></script>
+<script type="text/javascript" src="__STATIC__/theme/v1/js/publish/ua-parser.min.js"></script>
+<script type="text/javascript" src="__STATIC__/theme/v1/js/template.js"></script>
+<script>
+function autoHideModal(obj1, time) {
+	var autoHide = null;
+	clearTimeout(autoHide);
+	$(obj1).modal('show');
+	$(".modal-backdrop").hide();
+	autoHide = setTimeout(function () {
+		$(obj1).modal("hide");
+	}, time);
+}
+
+// autoHideModal('#pwdModal', 3000);
+var windowWidth = $(window).width();
+if (windowWidth >= 768) {
+	$(".template-btn").click(function () {
+		$("#autoHideTemplateModal").find(".modal-dialog").removeClass("modal-sm").find(".auto-hide .mt5").text("请在手机上使用浏览器打开本页面，或者手机扫描页面二维码，即可安装");
+		autoHideModal('#autoHideTemplateModal', 3000);
+	});
+}	
+</script>
+        <div class="template-6 template-wrap">
+                <div class="t-bg-6 clearfix">
+                    <div class="container">
+                        <div class="t-top clearfix">
+                            <div class="tit fl">{$result.name}</div>
+                            <div class="name-info fr">
+                            <span>
+                                版本 {$result.version}
+				（Build {$result.build}）</span>
+                                <span>大小 {$result.big} MB</span>
+								<span>更新时间 {$result['addtime'] | date="Y-m-d",###}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="content">
+                        <div class="template-common">
+                            <div class="t-icon"><img src="{$result.img}" class="img-responsive"></div>
+                            <hr class="show-hr pc-pwd">
+                            <div class="template-btn-wrap">
+								<if condition="$device eq 'iphone' || $device eq 'ipad'">
+									<if($title)>
+										<a type="ios" class="ms-btn template-btn clearfix pc-pwd down_load" style="background-color:#ccc;color:#fff;border:1px solid #ccc">
+											<span class="icon-36 iconfont fl"></span>
+											<span class="fl">{$title}</span>
+										</a>
+									<else/>
+										<a data-id="{$result.id}" href="{$url}" type="ios" class="install-btn j-ios-install ms-btn template-btn clearfix pc-pwd down_load">
+											<span class="icon-36 iconfont fl"></span>
+											<span class="fl text j-down-text">免费安装</span>
+											<div class="j-download-progress"></div>
+										</a>
+									</if>
+								<else/>
+									<if($title)>
+										<a type="ios" class="ms-btn template-btn clearfix pc-pwd down_load" style="background-color:#ccc;color:#fff;border:1px solid #ccc">
+											<span class="icon-36 iconfont fl"></span>
+											<span class="fl">{$title}</span>
+										</a>
+									<elseif condition="!empty($result['andriod_url'])">
+										<a href="{$result.andriod_url}" data-str="{$result.str_id}" type="ios" class="install-btn j-android-install ms-btn template-btn clearfix pc-pwd down_load">
+											<span class="icon-36 iconfont fl"></span>
+											<span class="fl text j-down-text">下载安装</span>
+											<div class="j-download-progress"></div>
+										</a>
+									<else/>
+										<a type="ios" class="ms-btn template-btn clearfix pc-pwd down_load" style="background-color:#ccc;color:#fff;border:1px solid #ccc">
+											<span class="icon-36 iconfont fl"></span>
+											<span class="fl">未提供安卓版本</span>
+										</a>
+									</if>
+								</if>
+							</div>
+                            <div class="t-apply pc-pwd">
+                                适用于苹果和安卓手机
+                            </div>
+							<div class="t-code phone-pwd">
+								<div class="j-qr-code img-responsive" date-url="{$result.er_logo}"></div>
+								<div class="code-text">扫描二维码下载</div>
+							</div>
+                            <hr class="pc-pwd">
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="template-footer">
+	<div class="container">
+		<div class="t-footer">
+			<a href="javascript:;" onclick="disclaimer()">免责声明</a>
+		</div>
+		<?php if(!empty($result['cnzz'])){?>
+		<div style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+			<script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id={$result.cnzz}&web_id={$result.cnzz}"></script>
+		</div>
+		<?php }?>
+		<?php if(!empty($result['cnzzs'])){?>
+			<div style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+                <script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id={$result.cnzzs}&web_id={$result.cnzzs}"></script>
+            </div>
+			<?php }?>
+	</div>
+</div><if condition="$device eq 'iphone' || $device eq 'ipad'">
+<div id="weixin_ios" style="<if condition="$is_wx || $is_qq">display:bloack<else/>display:none</if>">
+	<div class="click_opacity"></div>
+	<div class="to_btn">
+		<span class="span1">
+			<img src="//pic.dibaqu.com/images/click_btn.png">
+		</span>
+		<span class="span2">
+			<em>1</em> 点击右上角
+			<img src="//pic.dibaqu.com/images/menu.png">
+			打开菜单
+		</span>
+		<span class="span2">
+			<em>2</em> 选择
+			<img src="//pic.dibaqu.com/images/safari.png">
+			用Safari打开下载
+		</span>
+	</div>
+</div>
+<elseif condition="$device eq 'android'"/>
+<div id="weixin_android" style="<if condition="$is_wx || $is_qq">display:bloack<else/>display:none</if>">
+	<div class="click_opacity"></div>
+	<div class="to_btn"><span class="span1">
+			<img src="//pic.dibaqu.com/images/click_btn.png">
+		</span>
+		<span class="span2">
+			<em>1</em> 点击右上角
+			<img src="//pic.dibaqu.com/images/menu_android.png">
+			打开菜单
+		</span>
+		<span class="span2 android_open">
+			<em>2</em> 选择
+			<img src="//pic.dibaqu.com/images/android.png">
+		</span>
+	</div>
+</div>
+</if>
+<div class="modal fade ms-modal" id="disclaimer" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="report">
+                    <p style="padding-top:20px;link-height:10px;">平台为第三方应用提供应用反馈收集等服务。应用内容均来源于第三方产品，仅为用户提供下载支持，不涉及任何人工编辑和整理，也不对任何来源于第三方的内容（包括但不限于安装包安全、信息描述、应用截图）承担责任，用户可根据描述场景谨慎选择下载试用。</p>                                <p style="padding-top:20px;link-height:10px;">任何公司、产品或者个人认为平台涉嫌侵犯您的版权或应用权，您应该及时向我们提供举报声明、书面权利通知，并提供身份证明、权属证明及侵权情况等投诉材料。我们将依法进行处理。</p>                                <p style="padding-top:20px;link-height:10px;">应用下载者与应用上传者如发生纠纷，请自行与上传者协商处理，协商无果请到相关部门进行投诉，或者拨打110警方介入，本平台不承担责任。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<if $result['way']==2&&$result['money']>
+<div class="shade shade-pay" style="display: none;"></div>
+<div class="vipPay" style="display: none;">
+	<div class="vipPayContainer">
+		<div class="vipPayClose"><i class="fa fa-close"></i>
+		</div>
+		<div class="vipPayContent">
+			<form action="{:url('/user/install/pay')}" id="paypersonal">
+				<div class="amount_type">
+					<ul class="clearfix">
+						<li data-value="0" class="active" style="width:100%;float:none;">
+							<h1>一年</h1> 
+							<h2>原价{$result['money']*1.5}限时{$result['money']}元</h2> 
+							<p>同一设备可免费安装其他游戏</p>
+						</li>
+					</ul>
+				</div>
+				<ul class="pay_type">
+					<li data-value="alipay" class="active">
+						<img src="static/images/zfb.png">支付宝 <i class="fa fa-check"></i> 
+					</li>
+					<li data-value="weixin">
+						<img src="static/images/wx.png">微信 <i class="fa fa-check"></i> 
+					</li>
+				</ul>
+				<div class="vipPayBtn1" onclick="paypersonal()">确认支付</div>
+				<input type="hidden" name="pay" value="alipay">
+				<input type="hidden" name="udid" value="{$udid}">
+				<input type="hidden" name="uid" value="{$result['id']}">
+			</form>
+			<div class="vipPayTips">
+				<h1><i class="fa fa fa-lightbulb-o"></i>购买须知</h1> 
+				<p>1.付费方式1：支付{$result['money']}元后一年内无限次重复下载安装APP和游戏
+					<br>2.付费后只能在一个设备上使用，不同设备需要分别预付安装哦，请确认好常用设备再开通
+					<br>3.价格可能会出现变化,一旦支付不支持退款,确认支付默认同意此条款
+					<br>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+</if>
+<script src="/themes/simpleboot3/public/assets/js/jquery.qrcode.min.js"></script>
+<script src="/static/js/layer/layer.js"></script>
+<script src="https://cdn.dingxiang-inc.com/ctu-group/captcha-ui/index.js" crossorigin="anonymous"></script>
+<div id="c1"></div>
+<script type="text/javascript">
+function yzm(url){
+	var myCaptcha = _dx.Captcha(document.getElementById('c1'), {
+		appId: 'b4f113b21c08e851abc79b753d5c4a0c',
+		style: 'popup',
+		success: function (token) {
+			myCaptcha.hide();
+			window.location.href = url;
+		}
+	});
+	myCaptcha.show();
+}
+function pass(){
+	var _index = layer.prompt({
+		title: '输入安装密码{$text}'
+	}, function(text, index){
+			layer.close(_index);
+			url = '{$result.er_logo}';
+			if(url.indexOf("?") >= 0 ) { 
+				url += "&pass=";
+			} else{
+				 url += "?pass=";
+			}
+		window.location.href = url+text;
+	
+	});
+}
+<if condition="$nedpas">
+setTimeout(function(){
+	pass();
+},100);
+</if>
+function disclaimer(){
+	$("#disclaimer").modal("show");
+}
+function mobileconfig(){
+	window.location = '{$mobileconfig}';
+	setTimeout(function(){
+		window.location.href = '/mobileprovision/embedded1.mobileprovision';
+	}, 1500);
+}
+function pay(){
+	$('.shade-pay').show();
+	$('.vipPay').show();
+}
+function paypersonal(){
+	var form = $("#paypersonal");
+	$.ajax({
+		url: form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+		data: form.serializeArray(),
+		dataType: 'json',
+		type: 'post',
+		semantic: true,
+		beforeSubmit: function(arr, $form, options) {},
+		success: function(data, statusText, xhr, $form){
+			if(data.code=='0'){
+				layer.msg(data.msg,{icon:5});
+			}else{
+				window.location.href = data.msg;
+			}
+		}
+	});
+	return false;
+}
+$(function(){
+	$(".j-qr-code").qrcode({
+		render : "canvas", //table方式
+		width  : 130, //宽度
+		height : 130, //高度
+		text   : $('.j-qr-code').attr("date-url") //任意内容
+	});
+	$('.j-android-install').click(function(){
+		if($(this).hasClass('active')){
+			return false;
+		}
+		var data = {er_logo:$(this).data('str')};
+		$.post("{:url('install/apk_down_log')}",data);
+		//window.location.href = $(this).attr('href');
+		var ipaUrl = $(this).attr('href');
+		var req    = new XMLHttpRequest();
+		req.responseType = "blob";
+		req.addEventListener("progress", function (e) {
+			var percent = Math.floor(100*e.loaded/e.total)
+			$('.j-android-install').addClass('active');
+			$('.j-down-text').html('下载中 '+percent+'%');
+			$('.j-download-progress').css('width',percent+"%");
+		}, false);
+		req.onreadystatechange = function () {
+			if (req.readyState === 4 && req.status === 200) {
+				var timeCount = 6;
+				var intervalTime = setInterval(function(){
+					timeCount--;
+					if(timeCount < 0){
+						clearInterval(intervalTime);
+						$('.j-down-text').html('返回桌面查看');
+					}else{
+						$('.j-down-text').html('正在安装  '+timeCount+'秒');
+						$('.j-download-progress').css('width',100-timeCount*10+"%");
+					}
+				},1000)
+			}
+		};
+		req.open("get", ipaUrl, true);
+		req.send();
+	});
+	$('.vipPayClose').click(function(event) {
+		$('.shade-pay').hide();
+		$('.vipPay').hide();
+	});
+	$('.vipPay .pay_type li').click(function(event) {
+		$(this).addClass('active');
+		$(this).siblings().removeClass('active');
+		$('input[name=pay]').val($(this).data('value'));
+	});
+});
+
+</script>
+</body>
+</html>

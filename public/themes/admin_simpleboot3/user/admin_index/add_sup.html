@@ -1,0 +1,28 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap" style="height: 300px;">
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" id="add" action="{:url('AdminIndex/addpublic')}">
+        <div class="form-group">
+            <label for="input-score" class="col-sm-2 control-label">超级签名次数</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-score" name="sup_down_public" value="{$domain.sup_down_public}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="hidden" name="id" value="{$domain.id}">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script>
+	$('form#add').on("submit",function(){
+		return false;
+	});
+</script>
+</body>
+</html>

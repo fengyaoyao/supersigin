@@ -1,0 +1,43 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap" style="height: 300px;">
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" id="add" action="{:url('members/recharge')}">
+        <empty name="user">
+            <div class="form-group">
+                <label for="input-score" class="col-sm-2 control-label">会员ID</label>
+                <div class="col-md-6 col-sm-10">
+                    <input type="text" class="form-control" id="input-uid" name="uid" value="{$user['id']}">
+                </div>
+            </div>
+        <else />
+            <input type="hidden" name="uid" value="{$user.id | default=''}"/>
+        </empty>
+        <div class="form-group">
+            <label for="input-coin" class="col-sm-2 control-label">充值数量</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-num" name="num" value="1">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-coin" class="col-sm-2 control-label">充值金额</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-num" name="money" value="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script>
+	$('form#add').on("submit",function(){
+		return false;
+	});
+</script>
+</body>
+</html>

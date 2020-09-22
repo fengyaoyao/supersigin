@@ -1,0 +1,134 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('certificate/index')}">证书列表</a></li>
+        <li><a href="{:url('certificate/add_certificate')}">添加证书</a></li>
+    </ul>
+	<form class="well form-inline margin-top-20" method="GET" action="{:url('certificate/index')}">
+        ID:
+        <input type="text" class="form-control" name="id" style="width: 200px;"
+               value="{$params['id']|default=''}" placeholder="请输入ID">
+		iss:
+        <input type="text" class="form-control" name="iss" style="width: 200px;"
+               value="{$params['iss']|default=''}" placeholder="请输入iss">
+		状态:
+		<select class="form-control" name="status" style="width: 140px;">
+			<option value='-1'>全部</option>
+			<option value='1' <if condition="isset($params['status']) && $params['status'] eq '1'">selected="selected"</if>>启用</option>
+			<option value='0' <if condition="isset($params['status']) && $params['status'] eq '0'">selected="selected"</if>>未启用</option>
+			<option value='401' <if condition="isset($params['status']) && $params['status'] eq '401'">selected="selected"</if>>被封号</option>
+			<option value='403' <if condition="isset($params['status']) && $params['status'] eq '403'">selected="selected"</if>>权限问题</option>
+			<option value='4' <if condition="isset($params['status']) && $params['status'] eq '4'">selected="selected"</if>>P8文件不存在</option>
+		</select> &nbsp;&nbsp;
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+    </form>
+    <table class="table table-hover table-bordered margin-top-20">
+        <thead>
+        	
+            <th width="50">ID</th>
+            <th>证书作者</th>
+            <th>Iss</th>
+            <th>Kid</th>
+            <th>Tid</th>
+            <th>P12密码</th>
+            <th>剩余数量</th>
+            <th>已添数量</th>
+			<th>每日限制</th>
+			<th>最后时间</th>
+			<th>最后已用</th>
+            <!--<th>备注</th>-->
+            <!--<th>点击下载P12</th>-->
+            <!--<th>点击下载P8</th>-->
+            <th>创建时间</th>
+            <th>状态</th>
+            <th width="300">{:lang('ACTIONS')}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="list" item="vo">
+            <if condition="$vo['limit_count'] eq 0">
+        		<tr class="over">
+        	<else/>
+        		<tr class="">
+        	</if>
+                <td>{$vo.id}</td>
+                <td>{$vo.user_id}</td>
+                <td>{$vo.iss}</td>
+                <td>{$vo.kid}</td>
+                <td>{$vo.tid}</td>
+                <td>{$vo.p12_pwd}</td>
+                <if condition="$vo['limit_count'] gt 0">
+                	<td style="color:#0d56ff;font-weight:bold;">{$vo.limit_count}</td>
+                <else/>
+        			 <td>{$vo.limit_count}</td>
+        		</if>
+                <td>{$vo.total_count}</td>
+				<td>{$vo.day_num}</td>
+				<td>{:$vo['reg_time']?date('Y-m-d H:i:s',$vo['reg_time']):''}</td>                
+                <td>{$vo.reg_num}</td>
+                <!--<td>{$vo.mark}</td>-->
+                <!--<td>-->
+                <!--    <a>点击下载</a>-->
+                <!--</td>-->
+                <!--<td>-->
+                <!--    <a>点击下载</a>-->
+                <!--</td>-->
+                <td>{:date('Y-m-d H:i:s',$vo['create_time'])}</td>
+                <td>
+                    <if condition="$vo['status'] eq 1">
+                        <font color="green">启用</font>
+                     <elseif condition="$vo['status'] eq 0"/>
+                        <font color="red">未启用</font>
+                     <elseif condition="$vo['status'] eq 401"/>
+                         <font color="red">被封号</font>
+                     <elseif condition="$vo['status'] eq 403"/>
+                         <font color="blue">权限问题</font>
+					 <elseif condition="$vo['status'] eq 4"/>
+                         <font color="blue">P8文件不存在</font>
+					 <elseif condition="$vo['status'] eq 5"/>
+                         <font color="blue">session过期</font>
+                    </if>
+                </td>
+                <td class="link">
+                	<if condition="$vo['status'] eq 1 || $vo['status'] eq 0">
+	                    <a href='{:url("certificate/certificate_status",array("id"=>$vo["id"]))}'>启用</a>
+	                    <a href='{:url("certificate/certificate_status",array("id"=>$vo["id"]))}'>禁用</a>
+                    </if>
+					<a href='javascript:void(0)' onclick="getUdid({$vo["id"]})">UDID</a>
+			
+                    <a href='{:url("certificate/edit_certificate",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
+           
+                    <a class="js-ajax-delete" href="{:url('certificate/certificate_del',array('id'=>$vo['id']))}">{:lang('DELETE')}</a>
+                </td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+
+    <div class="pagination">{$page}</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="__STATIC__/js/admin.js"></script>
+<style>
+	.link a{border-right:1px solid #dcdcdc;padding-right:10px;margin-right:10px;}
+	.link a:last-child{border-right:none}
+	.over{background-color:#dcdcdc;}
+</style>
+<script>
+	function getUdid(cid){
+		layer.open({
+		  type: 2,
+		  area: ['450px', '450px'],
+		  fixed: false, //不固定
+		  maxmin: true,
+		  title:'UDID',
+		  shade: 0,
+		  content: "{:url('admin/certificate/udid')}?cid="+cid
+		});
+	}
+</script>
+
+</body>
+</html>

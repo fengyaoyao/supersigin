@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{$result.name} 下载中心</title>
+<script src="__STATIC__/theme/v2/js/jquery.min.js"></script>
+<script src="__STATIC__/theme/v2/js/qrcode.min.js"></script>
+<script src="__STATIC__/theme/v2/js/flexible.js"></script>
+<link href="__STATIC__/theme/v2/css/flexible.css" rel="stylesheet" />
+<link href="__STATIC__/theme/v2/css/index.css" rel="stylesheet" />
+<style>
+.install-btn{width:2.4rem;height:0.786666rem;border-radius:0.786666rem;font-size:0.373333rem;overflow:hidden;color:white;text-align:center;line-height:0.786666rem;background:#33a8ee;border:1px solid #33a8ee;position:relative;top: 0.346666rem}
+.install-btn .text{position:relative;z-index:1;margin:0}
+.install-btn.active{background-color:#ccc;}
+.install-btn.active .progress{text-align:center;display:block;position:absolute;background-color:#33a8ee;height:100%;left:0;top:0}
+.install-btn.disabled{background-color:#ccc;color:#fff}
+</style>
+</head>
+<body>
+<div class="PC">
+	<div class="container">
+		<strong>请使用手机扫描二维码下载</strong>
+		<div><img class="pc-logo" src="{$result.img}"></div>
+		<p>{$result.name}</p>
+		<div class="qrcode">{$result.er_logo}</div>
+	</div>
+</div>
+<div class="mobile">
+	<div class="second">
+		<img alt="{$result.name}" class="img" src="{$result.img}" />
+		<div class="text" style="position: relative;">
+			<p>{$result.name}</p>
+			<p></p>
+			<div data-url="{$supurl}" class="j-download-ipa install-btn">
+				<div class="text j-down-text">免费安装</div>
+				<div class="progress j-download-progress"></div>
+			</div>
+			<a href="itms-services://?action=download-manifest&url={$ios}" id="j-install-ipa" style="display:none">点击安装</a>
+		</div>
+	</div>
+	<div class="third">
+		<div class="thirdOne">
+			<div class="thirdOneDiv">
+				<span class="starNum">5</span>
+				<div class="starImg">
+					<img alt="" class="starImgOne" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: none;">
+					<img alt="" class="starImgTwo" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: none;">
+					<img alt="" class="starImgThree" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: none;">
+					<img alt="" class="starImgFour" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: none;">
+					<img alt="" class="starImgFive" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: none;">
+				</div>
+			</div>
+			<div class="score">
+				<p>2000个评分</p>
+			</div>
+		</div>
+		<div class="thirdTwo">
+			<p>#09</p>
+			<p>工具</p>
+		</div>
+		<div class="thirdThree">
+			<p>4+</p>
+			<p>年龄</p>
+		</div>
+	</div>
+	<div class="fourth">
+		<div class="fourthOne">
+			<if condition="count($img)">
+			<foreach name="img" item="v"><img alt="{$result.name}" src="{$v.img}"></foreach>
+			<else/>
+			<img alt="{$result.name}" src="__STATIC__/theme/v2/imgs/default-1.jpg" />
+			<img alt="{$result.name}" src="__STATIC__/theme/v2/imgs/default-2.jpg" />
+			</if>
+		</div>
+		<div class="fourFooter">
+			<div class="iphone">
+				<img alt="" src="__STATIC__/theme/v2/imgs/iphoen.png" />
+				<p>iPhone</p>
+			</div>
+		</div>
+	</div>
+	<div class="Fifth">
+		<div class="FifthOne">
+			<div class="FifthOneText">
+				<p>简介</p>
+				<p>{$result.introduce?$result.introduce:$result.name}</p>
+			</div>
+			<div class="FifthOneName">
+				<p>Apple Developer</p>
+				<p>开发者</p>
+			</div>
+		</div>
+	</div>
+	<div class="Sixth">
+		<div class="SixthOne">
+			<div class="SixthODiv">
+				<p>新功能</p>
+				<p>版本历史记录</p>
+			</div>
+			<div class="SixthtDiv">
+				<p>版本 {$result.version}</p>
+				<p>{$result['addtime'] | date="Y-m-d",###}</p>
+			</div>
+			<div class="SixthcDiv">
+				<p>{$result.instructions?$result.instructions:$result.name}</p>
+			</div>
+		</div>
+	</div>
+	<div class="Seventh">
+		<div class="SeventhOne">
+			<p>信息</p>
+		</div>
+		<div class="SeventhTwo">
+			<p>开发商</p>
+			<p>Apple Developer</p>
+		</div>
+		<div class="SeventhThree">
+			<p>大小</p>
+			<p>{$result.big} MB</p>
+		</div>
+		<div class="SeventhFour">
+			<p>类别</p>
+			<p>娱乐</p>
+		</div>
+		<div class="SeventhFive">
+			<p>兼容性</p>
+			<p>需要 iOS # 或更高版本</p>
+		</div>
+		<div class="SeventhSix">
+			<p>语言</p>
+			<p>#</p>
+		</div>
+		<div class="SeventhSeven">
+			<p>年龄分级</p>
+			<p>4+</p>
+		</div>
+		<div class="SeventhEight">
+			<p>版权</p>
+			<p>{$result.name}</p>
+		</div>
+	</div>
+	<div class="footer">
+		<div>
+			<p>免责声明：本网站仅为开发者提供App的下载和安装托管，App内的内容和运 营相关事项由App开发者复责，与本网站无关。</p>
+		</div>
+	</div>
+	<div class="loading" id="safari">
+		<img height="582" src="__STATIC__/theme/v2/imgs/safari.png" width="777" />
+	</div>
+</div>
+<input id="qrcode" name="qrcode" type="hidden" value="{$result.er_logo}">
+<script>
+var qrcode = $('#qrcode').val();
+var redir_url = '{$result.er_logo}';
+var block, loading_su, down, timeClock;
+var ua = navigator.userAgent.toLowerCase();
+$(function() {
+	$('.qrcode').qrcode(qrcode);
+	$('.j-download-ipa').click(function() {
+		getipa();
+	});
+	if (/iPhone|iPod|iPad/i.test(navigator.userAgent) ||
+		(navigator.userAgent.match(/Mac/) && navigator.maxTouchPoints && navigator.maxTouchPoints > 2)
+	) {
+		if (ua.indexOf('applewebkit') > -1 && ua.indexOf('mobile') > -1 && ua.indexOf('safari') > -1 && ua.indexOf('linux') == -1 && ua.indexOf('android') == -1) {
+			if (ua.indexOf("crios") > -1) {
+				window.location.href = redir_url;
+				return true;
+			} else {
+				getipa();
+				return true;
+			}
+		}
+		window.location.href = redir_url;
+		return true;
+	} else {
+		window.location.href = redir_url;
+		return true;
+	}
+});
+if ($(".starNum").html() == 1) {
+	$(".starImgOne").show()
+} else if ($(".starNum").html() == 2) {
+	$(".starImgOne").show();
+	$(".starImgTwo").show()
+} else if ($(".starNum").html() == 3) {
+	$(".starImgOne").show();
+	$(".starImgTwo").show();
+	$(".starImgThree").show()
+} else if ($(".starNum").html() == 4) {
+	$(".starImgOne").show();
+	$(".starImgTwo").show();
+	$(".starImgThree").show();
+	$(".starImgFour").show()
+} else if ($(".starNum").html() == 5) {
+	$(".starImgOne").show();
+	$(".starImgTwo").show();
+	$(".starImgThree").show();
+	$(".starImgFour").show();
+	$(".starImgFive").show()
+}
+function getipa(){
+	if($('.j-download-ipa').hasClass('active')){
+		return false;
+	}
+	$('.j-download-ipa').css({
+		"width": "3rem"
+	});
+	$('#j-install-ipa')[0].click();
+	
+	var ipaUrl = $('.j-download-ipa').data('url');
+	var req    = new XMLHttpRequest();
+
+	req.responseType = "blob";
+	req.addEventListener("progress", function (e) {
+		var percent = Math.floor(100*e.loaded/e.total)
+		$('.j-download-ipa').addClass('active');
+		$('.j-down-text').html('下载中 '+percent+'%');
+		$('.j-download-progress').css('width',percent+"%");
+	}, false);
+	req.onreadystatechange = function () {
+		if (req.readyState === 4 && req.status === 200) {
+			var timeCount = 10;
+			var intervalTime = setInterval(function(){
+				timeCount--;
+				if(timeCount < 0){
+					clearInterval(intervalTime);
+					$('.j-down-text').html('返回桌面查看');
+				}else{
+					$('.j-down-text').html('正在安装  '+timeCount+'秒');
+					$('.j-download-progress').css('width',100-timeCount*10+"%");
+				}
+			},1000)
+		}
+	};
+	req.open("get", ipaUrl, true);
+	req.send();
+}
+</script>
+</body>
+</html>

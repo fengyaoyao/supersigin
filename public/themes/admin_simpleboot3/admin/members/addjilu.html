@@ -1,0 +1,175 @@
+<include file="public@header"/>
+</head>
+
+<script>
+    $(function(){
+        var i = Math.ceil(Math.random()*25);
+        var value = getValue(i);
+        $("#input-xitong").find("option:contains('"+value+"')").attr("selected",true);
+        var old_destid = localStorage.getItem('destid')
+        if (old_destid) {
+            $("#input-appid").val(old_destid);
+        }
+    })
+
+    function getValue(obj) {
+        var value;
+        if(obj=="0"){
+            value = "17C54";
+        }else if(obj=="1"){
+            value = "16D57";
+        }else if(obj=="2"){
+            value = "16G130";
+        }else if(obj=="3"){
+            value = "16F203";
+        }else if(obj=="4"){
+            value = "14G60";
+        }else if(obj=="5"){
+            value = "16G102";
+        }else if(obj=="6"){
+            value = "17A878";
+        }else if(obj=="7"){
+            value = "14B100";
+        }else if(obj=="8"){
+            value = "17A861";
+        }else if(obj=="9"){
+            value = "15F79";
+        }else if(obj=="10"){
+            value = "15A432";
+        }else if(obj=="11"){
+            value = "14F89";
+        }else if(obj=="12"){
+            value = "16E227";
+        }else if(obj=="13"){
+            value = "17D50";
+        }else if(obj=="14"){
+            value = "17A860";
+        }else if(obj=="15"){
+            value = "17A861";
+        }else if(obj=="16"){
+            value = "13G35";
+        }else if(obj=="17"){
+            value = "13D15";
+        }else if(obj=="18"){
+            value = "15B202";
+        }else if(obj=="19"){
+            value = "16G77";
+        }else if(obj=="20"){
+            value = "16A404";
+        }else if(obj=="21"){
+            value = "15G77";
+        }else if(obj=="22"){
+            value = "15A372";
+        }else if(obj=="23"){
+            value = "15B202";
+        }else if(obj=="24"){
+            value = "17B111";
+        }else if(obj=="25"){
+            value = "14G60";
+        }
+		
+        return value;
+    }
+    function setValue() {
+        var value = $("#input-appid").val();
+        localStorage.setItem('destid', value);
+    }
+</script>
+<body>
+<div class="wrap" style="height: 300px;">
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" id="add" action="{:url('members/addpostjilu')}">
+        <div class="form-group">
+            <label for="input-iphone" class="col-sm-2 control-label">设备</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-iphone" name="iphone" value="iphone" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-xitong" class="col-sm-2 control-label">系统版本</label>
+            <div class="col-md-6 col-sm-10">
+                <select id="input-xitong" name="xitong" class="form-control">
+                    <option value="17D50">17D50</option>
+                     <option value="17C54">17C54</option>
+                    <option value="17A878">17A878</option>
+                    <option value="17A860">17A860</option>
+                    <option value="17B111">17B111</option>
+                    <option value="17A861">17A861</option>
+
+                    <option value="16F203">16F203 </option>
+                    <option value="16G77">16G77</option>
+                    <option value="16A404">16A404</option>
+                    <option value="16E227">16E227 </option>
+                    <option value="16G161">16G161</option>
+                    <option value="16D57">16D57</option>
+					<option value="16G130">16G130</option>
+					<option value="16G102">16G102</option>
+					
+                    <option value="15B202">15B202</option>
+                    <option value="15A432">15A432</option>
+                    <option value="15A372">15A372</option>
+                    <option value="15G77">15G77</option>
+                    <option value="15F79">15F79</option>
+                    
+                    <option value="14G60">14G60</option>
+                    <option value="14C92">14C92</option>
+                    <option value="14A456">14A456</option>
+					<option value="14B100">14B100</option>
+					<option value="14F89">14F89</option>
+					
+                    <option value="13D15">13D15</option>
+                    <option value="13E238">13E238</option>
+                    <option value="13G35">13G35</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-appid" class="col-sm-2 control-label">AppID</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-appid" name="appid" value="" onchange="setValue();">
+            </div>
+        </div>
+        <!--<div class="form-group">
+            <label for="input-banben" class="col-sm-2 control-label">App版本</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-banben" name="banben" value="">
+            </div>
+        </div>-->
+        <div class="form-group">
+            <label for="input-udid" class="col-sm-2 control-label">UDID</label>
+            <div class="col-md-6 col-sm-10">
+                <!--<input type="text" class="form-control" id="input-ip" name="ip" value="">-->
+                <select id="input-udid" name="udid" class="form-control">
+                    <foreach name="assetsu" id="v">
+                        <option value="{$v.index}">{$v.value}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-ip" class="col-sm-2 control-label">IP地址</label>
+            <div class="col-md-6 col-sm-10">
+                <!--<input type="text" class="form-control" id="input-ip" name="ip" value="">-->
+                <select id="input-ip" name="ip" class="form-control">
+                    <foreach name="assets" id="v">
+                        <option value="{$v.index}">{$v.value}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script>
+    $('form#add').on("submit",function(){
+        return false;
+    });
+</script>
+</body>
+</html>

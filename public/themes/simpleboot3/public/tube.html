@@ -1,0 +1,36 @@
+<!--  我的应用左侧 -->
+<div class="templatemo-sidebar" style="width: 220px;">
+    <div class="sq-logo">
+        <a href="/"><img src="__TMPL__/public/static/image/aaa.png"></a>
+    </div>
+
+    <div class="templatemo-sidebar-nav">
+        <ul>
+            <li>
+                <a class="{$nav=='tube' ? 'active' : ''}" href="{:cmf_url('user/tube/index')}">账户首页</a>
+            </li>
+            <li>
+                <a class="{$nav=='app' ? 'active' : ''}" href="{:cmf_url('user/app/index')}">我的应用</a>
+            </li>
+            <li>
+                <a class="{$nav=='user' ? 'active' : ''}" href="{:cmf_url('user/profile/center')}">基本设置</a>
+            </li>
+			<li>
+			    <a class="{$nav=='pay' ? 'active' : ''}" href="{:cmf_url('user/profile/financialInfo')}">财务信息</a>
+			</li>
+
+            <if condition="get_user('pid') == 0">
+                <li>
+                    <a class="{$nav=='level' ? 'active' : ''}" href="/user/level.html">我的客户</a>
+                </li>
+            </if>
+        </ul>
+    </div>
+
+    <span href="javascript:void(0);" class="j-upload-app__btn sq-btn">
+        发布应用
+    </span>
+
+   
+</div>
+

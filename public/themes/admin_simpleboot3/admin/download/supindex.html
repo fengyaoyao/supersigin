@@ -1,0 +1,87 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active tabs_index tabs_li"><a href="javascript:;">下载数列表</a></li>
+        <li class="tabs_li tabs_add"><a href="javascript:void(0)" onclick="sup_add()">添加超级签名下载</a></li>
+    </ul>
+
+    <form class="js-ajax-form" action="" method="post" style="margin-top:50px;">
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th width="50">ID</th>
+                <th>类型</th>
+                <th>下载次数</th>
+                <th>购买金额</th>
+                <th>赠送次数(0为不赠送)</th>
+                <th>顺序</th>
+                <th>添加时间</th>
+               <!-- <th>推荐(1为推荐)</th>
+                <th>状态(1为正常)</th> -->
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+            <foreach name="download" item="vo">
+                <tr>
+                    <td><b>{$vo.id}</b></td>
+                    <td>
+                        <if condition="$vo.type eq 1">
+                            公有
+                            <else/>
+                            私有
+                        </if>
+                    </td>
+                    <td>{$vo.num}</td>
+                    <td>{$vo.coin} 元</td>
+                    
+                    <td>{$vo.gift}</td>
+                    <td>{$vo.orderno}</td>
+                    <td>{$vo['addtime'] |date="Y-m-d H:i:s",###} </td>
+                    <td>
+                        <a href="javascript:void(0)" onclick="sup_edit({$vo['id']})">编 辑</a> |
+                        <a href="{:url('download/supdel',array('id'=>$vo['id']))}">删 除</a>
+                    </td>
+                </tr>
+            </foreach>
+
+        </table>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script>
+	function sup_edit(id){
+		
+		layer.open({
+		  type: 2,
+		  area: ['560px', '460px'],
+		  fixed: false, //不固定
+		  maxmin: true,
+		  title:'修改超级签名下载  ID:'+id,
+		  content: "{:url('download/add_sup')}?id="+id,
+		  end:function(){
+			  window.location.reload();
+		  }
+		});
+	}
+	function sup_add(){
+		$('.tabs_li').removeClass('active');
+		$('.tabs_add').addClass('active');
+		layer.open({
+		  type: 2,
+		  area: ['560px', '460px'],
+		  fixed: false, //不固定
+		  maxmin: true,
+		  title:'添加超级签名下载',
+		  content: "{:url('download/add_sup')}",
+		  end:function(){
+			  $('.tabs_li').removeClass('active');
+			  $('.tabs_index').addClass('active');
+			  window.location.reload();
+		  }
+		});
+	}
+</script>
+</body>
+</html>

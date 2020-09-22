@@ -1,0 +1,42 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('fastlane/index')}">Fastlane列表</a></li>
+        <li class="active"><a href="{:url('fastlane/add_certificate')}">添加证书</a></li>
+    </ul>
+
+    <div class="wrap js-check-wrap">
+        <form class="form-horizontal" action="{:url('fastlane/save_certificate')}" method="post"
+              enctype="multipart/form-data">
+			<div class="form-group">
+                <label>帐号</label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="请输入帐号" value="">
+            </div>
+			<div class="form-group">
+                <label>密码</label>
+                <input type="text" class="form-control" name="password" id="password" placeholder="请输入密码" value="">
+            </div>
+			<div class="form-group">
+                <label>专用密码</label>
+                <input type="text" class="form-control" name="specific_pass" id="specific_pass" placeholder="请输入专用密码" value="">
+            </div>
+			<div class="form-group">
+                <label>双重手机</label>
+                <input type="text" class="form-control" name="mobile" id="mobile" placeholder="请输入双重手机，如+86 13888888888" value="">
+            </div>
+			<div class="form-group">
+                <label>session</label>
+				<textarea class="form-control" id="fastlane_session" name="fastlane_session"></textarea>
+            </div>
+            <button type="submit" class="btn btn-default">保存</button>
+        </form>
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="__STATIC__/js/admin.js"></script>
+
+</body>
+</html>

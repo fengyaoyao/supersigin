@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>items</key>
+    <array>
+        <dict>
+            <key>assets</key>
+            <array>
+                <dict>
+                    <key>kind</key>
+                    <string>software-package</string>
+                    <key>url</key>
+                    <string>https://supersigin.rzxingu.com/upload/super_signature_ipa/583408ba904a33b156f4f5d1fb6e79468ec46c28e99a642bb01059f41e75dd55d4898f23mosxK6.ipa</string>
+                </dict>
+            </array>
+            <key>metadata</key>
+            <dict>
+                <key>bundle-identifier</key>
+                <string>com.gwpd.jdwil.app</string>
+                <key>bundle-version</key>
+                <string>1.0.0</string>
+                <key>kind</key>
+                <string>software</string>
+                <key>subtitle</key>
+                <string>柏富环球App</string>
+                <key>title</key>
+                <string>柏富环球App</string>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>

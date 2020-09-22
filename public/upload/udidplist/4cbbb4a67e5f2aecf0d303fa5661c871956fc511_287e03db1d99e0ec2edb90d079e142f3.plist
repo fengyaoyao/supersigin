@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>items</key>
+    <array>
+        <dict>
+            <key>assets</key>
+            <array>
+                <dict>
+                    <key>kind</key>
+                    <string>software-package</string>
+                    <key>url</key>
+                    <string>https://cecode.top/upload/super_signature_ipa/4cbbb4a67e5f2aecf0d303fa5661c871956fc5112316d71826c1b889bf0893adc856a2ddmopsE6.ipa</string>
+                </dict>
+            </array>
+            <key>metadata</key>
+            <dict>
+                <key>bundle-identifier</key>
+                <string>uni.UNI78922F8</string>
+                <key>bundle-version</key>
+                <string>8.0.2</string>
+                <key>kind</key>
+                <string>software</string>
+                <key>subtitle</key>
+                <string>Bitzon</string>
+                <key>title</key>
+                <string>Bitzon</string>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>

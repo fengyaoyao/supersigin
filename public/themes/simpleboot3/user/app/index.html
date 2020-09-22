@@ -1,0 +1,145 @@
+<include file="public@head"/>
+
+<style>
+    .layui-layer-prompt .layui-layer-btn{text-align: center}
+    .layui-layer-prompt .layui-layer-input{width: 100%;box-sizing: border-box;text-align: center}
+	.financial{background-color: #fff;padding: 30px;display:flex;align-items:center;justify-content:space-between;border: 1px solid #ececec;background-color: #fff;box-shadow: 3px 3px 3px #ececec}
+    .financial-count{}
+    .financial-count__title{color: #999;margin-bottom: 10px;}
+    .financial-count__num{font-size: 30px;}
+    .financial-count__num .small{font-size: 16px;position: relative;top: -2px;}
+    .record{margin-top: 20px;}
+    .record-tab{display: flex;align-items: baseline}
+    .record-tab__item{margin-right: 15px;font-size: 18px;color: #999}
+    .record-tab__item.active{color: #000;font-size: 22px;}
+</style>
+
+<body class="body-white">
+    <div class="templatemo-content">
+        <!--  我的应用左侧 -->
+        <include file="public@tube"/>
+        <!--  我的应用左侧 -->
+
+        <!--  内容中心 -->
+        <div class="templatemo-body">
+            <div class="sq-app">
+                <div class="sq-app__title">我的应用</div>
+                <form class="js-ajax-form" id="form" action="{:url('user/app/index')}" method="post">
+                <div class="financial">
+                  <input type="text" name="name" required  lay-verify="required" placeholder="请输入要搜索的应用名称" autocomplete="off" class="layui-input">
+                  <button onclick='doSubmitForm()' class="layui-btn layui-btn-normal">搜索</button>
+
+                </div>
+                </form>
+
+                <div class="sq-app__table">
+                    <table class="layui-table sq-table">
+                        <thead>
+                            <tr>
+                                <th>应用ID</th>
+                                <th>应用LOGO</th>
+                                <th>应用名称</th>
+                                <th>苹果版本</th>
+                                <th>下载地址</th>
+                                <th>应用状态</th>
+                                <th>IOS下载数</th>
+                                <th>安卓下载数</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <if condition="count($list) == 0">
+                                <tr class="">
+                                    <td colspan="10">
+                                        <p style="font-size: 16px;margin-top: 20px;margin-bottom: 20px">
+                                        <empty name="$name">该账户还未添加应用<else/>未找到搜索的应用</empty>
+                                        </p>
+                                    </td>
+                                </tr>
+                            <else/>
+                             <foreach name="list" id="v">
+                                    <tr>
+                                        <td>{$v.id}</td>
+                                        <td>
+                                          <a href="{:cmf_url('user/tube/sup_details',array('id'=>$v['id']))}">
+                                              <img width="40" height="40" src="{$v.img}" class="sq-app__img">
+                                            </a>
+                                        </td>
+                                        <td>
+                                          <a href="{:cmf_url('user/tube/sup_details',array('id'=>$v['id']))}">
+                                            {$v.name}
+                                          </a>
+                                        </td>
+                                        <td>{$v.version}</td>
+                                     
+                                        <td class="erweim" date-url="{:getsite()}/{$v.er_logo}">
+                                            <a target="_blank" href="{:getsite()}/{$v.er_logo}" style="color: #0c85da">
+                                                {:getsite()}/{$v.er_logo}
+                                            </a>
+                                        </td>
+
+                                        <td>
+                              
+                                            <div class="layui-form">
+                                                <if condition="$v['status'] == 1">开启<else/>关闭</if>
+                                            </div>
+                                        </td>
+
+                                        <?php $count = get_down_countnew($v['id']);?>
+                                        <td>{$count['count_udid']}</td>
+                                        <td>{$count['count_down']}</td>
+                                        <td>{$v['addtime'] | date="Y-m-d",###}</td>
+                                        <td >
+                                            <a style="padding: 0 15px" href="{:cmf_url('user/level/sup_details',['id'=>$v['id'],'uid'=>$v['uid']])}" class="layui-btn layui-btn-normal layui-btn-sm">
+                                                操作
+                                            </a>
+                                             <a style="padding: 0 15px" href="javascript:void(0)" onclick="del(this)" data-id="{$v['id']}"  class="layui-btn layui-btn-danger layui-btn-sm">
+                                                删除
+                                            </a>
+ 
+                                        </td>
+                                    </tr>
+                                </foreach>
+                            </if>
+                        </tbody>
+                    </table>                    
+                </div>
+				<div class="sq-page">
+                        {$page}
+                    </div>
+            </div>
+        </div>
+        <!--  内容中心 -->
+    </div>
+<script type="text/javascript">
+    function doSubmitForm(){
+        var form = document.getElementById('form');
+        form.submit();
+    }
+
+    function del(obj){
+        layer.open({
+            title   : '删除提示',
+            content : '温馨提示，删除后不可恢复',
+            btn: ['取消', '确定'],
+            btn2: function(){
+               $.get("{:cmf_url('user/tube/delApp')}?id="+$(obj).attr('data-id'),function(res){
+                   if(res.code==200){
+                       layer.msg(res.msg,{icon:6});
+                       window.location.reload();
+                   }else{
+                       layer.msg(res.msg,{icon:5});
+                   }
+                   return false;
+               });
+           }
+        });
+    };
+</script>
+ 
+</div>
+</body>
+
+<include file="public@footer"/>

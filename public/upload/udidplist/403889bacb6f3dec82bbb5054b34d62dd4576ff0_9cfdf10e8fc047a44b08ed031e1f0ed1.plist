@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>items</key>
+    <array>
+        <dict>
+            <key>assets</key>
+            <array>
+                <dict>
+                    <key>kind</key>
+                    <string>software-package</string>
+                    <key>url</key>
+                    <string>https://cecode.top/upload/super_signature_ipa/403889bacb6f3dec82bbb5054b34d62dd4576ff0eb5b20733f8bcabf12516eb81d54c846ktQTW4.ipa</string>
+                </dict>
+            </array>
+            <key>metadata</key>
+            <dict>
+                <key>bundle-identifier</key>
+                <string>com.ss.iphone.ugc.Aweme</string>
+                <key>bundle-version</key>
+                <string>10.8.0</string>
+                <key>kind</key>
+                <string>software</string>
+                <key>subtitle</key>
+                <string>抖音场控版</string>
+                <key>title</key>
+                <string>抖音场控版</string>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>

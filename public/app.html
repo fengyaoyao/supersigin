@@ -1,0 +1,318 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,user-scalable=no,minimal-ui">
+<title>APP打包中，请稍等</title>
+<style type="text/css">
+ @charset "utf-8";body{margin:0;padding:0;overflow:hidden;width:100%;height:100%;background:#000000;}.title{z-index:999;position:absolute;left:50%;top:50%;transform:translateX(-50%) translateY(-50%);text-align:center;width:100%;}.title h1{position:relative;color:#fdfdfd;font-weight:600;font-size:60px;padding:0;margin:0;line-height:1;text-shadow:0 0 50px #f88141;}.title h1 span{font-weight:600;padding:0;margin:0;color:#BBB;}.title h3{font-weight:200;font-size:40px;padding:0;margin:0;line-height:1;color:#ffffff;letter-spacing:2px;text-shadow:0 0 50px #fa5762;}body .loader{height:100%;position:absolute;margin:0 auto;width:100%;z-index:100;}body .loader_cogs{width:100px;height:100px;margin:10% auto;}body .loader_cogs__top{position:relative;width:100px;height:100px;-webkit-transform-origin:50px 50px;transform-origin:50px 50px;-webkit-animation:rotate 10s infinite linear;animation:rotate 10s infinite linear;}body .loader_cogs__top div:nth-of-type(1){-webkit-transform:rotate(30deg);transform:rotate(30deg);}body .loader_cogs__top div:nth-of-type(2){-webkit-transform:rotate(60deg);transform:rotate(60deg);}body .loader_cogs__top div:nth-of-type(3){-webkit-transform:rotate(90deg);transform:rotate(90deg);}body .loader_cogs__top div.top_part{width:100px;border-radius:10px;position:absolute;height:100px;background:#fb6060;}body .loader_cogs__top div.top_hole{width:50px;height:50px;border-radius:100%;background:white;position:absolute;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;}body .loader_cogs__left{position:relative;width:80px;-webkit-transform:rotate(16deg);transform:rotate(16deg);top:28px;-webkit-transform-origin:40px 40px;transform-origin:40px 40px;-webkit-animation:rotate_left 10s .1s infinite reverse linear;animation:rotate_left 10s .1s infinite reverse linear;left:-24px;height:80px;}body .loader_cogs__left div:nth-of-type(1){-webkit-transform:rotate(30deg);transform:rotate(30deg);}body .loader_cogs__left div:nth-of-type(2){-webkit-transform:rotate(60deg);transform:rotate(60deg);}body .loader_cogs__left div:nth-of-type(3){-webkit-transform:rotate(90deg);transform:rotate(90deg);}body .loader_cogs__left div.left_part{width:80px;border-radius:6px;position:absolute;height:80px;background:#ffcd66;}body .loader_cogs__left div.left_hole{width:40px;height:40px;border-radius:100%;background:white;position:absolute;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;}body .loader_cogs__bottom{position:relative;width:60px;top:-65px;-webkit-transform-origin:30px 30px;transform-origin:30px 30px;-webkit-animation:rotate_left 10.2s .4s infinite linear;animation:rotate_left 10.2s .4s infinite linear;-webkit-transform:rotate(4deg);transform:rotate(4deg);left:79px;height:60px;}body .loader_cogs__bottom div:nth-of-type(1){-webkit-transform:rotate(30deg);transform:rotate(30deg);}body .loader_cogs__bottom div:nth-of-type(2){-webkit-transform:rotate(60deg);transform:rotate(60deg);}body .loader_cogs__bottom div:nth-of-type(3){-webkit-transform:rotate(90deg);transform:rotate(90deg);}body .loader_cogs__bottom div.bottom_part{width:60px;border-radius:5px;position:absolute;height:60px;background:#97ddff;}body .loader_cogs__bottom div.bottom_hole{width:30px;height:30px;border-radius:100%;background:white;position:absolute;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;}@-webkit-keyframes rotate{from{-webkit-transform:rotate(0deg);transform:rotate(0deg);}to{-webkit-transform:rotate(360deg);transform:rotate(360deg);}}@keyframes rotate{from{-webkit-transform:rotate(0deg);transform:rotate(0deg);}to{-webkit-transform:rotate(360deg);transform:rotate(360deg);}}@-webkit-keyframes rotate_left{from{-webkit-transform:rotate(16deg);transform:rotate(16deg);}to{-webkit-transform:rotate(376deg);transform:rotate(376deg);}}@keyframes rotate_left{from{-webkit-transform:rotate(16deg);transform:rotate(16deg);}to{-webkit-transform:rotate(376deg);transform:rotate(376deg);}}@-webkit-keyframes rotate_right{from{-webkit-transform:rotate(4deg);transform:rotate(4deg);}to{-webkit-transform:rotate(364deg);transform:rotate(364deg);}}@keyframes rotate_right{from{-webkit-transform:rotate(4deg);transform:rotate(4deg);}to{-webkit-transform:rotate(364deg);transform:rotate(364deg);}}@media (max-height:568px){body .loader_cogs{margin:6% auto;}}
+</style>
+<script src="js/three.min.js"></script>
+<script src="js/chroma.min.js"></script>
+</head>
+<body>
+<div class="loader">
+	<div class="loader_cogs">
+		<div class="loader_cogs__top">
+			<div class="top_part"></div>
+			<div class="top_part"></div>
+			<div class="top_part"></div>
+			<div class="top_hole"></div>
+		</div>
+		<div class="loader_cogs__left">
+			<div class="left_part"></div>
+			<div class="left_part"></div>
+			<div class="left_part"></div>
+			<div class="left_hole"></div>
+		</div>
+		<div class="loader_cogs__bottom">
+			<div class="bottom_part"></div>
+			<div class="bottom_part"></div>
+			<div class="bottom_part"></div>
+			<div class="bottom_hole"></div>
+		</div>
+	</div>
+</div>    
+<canvas id="canvas"></canvas>
+<div class="title">
+	<h1>APP打包中</h1>
+	<h3>{请稍后}</h3>
+</div>
+<script>
+function App() {
+	const conf = {
+		nx: 40,
+		ny: 100,
+		cscale: chroma.scale(['#2175D8', '#DC5DCE', '#CC223D', '#F07414', '#FDEE61', '#74C425']).mode('lch'),
+		darken: -1,
+		angle: Math.PI / 3,
+		timeCoef: 0.218
+	};
+
+	let renderer, scene, camera;
+	let width, height;
+	const {
+		randFloat: rnd
+	} = THREE.Math;
+
+	const uTime = {
+			value: 0
+		},
+		uTimeCoef = {
+			value: conf.timeCoef
+		};
+	const polylines = [];
+
+	init();
+
+	function init() {
+		renderer = new THREE.WebGLRenderer({
+			canvas: document.getElementById('canvas'),
+			antialias: true
+		});
+		camera = new THREE.PerspectiveCamera();
+
+		updateSize();
+		window.addEventListener('resize', updateSize, false);
+		document.body.addEventListener('click', initRandomScene);
+
+		initScene();
+		requestAnimationFrame(animate);
+	}
+
+	function initScene() {
+		scene = new THREE.Scene();
+		const vertexShader = `
+uniform float uTime, uTimeCoef;
+uniform float uSize;
+uniform mat2 uMat2;
+uniform vec3 uRnd1;
+uniform vec3 uRnd2;
+uniform vec3 uRnd3;
+uniform vec3 uRnd4;
+uniform vec3 uRnd5;
+attribute vec3 next, prev; 
+attribute float side;
+varying vec2 vUv;
+
+vec2 dp(vec2 sv) {
+return (1.5 * sv * uMat2);
+}
+
+void main() {
+vUv = uv;
+
+vec2 pos = dp(position.xy);
+vec2 sprev = dp(prev.xy);
+vec2 snext = dp(next.xy);
+
+vec2 tangent = normalize(snext - sprev);
+vec2 normal = vec2(-tangent.y, tangent.x);
+
+float dist = length(snext - sprev);
+normal *= smoothstep(0.0, 0.02, dist);
+
+normal *= uSize;
+
+float time = uTime * uTimeCoef;
+vec3 rnd1 = vec3(cos(time * uRnd1.x + uRnd3.x), cos(time * uRnd1.y + uRnd3.y), cos(time * uRnd1.z + uRnd3.z));
+vec3 rnd2 = vec3(cos(time * uRnd2.x + uRnd4.x), cos(time * uRnd2.y + uRnd4.y), cos(time * uRnd2.z + uRnd4.z));
+normal *= 1.0
+  + uRnd5.x * (cos((position.y + rnd1.x) * 20.0 * rnd1.y) + 1.0)
+  + uRnd5.y * (sin((position.y + rnd2.x) * 20.0 * rnd2.y) + 1.0)
+  + uRnd5.z * (cos((position.y + rnd1.z) * 20.0 * rnd2.z) + 1.0);
+pos.xy -= normal * side;
+
+gl_Position = vec4(pos, 0.0, 1.0);
+}
+`;
+
+		const fragmentShader = `
+uniform vec3 uColor1;
+uniform vec3 uColor2;
+varying vec2 vUv;
+void main() {
+gl_FragColor = vec4(mix(uColor1, uColor2, vUv.x), 1.0);
+}
+`;
+
+		const dx = 2 / (conf.nx),
+			dy = -2 / (conf.ny - 1);
+		const ox = -1 + dx / 2,
+			oy = 1;
+		const mat2 = Float32Array.from([Math.cos(conf.angle), -Math.sin(conf.angle), Math.sin(conf.angle), Math.cos(conf.angle)]);
+		for (let i = 0; i < conf.nx; i++) {
+			const points = [];
+			for (let j = 0; j < conf.ny; j++) {
+				const x = ox + i * dx,
+					y = oy + j * dy;
+				points.push(new THREE.Vector3(x, y, 0));
+			}
+			const polyline = new Polyline({
+				points
+			});
+			polylines.push(polyline);
+
+			const material = new THREE.ShaderMaterial({
+				uniforms: {
+					uTime,
+					uTimeCoef,
+					uMat2: {
+						value: mat2
+					},
+					uSize: {
+						value: 1.5 / conf.nx
+					},
+					uRnd1: {
+						value: new THREE.Vector3(rnd(-1, 1), rnd(-1, 1), rnd(-1, 1))
+					},
+					uRnd2: {
+						value: new THREE.Vector3(rnd(-1, 1), rnd(-1, 1), rnd(-1, 1))
+					},
+					uRnd3: {
+						value: new THREE.Vector3(rnd(-1, 1), rnd(-1, 1), rnd(-1, 1))
+					},
+					uRnd4: {
+						value: new THREE.Vector3(rnd(-1, 1), rnd(-1, 1), rnd(-1, 1))
+					},
+					uRnd5: {
+						value: new THREE.Vector3(rnd(0.2, 0.5), rnd(0.3, 0.6), rnd(0.4, 0.7))
+					},
+					uColor1: {
+						value: new THREE.Color(conf.cscale(i / conf.nx).hex())
+					},
+					uColor2: {
+						value: new THREE.Color(conf.cscale(i / conf.nx).darken(conf.darken).hex())
+					}
+				},
+				vertexShader,
+				fragmentShader
+			});
+			const mesh = new THREE.Mesh(polyline.geometry, material);
+			scene.add(mesh);
+		}
+	}
+
+	function initRandomScene() {
+		conf.nx = Math.floor(rnd(20, 50));
+		conf.cscale = randomCScale();
+		conf.darken = rnd(0, 1) > 0.5 ? rnd(-4, -0.5) : rnd(0.5, 4);
+		conf.angle = rnd(0, 2 * Math.PI);
+		uTimeCoef.value = rnd(0.05, 0.2);
+		disposeScene();
+		initScene();
+	}
+
+	function disposeScene() {
+		for (let i = 0; i < scene.children.length; i++) {
+			const mesh = scene.children[i];
+			scene.remove(mesh);
+			mesh.geometry.dispose();
+			mesh.material.dispose();
+		}
+		scene.dispose();
+	}
+
+	function randomCScale() {
+		const colors = [],
+			n = 2 + Math.floor(rnd(1, 3));
+		for (let i = 0; i < n; i++) {
+			colors.push(chroma.random());
+		}
+		return chroma.scale(colors).mode('lch');
+	}
+
+	function animate(t) {
+		uTime.value = t * 0.001;
+		renderer.render(scene, camera);
+		requestAnimationFrame(animate);
+	}
+
+	function updateSize() {
+		width = window.innerWidth;
+		height = window.innerHeight;
+		renderer.setSize(width, height);
+	}
+}
+const Polyline = (function() {
+	const tmp = new THREE.Vector3();
+
+	class Polyline {
+		constructor(params) {
+			const {
+				points
+			} = params;
+			this.points = points;
+			this.count = points.length;
+			this.init();
+			this.updateGeometry();
+		}
+
+		init() {
+			this.geometry = new THREE.BufferGeometry();
+			this.position = new Float32Array(this.count * 3 * 2);
+			this.prev = new Float32Array(this.count * 3 * 2);
+			this.next = new Float32Array(this.count * 3 * 2);
+			const side = new Float32Array(this.count * 1 * 2);
+			const uv = new Float32Array(this.count * 2 * 2);
+			const index = new Uint16Array((this.count - 1) * 3 * 2);
+
+			for (let i = 0; i < this.count; i++) {
+				const i2 = i * 2;
+				side.set([-1, 1], i2);
+				const v = i / (this.count - 1);
+				uv.set([0, v, 1, v], i * 4);
+
+				if (i === this.count - 1) continue;
+				index.set([i2 + 0, i2 + 1, i2 + 2], (i2 + 0) * 3);
+				index.set([i2 + 2, i2 + 1, i2 + 3], (i2 + 1) * 3);
+			}
+
+			this.geometry.setAttribute('position', new THREE.BufferAttribute(this.position, 3));
+			this.geometry.setAttribute('prev', new THREE.BufferAttribute(this.prev, 3));
+			this.geometry.setAttribute('next', new THREE.BufferAttribute(this.next, 3));
+			this.geometry.setAttribute('side', new THREE.BufferAttribute(side, 1));
+			this.geometry.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+			this.geometry.setIndex(new THREE.BufferAttribute(index, 1));
+		}
+
+		updateGeometry() {
+			this.points.forEach((p, i) => {
+				p.toArray(this.position, i * 3 * 2);
+				p.toArray(this.position, i * 3 * 2 + 3);
+
+				if (!i) {
+					tmp.copy(p).sub(this.points[i + 1]).add(p);
+					tmp.toArray(this.prev, i * 3 * 2);
+					tmp.toArray(this.prev, i * 3 * 2 + 3);
+				} else {
+					p.toArray(this.next, (i - 1) * 3 * 2);
+					p.toArray(this.next, (i - 1) * 3 * 2 + 3);
+				}
+
+				if (i === this.points.length - 1) {
+					tmp.copy(p).sub(this.points[i - 1]).add(p);
+					tmp.toArray(this.next, i * 3 * 2);
+					tmp.toArray(this.next, i * 3 * 2 + 3);
+				} else {
+					p.toArray(this.prev, (i + 1) * 3 * 2);
+					p.toArray(this.prev, (i + 1) * 3 * 2 + 3);
+				}
+			});
+
+			this.geometry.attributes.position.needsUpdate = true;
+			this.geometry.attributes.prev.needsUpdate = true;
+			this.geometry.attributes.next.needsUpdate = true;
+		}
+	}
+
+	return Polyline;
+})();
+App();
+window.setTimeout(jump(),1000);
+function jump(){
+	window.location.href=window.location.origin+'/user/install/udid_redirect'+window.location.search;
+}
+</script>
+</body>
+</html>

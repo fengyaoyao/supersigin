@@ -1,0 +1,192 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+   <ul class="nav nav-tabs">
+        <li class="tabs_li tabs_index active"><a>{:lang('USER_INDEXADMIN_INDEX')}</a></li>
+        <li class="tabs_li tabs_add"><a href="javascript:void(0)" onclick="user_add()">添加用户</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('admin/adminIndex/index')}">
+        用户ID：
+        <input class="form-control" type="text" name="uid" style="width: 200px;" value="{:input('request.uid')}"
+               placeholder="请输入用户ID">
+        &nbsp;&nbsp;&nbsp;关键字：
+        <input class="form-control" type="text" name="keyword" style="width: 200px;" value="{:input('request.keyword')}"
+               placeholder="用户名/昵称/邮箱">
+        手机号码：
+        <input class="form-control" type="text" name="mobile" style="width: 200px;" value="{:input('request.mobile')}"
+               placeholder="手机号码">
+
+	
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('admin/adminIndex/index')}">清空</a>
+    </form>
+    <form method="post" class="js-ajax-form">
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>应用总数</th>
+                <th><font color="blue">今日装机数</font></th>
+                <th><font color="blue">今日下载数</font></th>
+                <th><font color="red">超级签名剩余装机设备数</font></th>
+                <th><font color="blue">IOS真实总装机数</font></th>
+                <th><font color="red">IOS总装机数</font></th>
+                <th><font color="Magenta">安卓总下载数</font></th>
+                <th>总充值金额</th>
+                <th>{:lang('STATUS')}</th>
+                <th>备注</th>
+                <th>{:lang('ACTIONS')}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <php>
+                $user_statuses=array("0"=>lang('USER_STATUS_BLOCKED'),"1"=>lang('USER_STATUS_ACTIVATED'),"2"=>lang('USER_STATUS_UNVERIFIED'));
+            </php>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.user_login}</td>
+                    <td><strong>{$vo.yingyongzongshu}</strong></td>
+                    <td><span style="font-weight: bold;color: blue;">{$vo.todayApp}</span></td>
+                    <td><span style="font-weight: bold;color: blue;">{$vo.todayDownload}</span></td>
+                    <td><span style="font-weight: bold;color: red;">{$vo.sup_down_public|default='0'}</span></td>
+                    <td><strong><font color="blue">{$vo.udid_count}</strong></font></td>
+                    <td><strong><font color="red">{$vo.allApp}</strong></font></td>
+                    <td><strong><font color="Magenta">{$vo.andriod}</font></td>
+                    <td>{$vo.coin_count}</td>
+                    <td>{$user_statuses[$vo['user_status']]}</td>
+				    <td><input type="text" style="width: 100px;" onblur="xiugai(this,'{$vo[\'id\']}');" value="{$vo['bz']}"> </td>
+                    <td>
+                        <neq name="vo.id" value="1">
+                            <empty name="vo.user_status">
+                                <a href="{:url('adminIndex/cancelban',array('id'=>$vo['id']))}"
+                                   class="js-ajax-dialog-btn"
+                                   data-msg="{:lang('ACTIVATE_USER_CONFIRM_MESSAGE')}">{:lang('ACTIVATE_USER')}</a>
+                                <else/>
+                                <a href="{:url('adminIndex/ban',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn"
+                                   data-msg="{:lang('BLOCK_USER_CONFIRM_MESSAGE')}">{:lang('BLOCK_USER')}</a>
+                            </empty>
+                            <else/>
+                            <a style="color: #ccc;">{:lang('BLOCK_USER')}</a>
+                        </neq>
+						<a href="#" onclick="toLevel({$vo.id})" class="">{:lang('LOWER_LEVEL')}</a>
+						<a href="{:url('admin/user/editPwd',array('id'=>$vo['id']))}" class="">重置密码</a>
+                        <a href="javascript:void(0)" onclick="sup_add('{$vo[\'id\']}')">充值</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <div class="pagination">{$page}</div>
+		
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script>
+	function toLevel(pid){
+		layer.open({
+		  type: 2,
+		  area: ['700px', '450px'],
+		  fixed: false, //不固定
+		  maxmin: true,
+		  title:'下级管理',
+		  content: "{:url('admin/level/index')}?pid="+pid+"&page=1"
+		});
+	}
+	
+	function user_add(){
+		$('.tabs_li').removeClass('active');
+		$('.tabs_add').addClass('active');
+		layer.open({
+		  type: 2,
+		  area: ['340px', '360px'],
+		  fixed: false, //不固定
+		  maxmin: true,
+		  title:'添加用户',
+		  content: "{:url('adminIndex/add')}",
+		  end:function(){
+			  $('.tabs_li').removeClass('active');
+			  $('.tabs_index').addClass('active');
+		  }
+		});
+	}
+
+    function sup_add(value){
+        layer.open({
+            type: 2,
+            area: ['560px', '460px'],
+            fixed: false, //不固定
+            maxmin: true,
+            title:'设置次数',
+            content: "{:url('adminIndex/add_sup')}?pid="+value,
+            end:function(){
+                $('.tabs_li').removeClass('active');
+                $('.tabs_index').addClass('active');
+                window.location.reload();
+            }
+        });
+    }
+	
+	function toPid(pid){
+		layer.open({
+		  type: 2,
+		  area: ['700px', '450px'],
+		  fixed: false, //不固定
+		  maxmin: true,
+		  title:'更改上级',
+		
+		  content: "{:url('admin/level/index')}?pid="+pid+"&page=1"
+		});
+	}
+	
+	function editPid(obj,id){
+		pid = obj.options[obj.options.selectedIndex].value;
+		$.get("{:url('admin/adminIndex/editPid')}?id="+id+'&pid='+pid,function(res){
+			if(res.code==200){
+				layer.msg('修改成功');
+			}else{
+				layer.msg('修改失败');
+			}
+		});
+		
+	}
+	
+	function downData(uid,nickname){
+		layer.open({
+		  type: 2,
+		  area: ['700px', '450px'],
+		  fixed: false, //不固定
+		  maxmin: true,
+		  title:'详细数据-'+nickname,
+		  shade: 0,
+		  content: "{:url('admin/level/downData')}?uid="+uid
+		});
+	}
+	
+	function toAdd(pid){
+		layer.open({
+		  type: 2,
+		  area: ['700px', '450px'],
+		  fixed: false, //不固定
+		  maxmin: true,
+		  title:'可设置下级人员',
+		  content: "{:url('admin/level/lists')}?pid="+pid
+		});
+	}
+
+
+    function xiugai(e,value) {
+
+        $.get("{:cmf_url('admin/admin_index/updatebz')}?id="+value+"&beizhu="+e.value,function(res){
+            if(res.code==200){
+                window.location.reload();
+            }else{
+            }
+            return false;
+        });
+    }
+</script>
+</body>
+</html>

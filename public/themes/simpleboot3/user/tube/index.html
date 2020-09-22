@@ -1,0 +1,194 @@
+<include file="public@head"/>
+
+<body>
+    <div class="templatemo-content">
+        <!--  我的应用左侧 -->
+        <include file="public@tube"/>
+        <!--  我的应用左侧 -->
+
+        <!--  begin 首页-->
+        <div class="templatemo-body">
+            <!--begin 用户资料-->
+            <div class="sq-user">
+                <h3 class="sq-user__title">账户资料</h3>
+
+                <div class="sq-user__body">
+                    <div class="sq-user__content">
+                        <div class="content-head">
+                            <div class="content-head__info">
+                                <img src="/avatar.png" >
+                                <dl>
+                                    <dt>
+                                    	<span>{$user.mobile}</span>
+                                    	<a href="{:url('index/logout')}"  style="color:#ff5722;font-size:14px;">（退出登陆）</a>
+                                    </dt>
+                                    <dd style="width:75%">
+                                        <i class="layui-icon layui-icon-auz" style="color: #2198f0;position:relative;top:1px;"></i> <span style="font-weight: bold;">欢迎使用本平台。<span style="font-weight: bold;color: red;">本平台不支持,金融类、微信、支付宝、QQ类功能包,发现后封停账户处理。</span>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="content-head__count">
+                                <div style="margin-right: 28px">
+                                    <div class="count-title">剩余IOS装机设备数</div>
+                                    <dl class="">
+                                        <dt><span style="font-weight: bold;color: red;">{$user.sup_down_public}</span></dt>
+                                        <dd>台</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-body">
+                            <dl>
+                                <dt>今日下载数</dt>
+                                <dd><strong>{$todayDownload}</strong></dd>
+                            </dl>
+                            <dl>
+                                <dt>今日装机数</dt>
+                                <dd><strong>{$todayApp}</strong></dd>
+                            </dl>
+                            <dl>
+                                <dt>本月下载数</dt>
+                                <dd><strong>{$monthDownload}</strong></dd>
+                            </dl>
+                            <dl>
+                                <dt>累计下载数</dt>
+                                <dd><strong>{$allDownload}</strong></dd>
+                            </dl>
+
+                            <if condition="get_user('pid') == 0">
+                                <dl>
+                                    <dt>客户剩余下载数</dt>
+                                    <dd><strong>{$sup_down_public}</strong></dd>
+                                </dl>
+                            </if>
+                        </div>
+                    </div>
+               
+               <div class="sq-user__set">
+                        <a href="/user/profile/edit.html" style="margin-bottom: 10px;display: block">
+                            <dl class="">
+                                <dt class="layui-icon layui-icon-set"></dt>
+                                <dd class="">
+                                    <h5>账户资料</h5>
+                                    <p>查看和修改账号信息</p>
+                                </dd>
+                            </dl>
+                        </a>
+
+                        <a href="/user/profile/financialinfo.html">
+                            <dl class="">
+                                <dt class="layui-icon layui-icon-set"></dt>
+                                <dd class="">
+                                    <h5>财务信息</h5>
+                                    <p>查看充值消费记录和付费APP安装记录</p><!--和充值记录-->
+                                </dd>
+                            </dl>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--end   用户资料-->
+
+            <!--begin 数据统计-->
+            <div class="sq-count">
+                <h3 class="sq-count__title">最近一周下载统计</h3>
+                <div style="height:460px;background-color: #fff;padding: 10px 0;border: 1px solid #ececec;box-shadow: 3px 3px 3px #ececec">
+                    <div id="chart"></div>
+                </div>
+            </div>
+            <!--begin 数据统计-->
+        </div>
+        <!--  end   首页-->
+    </div>
+</body>
+
+<include file="public@footer"/>
+<script src="https://unpkg.com/frappe-charts@1.0.0/dist/frappe-charts.min.iife.js"></script>
+
+<script type="text/javascript">
+    function del(obj){
+        layer.open({
+            title   : '删除提示',
+            content : '温馨提示，删除后不可恢复',
+            btn: ['取消', '确定'],
+            btn2: function(){
+               $.get("{:cmf_url('user/tube/delApp')}?id="+$(obj).attr('data-id'),function(res){
+                   if(res.code==200){
+                       layer.msg(res.msg,{icon:6});
+                       window.location.reload();
+                   }else{
+                       layer.msg(res.msg,{icon:5});
+                   }
+                   return false;
+               });
+           }
+        });
+    };
+
+    function xiugai(e,value) {
+
+        /*var iphone = e.value;
+        var xhr=new XMLHttpRequest();
+        xhr.onreadystatechange=function () {
+            if (xhr.readyState==4){
+
+            }
+        };
+        xhr.open('get','index.php?g=User&m=indexadmin&a=update&id='+value+"&iphone="+e.value);
+        xhr.send(null);*/
+
+        $.get("{:cmf_url('user/tube/updateApp')}?id="+value+"&beizhu="+e.value,function(res){
+            if(res.code==200){
+                window.location.reload();
+            }else{
+            }
+            return false;
+        });
+    }
+    
+    function xiazai(e,value){
+        $.get("{:cmf_url('user/tube/updatenum')}?id="+value+"&beizhu="+e.value,function(res){
+            if(res.code==200){
+                window.location.reload();
+            }else{
+            }
+            return false;
+        });
+    }
+
+    $(function () {
+        layui.use('form', function () {
+            var form = layui.form;
+
+            form.on('switch(status)', function (data) {
+                var id     = data.elem.attributes['data-id'].nodeValue;
+                var status = data.elem.checked?1:0;
+
+                $.get("{:url('tube/sup_status_update')}?id="+id+"&status="+status,function(res){
+                    if(res.code == 200){
+                        layer.msg('修改成功',{icon:6});
+                    }else{
+                        layer.msg('修改失败',{icon:5});
+                    }
+                });
+            });
+            form.render()
+        })
+
+        let chart = new Chart("#chart", {
+            data: {
+                labels: {$week},
+                datasets: [
+                {
+                    "name": "装机数",
+                    "values": {$count_udid}
+                }]
+            },
+            type   : 'line',
+            height : 330,
+            colors : ['#46BFBD', 'light-blue']
+        });
+    })
+</script>
+

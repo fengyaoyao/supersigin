@@ -1,0 +1,120 @@
+<include file="public@head"/>
+
+<style>
+    .layui-layer-prompt .layui-layer-btn{text-align: center}
+    .layui-layer-prompt .layui-layer-input{width: 100%;box-sizing: border-box;text-align: center}
+	.financial{background-color: #fff;padding: 30px;display:flex;align-items:center;justify-content:space-between;border: 1px solid #ececec;background-color: #fff;box-shadow: 3px 3px 3px #ececec}
+    .financial-count{}
+    .financial-count__title{color: #999;margin-bottom: 10px;}
+    .financial-count__num{font-size: 30px;}
+    .financial-count__num .small{font-size: 16px;position: relative;top: -2px;}
+    .record{margin-top: 20px;}
+    .record-tab{display: flex;align-items: baseline}
+    .record-tab__item{margin-right: 15px;font-size: 18px;color: #999}
+    .record-tab__item.active{color: #000;font-size: 22px;}
+</style>
+
+<body class="body-white">
+    <div class="templatemo-content">
+        <!--  我的应用左侧 -->
+        <include file="public@tube"/>
+        <!--  我的应用左侧 -->
+
+        <!--  内容中心 -->
+        <div class="templatemo-body">
+        <div class="sq-app">
+        <div class="sq-app__title">我的客户</div>
+        <form class="js-ajax-form" id="form" action="{:url('user/level/index')}" method="post">
+				<div class="financial">
+          <input type="text" name="name" required  lay-verify="required" placeholder="请输入要搜索的用户名" autocomplete="off" class="layui-input">
+          <button onclick='doSubmitForm()' class="layui-btn layui-btn-normal">搜索</button>
+
+				</div>
+        </form>
+                <div class="sq-app__table">
+                    <table class="layui-table sq-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>用户名</th>
+                                <th>IOS装机数</th>
+                                <th>总下载数量</th>
+                                <th>剩余下载量</th>
+                                <th>APP个数</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <if condition="count($list) == 0">
+                                <tr class="">
+                                    <td colspan="7">
+                                        <p style="font-size: 16px;margin-top: 20px;margin-bottom: 20px">
+                                            
+                                        <empty name="$name">该账户还未添加应用<else/>未找到搜索的内容</empty>
+
+                                        </p>
+                                    </td>
+                                </tr>
+                            <else/>
+                                <foreach name="list" item="vo">
+                                   <tr>
+                                       <td>{$vo.id}</td>
+                                       <td>
+
+                                          <empty name="$vo.user_nickname">
+                                            {$vo.user_email}
+                                          <else />
+                                            {$vo.user_nickname}
+                                          </empty>
+                                       </td>
+                                       <td>{$vo.udid_count}</td>
+                                       <td>{$vo.download_count}</td>
+                                       <td>{$vo.sup_down_public}</td>
+                                       <td>{$vo.app_count}</td>
+
+                                       <td>
+                                        <a style="padding: 0 15px" href="{:cmf_url('user/level/child_app',['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-sm">应用管理</a>
+                                      <!--   <a style="padding: 0 15px" href="{:cmf_url('user/level/child_app',['id'=>$vo['id']])}" class="layui-btn  layui-btn-sm">修改账户</a> -->
+
+                                        <a style="padding: 0 15px" href="#" class="layui-btn layui-btn-warm layui-btn-sm" onclick="downData({$vo.id})" >账户充值</a>
+                                       </td>
+                                   </tr>
+                                </foreach>
+                            </if>
+                        </tbody>
+                    </table>                    
+                </div>
+				<div class="sq-page">{$page}</div>
+        </div>
+        </div>
+        <!--  内容中心 -->
+    </div>
+<script type="text/javascript">
+  function downData(uid){
+      layer.prompt({
+                title: '输入充值数量：自身剩余设备数：{$sup_down_public}'
+            }, function(text, index){
+        $.get('{:url("level/recharge")}?num='+text+'&sid='+uid,function(res){
+          if(res.code==200){
+            layer.msg(res.msg,{icon:6});
+          }else{
+            layer.msg(res.msg,{icon:5});
+          }
+          //window.location.reload();
+          layer.close(index);
+        });
+      });
+  }
+
+  function doSubmitForm(){
+    var form = document.getElementById('form');
+    form.submit();
+  }
+
+</script>
+
+ 
+</div>
+</body>
+
+<include file="public@footer"/>

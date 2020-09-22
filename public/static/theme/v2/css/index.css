@@ -1,0 +1,388 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.first {
+    display: flex;
+    margin-top: 0.853333rem;
+    align-items: center;
+}
+
+.goback {
+    width: 0.28rem;
+    height: 0.52rem;
+    margin-left: 0.4rem;
+}
+
+.search {
+    margin-left: 0.226666rem;
+    font-size: 0.48rem;
+    color: #06B2B6;
+}
+
+.second {
+    margin-top: 0.386666rem;
+    display: flex;
+}
+
+.img {
+    width: 2.853333rem;
+    height: 2.853333rem;
+    border-radius: 0.56rem;
+    margin-left: 0.453333rem;
+}
+
+.second p:nth-child(1) {
+    width: 5.5rem;
+    font-size: 0.52rem;
+    color: black;
+}
+
+.second p:nth-child(2) {
+    font-size: 0.373333rem;
+    color: #ADADAD;
+    margin-top: 0.16rem;
+}
+
+.text {
+    margin-left: 0.413333rem;
+}
+
+.text button {
+    width: 2.4rem;
+    height: 0.706666rem;
+    background-color: #33a8ee;
+    font-size: 0.373333rem;
+    border: none;
+    color: white;
+    border-radius: 0.706666rem;
+    margin-top: 0.346666rem;
+}
+
+.third {
+    display: flex;
+    margin-top: 0.56rem;
+}
+
+.starImg {
+    margin-left: 0.266666rem;
+}
+
+.starImg img {
+    width: 0.44rem;
+    height: 0.426666rem;
+}
+
+.thirdOne {
+    display: flex;
+    flex-flow: column;
+    margin-left: 0.453333rem;
+}
+
+.thirdOneDiv {
+    display: flex;
+    align-items: center;
+}
+
+.starNum {
+    font-size: 0.56rem;
+    color: #8E8F93;
+}
+
+.score {
+    font-size: 0.28rem;
+    color: #C0C0C2;
+}
+
+.thirdTwo {
+    display: flex;
+    flex-flow: column;
+    margin-left: 2.24rem;
+}
+
+.thirdTwo p:nth-child(1) {
+    font-size: 0.56rem;
+    color: #8E8F93;
+}
+
+.thirdTwo p:nth-child(2) {
+    font-size: 0.28rem;
+    color: #C0C0C2;
+}
+
+.thirdThree {
+    display: flex;
+    flex-flow: column;
+    margin-left: 2.133333rem;
+}
+
+.thirdThree p:nth-child(1) {
+    font-size: 0.56rem;
+    color: #8E8F93;
+}
+
+.thirdThree p:nth-child(2) {
+    font-size: 0.28rem;
+    color: #C0C0C2;
+}
+
+.fourth {
+    width: 100%;
+    margin-top: 0.36rem;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.fourthOne {
+    width: 100%;
+    /*height: 12.866666rem;*/
+    overflow-x: scroll;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.fourthOne img:nth-child(1) {
+    margin-left: 0.48rem;
+}
+
+.fourthOne img {
+    /*height: 5.906666rem;*/
+    /*width: 12.866666rem;*/
+    width: 90%;
+    margin: 0 5%;
+    border-radius: 0.56rem;
+}
+
+.iphone {
+    width: 90%;
+    height: 60px;
+    border-bottom: 1px solid #EBEBED;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    color: #87878A;
+}
+
+.iphone img {
+    width: 0.293333rem;
+    height: 0.466666rem;
+}
+
+.fourFooter {
+    width: 100%;
+}
+
+.fourFooter p {
+    margin-left: 0.293333rem;
+}
+
+.Fifth {
+    width: 100%;
+    display: flex;
+    margin-top: 0.386666rem;
+    justify-content: center;
+}
+
+.FifthOne {
+    width: 90%;
+    border-bottom: 1px solid #EBEBED;
+}
+
+.FifthOneText {
+    font-size: 0.373333rem;
+}
+
+.FifthOneText p:nth-child(2) {
+    margin-top: 0.2rem;
+}
+
+.FifthOneText p:nth-child(3) {
+    margin-top: 0.2rem;
+}
+
+.FifthOneName {
+    margin-top: 0.786666rem;
+}
+
+.FifthOneName p:nth-child(1) {
+    color: #06B2B6;
+    font-size: 0.373333rem;
+}
+
+.FifthOneName p:nth-child(2) {
+    color: #939497;
+    font-size: 0.32rem;
+    margin-bottom: 0.986666rem;
+}
+
+.Sixth {
+    width: 100%;
+    display: flex;
+    margin-top: 0.386666rem;
+    justify-content: center;
+}
+
+.SixthOne {
+    width: 90%;
+    border-bottom: 1px solid #EBEBED;
+}
+
+.SixthOne div:nth-child(1) {
+    display: flex;
+    align-items: center;
+}
+
+.SixthOne div:nth-child(2) {
+    display: flex;
+}
+
+.SixthODiv p:nth-child(1) {
+    font-size: 0.533333rem;
+}
+
+.SixthODiv p:nth-child(2) {
+    margin-left: 4.9rem;
+    font-size: 0.4rem;
+    color: #06B2B6;
+}
+
+.SixthtDiv {
+    margin-top: 0.4rem;
+    color: #939397;
+    font-size: 0.346666rem;
+}
+
+.SixthtDiv p:nth-child(2) {
+    margin-left: 6.3rem;
+}
+
+.SixthcDiv {
+    margin-top: 0.386666rem;
+    font-size: 0.346666rem;
+}
+
+.SixthcDiv p:nth-child(2) {
+    margin-top: 0.213333rem;
+}
+
+.SixthcDiv p:nth-child(3) {
+    margin-top: 0.213333rem;
+    margin-bottom: 0.88rem;
+}
+
+.Seventh {
+    width: 100%;
+    /*display: flex;*/
+    margin-top: 0.386666rem;
+    justify-content: center;
+}
+
+.SeventhOne,
+.SeventhTwo,
+.SeventhThree,
+.SeventhFour,
+.SeventhFive,
+.SeventhSix,
+.SeventhSeven,
+.SeventhEight {
+    width: 90%;
+    height: 1.12rem;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.346666rem;
+    border-bottom: 1px solid #EBEBED;
+}
+
+.SeventhTwo p:nth-child(1),
+.SeventhThree p:nth-child(1),
+.SeventhFour p:nth-child(1),
+.SeventhFive p:nth-child(1),
+.SeventhSix p:nth-child(1),
+.SeventhSeven p:nth-child(1),
+.SeventhEight p:nth-child(1) {
+    color: #939397;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    margin-top: 0.693333rem;
+    justify-content: center;
+    color: #666666;
+    font-size: 0.266666rem;
+}
+
+.footer div {
+    width: 90%;
+}
+
+#myProgress {
+    width: 100%;
+    height: 50px;
+    border-radius: 20px;
+    background-color: #ddd;
+}
+
+#myBar {
+    width: 10%;
+    height: 50px;
+    background-color: #2196F3;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 20px;
+    color: white;
+}
+
+.PC .container {
+    text-align: center;
+    display: none;
+    font-size: 25px;
+}
+
+.PC .container strong {
+    line-height: 3em;
+}
+
+.PC .container .pc-logo {
+    border-radius: 25px;
+    width: 120px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.PC .container p {
+    padding: 10px;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #232121;
+    z-index: 999;
+    opacity: 0.8;
+    display: none;
+}
+
+.loading img {
+    display: block;
+    margin: 15% auto 0;
+    width: 80%;
+    height: 30%;
+}
+
+.loading p {
+    font-size: 0.2rem;
+    text-align: center;
+    color: #ffffff;
+    width: 70%;
+    position: absolute;
+    left: 50px;
+    top: 45%;
+}

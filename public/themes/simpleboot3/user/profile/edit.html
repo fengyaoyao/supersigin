@@ -1,0 +1,55 @@
+<include file="public@head"/>
+<style>
+    .sq-form{border-radius:5px;background-color: #fff;padding:30px;box-shadow: 3px 3px 3px #ececec;border: 1px solid #ececec;}
+    .sq-form-item{display: flex;align-items: center;margin-bottom: 20px;}
+    .sq-form-item .item-label{width: 130px;color: #999}
+    .sq-form-item .item-input{width: 300px;height: 38px;line-height: 38px;}
+</style>
+<body>
+    <div class="templatemo-content">'
+        <!--  我的应用左侧 -->
+        <include file="public@tube"/>
+        <!--  我的应用左侧 -->
+
+        <!--  修改资料-->
+        <div class="templatemo-body">
+            <h5>基本信息</h5>
+
+            <div class="sq-form">
+                <form class="js-ajax-form" action="{:url('user/profile/editPost')}" method="post">
+                    <div class="sq-form-item">
+                        <div class="item-label">绑定邮箱：</div>
+                        <div class="item-input">
+                            <input name="user_email" type="text" placeholder="请输入邮箱" value="{$user.user_email}" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="sq-form-item">
+                        <div class="item-label">用户昵称：</div>
+                        <div class="item-input">
+                            <input name="user_nickname" type="text" value="{$user.user_nickname}" placeholder="请输入用户昵称" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="sq-form-item">
+                        <div class="item-label">手机号：</div>
+                        <div class="item-input">
+                            {$user.mobile}
+                        </div>
+                    </div>
+                    <div class="sq-form-item">
+                        <div class="item-label"></div>
+                        <button class="layui-btn layui-btn-normal">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--  修改资料-->
+    </div>
+</body>
+
+<include file="public@footer"/>
+
+<script>
+
+</script>

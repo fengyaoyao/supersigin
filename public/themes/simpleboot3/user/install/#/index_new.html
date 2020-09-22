@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{$result.name} 下载中心</title>
+<link href="__STATIC__/theme/v2/css/flexible.css" rel="stylesheet" />
+<link href="__STATIC__/theme/v2/css/index.css" rel="stylesheet" />
+<link href="__STATIC__/theme/v2/css/apk.css" rel="stylesheet" />
+<script src="__STATIC__/theme/v2/js/jquery.min.js"></script>
+<script src="__STATIC__/theme/v2/js/qrcode.min.js"></script>
+<script src="__STATIC__/theme/v2/js/flexible.js"></script>
+<style>
+.mask {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	background: rgba(2, 2, 2, 0.4);
+	z-index: 1000000;
+	top: 0;
+}
+.maks-img img {
+	width: 6.906666rem;
+	height: 5.173333rem;
+	position: absolute;
+	top: 3%;
+	left: 28%;
+}
+.secondDiv {
+	width: 8rem;
+	height: 5.493333rem;
+	background-image: url("__STATIC__/theme/v2/imgs/bg@2x.png");
+	background-size: 8rem 5.493333rem;
+	background-repeat: no-repeat;
+	position: relative;
+}
+.close {
+	position: absolute;
+	right: 5%;
+	top: 6%;
+	width: 6%;
+}
+.copy {
+	width: 6.373333rem;
+	height: 0.986666rem;
+	background-image: url('__STATIC__/theme/v2/imgs/fuzhi@2x.png');
+	background-size: 6.373333rem 0.986666rem;
+	background-repeat: no-repeat;
+	margin: 4rem auto 0 auto;
+	display: flex;
+}
+.copy #url {
+	width: 6rem;
+	line-height: 0.986666rem;
+	padding-left: 0.35rem;
+	font-size: 0.4rem;
+}
+.copyBtn {
+	width: 2rem;
+	height: 1rem;
+	margin-left: 2.5rem;
+	width: 1.5rem;
+}
+#input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	z-index: -10;
+}
+#content {
+	line-height: 20px;
+	width: 1%;
+	text-align: center;
+	overflow: hidden;
+	z-index: -20;
+}
+.frame {
+	width: 8rem;
+	height: 5rem;
+	background-color: white;
+	border-radius: 0.5rem;
+	position: relative;
+}
+.small {
+	display: flex;
+	justify-content: center;
+	flex-flow: column;
+	align-items: center;
+}
+.small p:nth-child(1) {
+	font-size: 0.45rem;
+	font-weight: bold;
+	margin-top: 0.6rem;
+	font-family: "微软雅黑";
+}
+.small p:nth-child(2) {
+	font-size: 0.4rem;
+	margin-top: 0.2rem;
+	font-family: "微软雅黑";
+}
+.small input {
+	width: 7rem;
+	height: 1rem;
+	font-size: 0.4rem;
+	margin-top: 0.6rem;
+	border: 1px solid #b3b3b3;
+}
+.alert-footer {
+	width: 100%;
+	height: 1rem;
+	border-top: 1px solid #cccccc;
+	display: flex;
+	font-size: 0.45rem;
+	position: absolute;
+	bottom: 0;
+	align-items: center;
+	color: #3478f6;
+	justify-content: space-evenly;
+}
+.alert-footer div:nth-child(1) {
+	width: 50%;
+	height: 1rem;
+	text-align: center;
+	line-height: 1rem;
+}
+.apk {
+	display: none;
+}
+.apk-loading {
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: none;
+}
+.vipPayBtn1 {
+    display: block;
+    background-color: #ff9b24;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 5em;
+    color: #ffffff;
+    margin-top: 15px;
+    padding: 7.5px 0;
+    border: none;
+}
+.install-btn{width:2.4rem;height:0.786666rem;border-radius:0.786666rem;font-size:0.373333rem;overflow:hidden;color:white;text-align:center;line-height:0.786666rem;background:#33a8ee;border:1px solid #33a8ee;position:relative;top: 0.346666rem}
+.install-btn .text{position:relative;z-index:1;margin:0}
+.install-btn.active{background-color:#ccc;}
+.install-btn.active .progress{text-align:center;display:block;position:absolute;background-color:#33a8ee;height:100%;left:0;top:0}
+.install-btn.disabled{background-color:#ccc;color:#fff}
+.vipPayBtn1{display:block;background-color:#ff9b24;font-size:15px;text-align:center;border-radius:5em;color:#ffffff;margin-top:15px;padding:7.5px 0;border:none;}
+</style>
+<link href="__STATIC__/vip_files/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="__STATIC__/vip_files/m-vip.css">
+</head>
+<body>
+<div class="PC">
+	<div class="container">
+		<strong>请使用手机扫描二维码下载</strong>
+		<div><img class="pc-logo" src="{$result.img}"></div>
+		<p>{$result.name}</p>
+		<div class="qrcode"></div>
+	</div>
+</div>
+<div class="mobile">
+	<div class="second">
+		<img alt="{$result.name}" class="img" src="{$result.img}" />
+		<div class="text">
+			<p>{$result.name}</p>
+			<p></p>
+			<if($title)>
+				<div class="install-btn" style="background-color:#ccc;color:#fff;border:1px solid #ccc">
+					<div class="text j-down-text">{$title}</div>
+				</div>
+			<else/>
+				<div data-url="{$url}" onclick="{$url}" class="j-download-ipa install-btn">
+					<div class="text j-down-text">免费安装</div>
+					<div class="progress j-download-progress"></div>
+				</div>
+				<a href="{$url}" id="j-install-ipa" style="display:none">点击安装</a>
+			</if>
+		</div>
+	</div>
+	<div class="third">
+		<div class="thirdOne">
+			<div class="thirdOneDiv">
+				<span class="starNum">5</span>
+				<div class="starImg">
+					<img class="starImgOne" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: none;">
+					<img class="starImgTwo" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: none;">
+					<img class="starImgThree" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: none;">
+					<img class="starImgFour" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: none;">
+					<img class="starImgFive" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: none;">
+				</div>
+			</div>
+			<div class="score">
+				<p>2000个评分</p>
+			</div>
+
+		</div>
+		<div class="thirdTwo">
+			<p>#09</p>
+			<p>工具</p>
+		</div>
+		<div class="thirdThree">
+			<p>4+</p>
+			<p>年龄</p>
+		</div>
+	</div>
+	
+	<div class="fourth">
+		<div class="fourthOne">
+			<if condition="count($img)">
+			<foreach name="img" item="v"><img alt="{$result.name}" src="{$v.img}"></foreach>
+			<else/>
+			<img alt="{$result.name}" src="__STATIC__/theme/v2/imgs/default-1.jpg" />
+			<img alt="{$result.name}" src="__STATIC__/theme/v2/imgs/default-2.jpg" />
+			</if>
+		</div>
+		<div class="fourFooter">
+			<div class="iphone">
+				<img src="__STATIC__/theme/v2/imgs/iphoen.png" />
+				<p>iPhone</p>
+			</div>
+		</div>
+	</div>
+	<div class="Fifth">
+		<div class="FifthOne">
+			<div class="FifthOneText">
+				<p>简介</p>
+				<p>{$result.introduce?$result.introduce:$result.name}</p>
+			</div>
+			<div class="FifthOneName">
+				<p>Apple Developer</p>
+				<p>开发者</p>
+			</div>
+		</div>
+	</div>
+	<div class="Sixth">
+		<div class="SixthOne">
+			<div class="SixthODiv">
+				<p>新功能</p>
+				<p>版本历史记录</p>
+			</div>
+			<div class="SixthtDiv">
+				<p>版本 {$result.version}</p>
+				<p>{$result['addtime'] | date="Y-m-d",###}</p>
+			</div>
+			<div class="SixthcDiv">
+				<p>{$result.instructions?$result.instructions:$result.name}</p>
+			</div>
+		</div>
+	</div>
+	<div class="Seventh">
+		<div class="SeventhOne">
+			<p>信息</p>
+		</div>
+		<div class="SeventhTwo">
+			<p>开发商</p>
+			<p>Apple Developer</p>
+		</div>
+		<div class="SeventhThree">
+			<p>大小</p>
+			<p>{$result.big} MB</p>
+		</div>
+		<div class="SeventhFour">
+			<p>类别</p>
+			<p>娱乐</p>
+		</div>
+		<div class="SeventhFive">
+			<p>兼容性</p>
+			<p>需要 iOS 8.0 或更高版本</p>
+		</div>
+		<div class="SeventhSix">
+			<p>语言</p>
+			<p>#</p>
+		</div>
+		<div class="SeventhSeven">
+			<p>年龄分级</p>
+			<p>4+</p>
+		</div>
+		<div class="SeventhEight">
+			<p>版权</p>
+			<p>{$result.name}</p>
+		</div>
+	</div>
+	<div class="footer">
+		<div>
+			<p>免责声明：本网站仅为开发者提供App的下载和安装托管，App内的内容和运 营相关事项由App开发者负责，与本网站无关。</p>
+		</div>
+	</div>
+	<div class="mask maks-img" id="safari" style="display: none;">
+		<img src="__STATIC__/theme/v2/imgs/safari.png" />
+	</div>
+	<div class="other_ua mask" style="display: none;">
+		<div class="secondDiv">
+			<div class="copy">
+				<p id="url"> 点击复制 --></p>
+				<p class="uuid-code" id="content"></p>
+				<p class="copyBtn" id="copyBtn"></p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="apk">
+	<div class="second22">
+		<img class="img22" src="{$result.img}" />
+		<div class="text22">
+			<p>{$result.name}</p>
+			<p>工具</p>
+			<if($title)>
+				<div class="btn22" style="background:#ccc;border:1px solid #ccc;border-radius:0.786666rem;">{$title}</div>
+			<elseif condition="!empty($result['andriod_url'])">
+				<div data-url="{$result.andriod_url}" data-str="{$result.str_id}" class="btn22 install-btn j-android-install">
+					<div class="text j-down-text">免费安装</div>
+                    <div class="progress j-download-progress"></div>
+				</div>
+			<else/>
+				<div class="btn22" style="background:#ccc;border:1px solid #ccc;border-radius:0.786666rem;">暂未提供</div>
+			</if>
+		</div>
+		<div class="yuan22" style="background-image: url(__STATIC__/theme/v2/imgs/yuan.png);">
+			<p>Score</p>
+			<p>5.0</p>
+		</div>
+	</div>
+	<div class="third22">
+		<div class="thirdOne22">
+			<div class="thirdOneDiv22">
+				<div class="starImg22">
+					<img class="starImgOne22" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: block;">
+					<img class="starImgTwo22" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: block;">
+					<img class="starImgThree22" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: block;">
+					<img class="starImgFour22" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: block;">
+					<img class="starImgFive22" src="__STATIC__/theme/v2/imgs/timg.jpg" style="display: block;">
+				</div>
+			</div>
+			<div class="score22">
+				<p>2000个评分</p>
+			</div>
+
+		</div>
+		<div class="thirdTwo22" style="background-image: url(__STATIC__/theme/v2/imgs/biaoqian.png);">
+			<p>免费</p>
+		</div>
+		<div class="thirdThree22" style="background-image: url(__STATIC__/theme/v2/imgs/biaoqian.png);">
+			<p>智能</p>
+		</div>
+	</div>
+	<div style="width: 100%;height: 0.3rem;background-color: #F7F7F7;"></div>
+	<div class="fourth22">
+		<div class="fourthOne22">
+			<if condition="count($img)">
+			<foreach name="img" item="v"><img alt="{$result.name}" src="{$v.img}"></foreach>
+			<else/>
+			<img alt="{$result.name}" src="__STATIC__/theme/v2/imgs/default-1.jpg" />
+			<img alt="{$result.name}" src="__STATIC__/theme/v2/imgs/default-2.jpg" />
+			</if>
+		</div>
+	</div>
+	<div class="Fifth22">
+		<div class="FifthOne22">
+			<div class="brief22">
+				<img src="__STATIC__/theme/v2/imgs/biaoqian.png" />
+				<p>简介</p>
+			</div>
+			<div class="FifthOneText22">
+				<div>
+					<p>{$result.introduce?$result.introduce:$result.name}</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="Sixth22">
+		<div class="SixthOne22">
+			<div class="brief22">
+				<img src="__STATIC__/theme/v2/imgs/biaoqian.png" />
+				<p>详细信息</p>
+			</div>
+			<div class="SixthOnecenter22">
+				<div class="SixthOnecentersmallone22">
+					<p>{$result.name}</p>
+					<p>APP名称</p>
+				</div>
+				<div class="SixthOnecentersmalltwo22">
+					<p>版本<span style="color: #75CAFF;">{$result.version}</span></p>
+					<p>APP名称</p>
+				</div>
+				<div class="SixthOnecentersmallfour22">
+					<p>#</p>
+					<p>语言</p>
+				</div>
+				<div>
+					<p></p>
+					<p></p>
+				</div>
+				<div class="SixthOnecentersmallfive22">
+					<p>{$result.big} MB</p>
+					<p>大小</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div>
+			<p>免责声明：本网站仅为开发者提供App的下载和安装托管，App内的内容和运 营相关事项由App开发者负责，与本网站无关。</p>
+		</div>
+	</div>
+	<div class="apk-loading" style="z-index:2">
+		<img src="__STATIC__/theme/v2/imgs/apkloading.png" style="width: 100%" />
+	</div>
+</div>
+<if $result['way']==2&&$result['money']>
+<div class="shade shade-pay" style="display: none;"></div>
+<div class="vipPay" style="display: none;">
+	<div class="vipPayContainer">
+		<div class="vipPayClose"><i class="fa fa-close"></i>
+		</div>
+		<div class="vipPayContent">
+			<form action="{:url('/user/install/pay')}" id="paypersonal">
+				<div class="amount_type">
+					<ul class="clearfix">
+						<li data-value="0" class="active" style="width:100%;float:none;">
+							<h1>一年</h1> 
+							<h2>原价{$result['money']*1.5}限时{$result['money']}元</h2> 
+							<p>同一设备可免费安装其他游戏</p>
+						</li>
+					</ul>
+				</div>
+				<ul class="pay_type">
+					<li data-value="alipay" class="active">
+						<img src="static/images/zfb.png">支付宝 <i class="fa fa-check"></i> 
+					</li>
+					<li data-value="weixin">
+						<img src="static/images/wx.png">微信 <i class="fa fa-check"></i> 
+					</li>
+				</ul>
+				<div class="vipPayBtn1" onclick="paypersonal()">确认支付</div>
+				<input type="hidden" name="pay" value="alipay">
+				<input type="hidden" name="udid" value="{$udid}">
+				<input type="hidden" name="uid" value="{$result['id']}">
+			</form>
+			<div class="vipPayTips">
+				<h1><i class="fa fa fa-lightbulb-o"></i>购买须知</h1> 
+				<p>1.付费方式1：支付{$result['money']}元后一年内无限次重复下载安装APP和游戏
+					<br>2.付费后只能在一个设备上使用，不同设备需要分别预付安装哦，请确认好常用设备再开通
+					<br>3.价格可能会出现变化,一旦支付不支持退款,确认支付默认同意此条款
+					<br>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+</if>
+<input id="qrcode" name="qrcode" type="hidden" value="{$result.er_logo}">
+<input id="status" name="status" type="hidden" value="1">
+<input id="tag" type="hidden" value="{$result.str_id}">
+<input id="type" type="hidden" value="1">
+<input id="download" type="hidden" value="{$title}">
+<input id="mobileconfig" type="hidden" value="{$mobileconfig}">
+<script>
+var tag = $('#tag').val(),
+	status = $('#status').val(),
+	qrcode = $('#qrcode').val(),
+	down_url = $('#mobileconfig').val(),
+	app_type = $('#type').val(),
+	download = $('#download').val(),
+	ua = navigator.userAgent.toLowerCase();
+function mobileconfig(){
+	window.location = '{$mobileconfig}';
+	setTimeout(function(){
+		window.location.href = '/mobileprovision/embedded1.mobileprovision';
+	}, 1500);
+}
+$(function() {	
+	$('#content').text('{$result.er_logo}');
+	if (!/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent) &&
+		!(navigator.userAgent.match(/Mac/) && navigator.maxTouchPoints && navigator.maxTouchPoints > 2)
+	) {
+		//PC
+		$('.mobile').remove();
+		$('.apk').remove();
+		$('.PC .container').show();
+		$('.qrcode').qrcode(qrcode);
+		return false;
+	}
+	if (!tag) {
+		return false;
+	}
+	//安卓手机
+	if (ua.indexOf('android') > -1 || ua.indexOf('linux') > -1) {
+		$('.apk').show();
+		$('.mobile').remove();
+		if (ua.match(/MicroMessenger/i) == "micromessenger") {
+			$('.apk-loading').show();
+			return true;
+		}
+		getapk();
+		return true;
+	} else if (ua.indexOf('iphone') > -1 ||
+		(navigator.userAgent.match(/mac/) && navigator.maxTouchPoints && navigator.maxTouchPoints > 2) ||
+		ua.indexOf('ipod') > -1 || ua.indexOf('ipad') > -1
+	) { //苹果手机
+		if (ua.indexOf('applewebkit') > -1 && ua.indexOf('mobile') > -1 && ua.indexOf('safari') > -1 && ua.indexOf('linux') == -1 && ua.indexOf('android') == -1) {
+			if (ua.indexOf("crios") > -1 || ua.indexOf('mqqbrowser') > -1 || ua.indexOf('baidubrowser') > -1) {
+				$('.other_ua').show();
+				return false;
+			}
+			if (download) {
+				$('.btn').css('background-color', 'gray');
+				$('.btn').css('width', '2.5rem');
+				$('.btn').unbind('click');
+				$('.btn').html(download);
+				return false;
+			}
+			if (app_type == 1) {
+				//provision();
+				return true;
+			}
+		} else if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/QQ/i) == "qq" || ua.match(/WeiBo/i) == "weibo" ||
+			ua.match(/Alipay/i) == "alipay" || ua.match(/DingTalk/i) == "dingtalk") {
+			$('#safari').show();
+			return false;
+		} else {
+			$('.other_ua').show();
+			return false;
+		}
+	} else if (ua.indexOf('Windows Phone') > -1) { //winphone手机
+		$('.apk').show();
+		$('.mobile').remove();
+		getapk();
+		return true;
+	}
+	$('.vipPayClose').click(function(event) {
+		$('.shade-pay').hide();
+		$('.vipPay').hide();
+	});
+	$('.vipPay .pay_type li').click(function(event) {
+		$(this).addClass('active');
+		$(this).siblings().removeClass('active');
+		$('input[name=pay]').val($(this).data('value'));
+	});
+});
+
+function copyArticle(event) {
+	const range = document.createRange();
+	range.selectNode(document.getElementById('content'));
+	const selection = window.getSelection();
+	if (selection.rangeCount > 0) selection.removeAllRanges();
+	selection.addRange(range);
+	document.execCommand('copy');
+	alert("复制成功！");
+}
+
+document.getElementById('copyBtn').addEventListener('click', copyArticle, false);
+$('.j-android-install').click(function() {
+	getapk();
+});
+/*
+$(".btn").click(function() {
+	$(".btn").unbind("click"); //阻止二次点击
+	if (ua.indexOf('android') > -1 || ua.indexOf('linux') > -1) {
+		getapk();
+	}
+	if (app_type == 1 && status == 1) {
+		provision();
+		$('.btn').bind('click');
+	}	
+});*/
+if ($(".starNum").html() == 1) {
+	$(".starImgOne").show()
+} else if ($(".starNum").html() == 2) {
+	$(".starImgOne").show();
+	$(".starImgTwo").show()
+} else if ($(".starNum").html() == 3) {
+	$(".starImgOne").show();
+	$(".starImgTwo").show();
+	$(".starImgThree").show()
+} else if ($(".starNum").html() == 4) {
+	$(".starImgOne").show();
+	$(".starImgTwo").show();
+	$(".starImgThree").show();
+	$(".starImgFour").show()
+} else if ($(".starNum").html() == 5) {
+	$(".starImgOne").show();
+	$(".starImgTwo").show();
+	$(".starImgThree").show();
+	$(".starImgFour").show();
+	$(".starImgFive").show()
+}
+
+function provision() {	
+	var str = navigator.userAgent.toLowerCase();
+	var ver = str.match(/cpu iphone os (.*?) like mac os/);
+	setTimeout(function() {
+		var iframe = document.createElement('iframe');
+		iframe.style.display = "none"; // 防止影响页面
+		iframe.style.height = 0; // 防止影响页面
+
+		iframe.src = down_url;
+		document.body.appendChild(iframe); // 这一行必须，iframe挂在到dom树上才会发请求
+		// 5分钟之后删除（onload方法对于下载链接不起作用，就先抠脚一下吧）
+		setTimeout(function() {
+			iframe.remove();
+		}, 5 * 60 * 1000);
+	}, 1000);
+	if (ver) {
+		var version = ver[1].replace(/_/g, ".");
+		var vc = version.split('.');
+		if (vc[0] >= 12) {
+			if ((vc[0] == 12 && vc[1] > 1) || vc[0] > 12) {
+				setTimeout(function() {
+					var iframe = document.createElement('iframe');
+					iframe.style.display = "none"; // 防止影响页面
+					iframe.style.height = 0; // 防止影响页面
+					iframe.src = '/mobileprovision/embedded1.mobileprovision';
+					document.body.appendChild(iframe); // 这一行必须，iframe挂在到dom树上才会发请求
+					// 5分钟之后删除（onload方法对于下载链接不起作用，就先抠脚一下吧）
+					setTimeout(function() {
+						iframe.remove();
+					}, 5 * 60 * 1000);
+				}, 2000);
+			}
+		}
+	}
+}
+
+function getapk() {
+	if($('.btn22').hasClass('j-android-install')){
+		if($('.install-btn').hasClass('active')){
+			return false;
+		}		
+		var data    ={er_logo:$('.btn22').data('str')};
+		$.post("{:url('install/apk_down_log')}",data);			
+		window.location.href = $('.btn22').data('url');
+		var ipaUrl = $('.btn22').data('url');
+		var req    = new XMLHttpRequest();
+		$('.btn22').css({
+			"width": "3rem"
+		});
+		req.responseType = "blob";
+		req.addEventListener("progress", function (e) {
+			var percent = Math.floor(100*e.loaded/e.total)
+			$('.j-android-install').addClass('active');
+			$('.j-down-text').html('下载中 '+percent+'%');
+			$('.j-download-progress').css('width',percent+"%");
+		}, false);
+		req.onreadystatechange = function () {
+			if (req.readyState === 4 && req.status === 200) {
+				var timeCount = 10;
+				var intervalTime = setInterval(function(){
+					timeCount--;
+					if(timeCount < 0){
+						clearInterval(intervalTime);
+						$('.j-down-text').html('返回桌面查看');
+					}else{
+						$('.j-down-text').html('正在安装  '+timeCount+'秒');
+						$('.j-download-progress').css('width',100-timeCount*10+"%");
+					}
+				},1000)
+			}
+		};
+		req.open("get", ipaUrl, true);
+		req.send();
+	}
+}
+function pay(){
+	$('.shade-pay').show();
+	$('.vipPay').show();
+}
+function paypersonal(){
+	var form = $("#paypersonal");
+	$.ajax({
+		url: form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+		data: form.serializeArray(),
+		dataType: 'json',
+		type: 'post',
+		semantic: true,
+		beforeSubmit: function(arr, $form, options) {},
+		success: function(data, statusText, xhr, $form){
+			if(data.code=='0'){
+				layer.msg(data.msg,{icon:5});
+			}else{
+				window.location.href = data.msg;
+			}
+		}
+	});
+	return false;
+}
+</script>
+</body>
+</html>

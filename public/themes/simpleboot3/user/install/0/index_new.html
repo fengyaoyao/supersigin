@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta content="telephone=no" name="format-detection"/>
+<title>{$result.name} 下载</title>
+<link rel="stylesheet" href="__STATIC__/js/layui/css/layui.css" media="all">
+<link href="__STATIC__/vip_files/swiper.min.css" rel="stylesheet">
+<style>
+body{font-size: 16px}
+.base-info{padding:1.25rem 1.45rem;margin:0 auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row}
+.base-info .base-info-l{border-radius:.75rem;overflow:hidden;width:6.5rem;height:6.5rem;box-sizing:border-box;border:1px solid #eee;flex-shrink:0}
+.base-info .base-info-l>img{width:100%;height:100%}
+.base-info .base-info-r{position:relative;margin-left:1.2rem;flex:1}
+.base-info .base-info-r .title{margin-top:.35rem;font-weight:700;font-size:1.25rem}
+.base-info .base-info-r .category,.base-info .base-info-r .title{word-break:break-all;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.base-info .base-info-r .category{color:#999;font-size:1rem}
+.base-info .base-info-r .base-tag{display: flex;margin-top: 16px;}
+.base-info .base-info-r .base-tag li{border: 1px solid #0c85da;color: #0c85da;font-size: 12px;border-radius:20px;padding:2px 10px;margin-right: 10px;}
+.install-btn{display:inline-block;height:1.6rem;line-height:1.6rem;border-radius:.8rem;background:#0477f9;border:1px solid #0477f9;margin-top: 1px;text-align:center;color:#fff;font-size:.85rem;bottom:.35rem;left:0;padding: 0 20px}
+.rate-info{padding-bottom:1.25rem;margin:0 1.45rem;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}
+.rate-info .rate>strong{font-size:1rem;font-weight:700;color:#888}
+.rate-info .rate>img{width:5rem;margin-left:5px;height: 1rem;margin-top: -4px}
+.rate-info .rate>p{color:#d8d8d8;font-size:.75rem}
+.rate-info .classification>strong{color:#8e8f92;font-size:1rem}
+.rate-info .classification>p{color:#d8d8d8;font-size:.75rem}
+.summary-info{border-top:1px solid #eee;padding:1.25rem 0;margin:0 1.45rem}
+.summary-info .summary-info-title{font-size:1.25rem;margin-bottom:.85rem}
+.summary-info .summary-info-text{position:relative;line-height:1.3rem;font-size:.875rem}.summary-info .summary-info-text .unfold-button[data-v-5cecdd32]{position:absolute;right:0;bottom:0;background:#fff;color:#067afe;width:2rem;padding-left:.3rem}
+.summary-info .summary-info-text .omit{position:absolute;right:2.3rem;bottom:0;background:#fff;text-align:right}.summary-info .text-fold[data-v-5cecdd32]{word-break:break-all;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.summary-info .text-unfold{display:block}
+.comment-info{border-top:1px solid #eee;padding:1.25rem 1.45rem;}
+.comment-info .comment-info-title{margin-bottom:.85rem;font-size:1.25rem;font-weight: bold}
+.comment-info .comment-info-content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row}
+.comment-info .comment-info-content .comment-info-l>strong{font-size:3.75rem;line-height:2.6875rem;color:#4a4a4e;font-weight:700}
+.comment-info .comment-info-content .comment-info-l>p{width:5.6875rem;text-align:center;color:#7b7b7b;margin-top:.625rem}
+.comment-info .comment-info-content .comment-info-r{margin-left:2rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}
+.comment-info .comment-info-content .comment-info-r .comment-star-list>li{margin-top:.6rem;line-height:0;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
+.comment-info .comment-info-content .comment-info-r .comment-star-list>li:first-child{margin-top: 0}
+.comment-info .comment-info-content .comment-info-r .comment-star-list .comment-star{position:relative;width:2.875rem;height:.4375rem}
+.comment-info .comment-info-content .comment-info-r .comment-star-list .comment-star>img{display:block;width:100%;height:100%}
+.comment-info .comment-info-content .comment-info-r .comment-star-list .comment-star>div{position:absolute;left:0;top:0;height:100%;background:#fff}
+.comment-info .comment-info-content .comment-info-r .comment-star-list .comment-progress{position:relative;margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:.125rem;background:#e9e9ec;border-radius:.125rem}
+.comment-info .comment-info-content .comment-info-r .comment-star-list .comment-progress>div{position:absolute;left:0;width:0;height:.125rem;background:#4a4a4e;border-radius:.125rem;width:90%}
+.app-info{border-top:1px solid #eee;padding:1.25rem 1.45rem;}
+.app-info .app-title{margin-bottom:.5rem;font-size:1.25rem}
+.app-info .app-info-con{position:relative;font-size:.875rem}
+.information-info{border-top:1px solid #eee;padding:1.25rem 1.45rem 0;}
+.information-info .app-title{margin-bottom:.5rem;font-size:1.25rem}
+.information-info .information-list>li{font-size:.75rem;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;line-height:3.5;border-bottom:1px solid #f2f2f2}
+.information-info .information-list>li:last-child{border-bottom: none}
+.information-info .information-list>li .l{color:#737379}
+.information-info .information-list>li .r{margin-left:1.5rem;-webkit-box-flex:1;-ms-flex:1;flex:1;text-align:right;line-height:1rem}
+.android-install{position: fixed;box-sizing:border-box;bottom: 0;background-color: #fff;border-top: 1px solid #ccc;padding:10px 30px;width: 100%;}
+.android-install__btn{
+display: block;
+height: 1.6rem;
+line-height: 1.6rem;
+border-radius: .8rem;
+background: #0477f9;
+border: 1px solid #0477f9;
+margin-top: 36px;
+text-align: center;
+color: #fff;
+font-size: .85rem;
+bottom: .35rem;
+left: 0;
+padding: 0 20px;
+}
+.android-install__btn .text{position: relative;z-index: 2;}
+.android-install__btn.active{background-color: #ccc;}
+.android-install__btn.active .progress{text-align: center;display: block;position: absolute;background-color: #0c85da;height: 100%;left: 0;top: 0;}
+.android-install__btn.disabled{background-color: #ccc;color: #fff}
+.no_safar {width: 100%;height: 100%;z-index: 600;}
+.no_safar .tip_img {z-index: 500;position: fixed;left: 1.2rem; top: .1rem;}
+.no_safar .tip_img img {width: 21rem;}
+.no_safar .model {position: fixed;left: 0;top: 0;width: 100%;height: 100%;background-color: #000000;opacity: 0.7;filter: alpha(opacity=70);z-index: 499;}
+.pc-platform{text-align: center;padding:20px 30px;}
+.pc-platform .pc-platform__logo{margin-bottom: 30px;}
+.pc-platform .pc-platform__code{}
+.pc-platform .pc-platform__code .code-title{font-weight: bold}
+
+.safari-tip {}
+.safari-tip .model {position: fixed;left: 0;top: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,0.5);z-index: 499;}
+.safari-tip .safari-tip-body{position:fixed;top:50%;left:50%;transform: translate(-50%,-50%);z-index:1000;color:#fff;border-radius:12px;width:72%;}
+.safari-tip .safari-tip-body .body-head{background-color:#3eadfe;display:flex;align-items:center;padding:20px;font-size:16px;}
+.safari-tip .safari-tip-body .body-head img{width:80px;height:80px;margin-right:10px;}
+.safari-tip .safari-tip-body .body-head .text span{color:red;}
+.safari-tip .safari-tip-body .body-footer{background-color:#fff;color:#000;padding:20px 10px 20px 20px;display:flex;align-items:center;}
+.safari-tip .safari-tip-body .body-footer .text{background-color:#dcdcdc;padding:11px 20px;width:70%;overflow:hidden;white-space:nowrap;}
+.safari-tip .safari-tip-body .body-footer .btn{background-color:#3eadfe;color:#fff;padding:10px;border-top-right-radius:30px;border-bottom-right-radius:30px;width:30%;text-align:center;border:none;}
+.fourth {
+	width: 100%;
+	margin-top: 0.36rem;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+}
+
+.fourthOne {
+	width: 100%;
+	/*height: 12.866666rem;*/
+	overflow-x: scroll;
+	display: inline-block;
+	white-space: nowrap;
+}
+.fourthOne img {
+	width: 90%;
+	margin: 0;
+	border-radius: 0.56rem;
+}
+.vipPayBtn1 {
+    display: block;
+    background-color: #ff9b24;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 5em;
+    color: #ffffff;
+    margin-top: 15px;
+    padding: 7.5px 0;
+    border: none;
+}
+.base-info .base-info-r .clr {
+    margin-top: 1.8em;
+}
+
+.base-info .base-info-r .arouse {
+    float: right;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(6,122,254,1);
+}
+
+.base-info .base-info-r .arouse b {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin: -2px 5px 0 0;
+    text-align: center;
+    background: rgba(6,122,254,1);
+    color: #fff;
+    border-radius: 100%;
+}
+/* 遮罩 */
+.mask-box {
+    z-index: 2;
+    position: relative;
+}
+
+.mask-colsed {
+    z-index: 2;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 20px;
+}
+
+.mask-colsed img {
+    display: block;
+    width: 100%;
+}
+
+.mask-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .2)
+}
+
+.mask-pop {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    max-width: 300px;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* swiper */
+.mask-pop .swiper-container {
+    width: 100%;
+}
+.mask-pop .swiper-slide img {
+    display: block;
+    width: 100%;
+}
+
+.mask-pop .swiper-slide p {
+    margin: 10px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #0491F7;
+}
+
+.mask-pop .swiper-container .swiper-pagination {
+    position: static;
+}
+
+.mask-pop .swiper-pagination-bullet {
+    background: #DBF0FD;
+    opacity: 1;
+}
+
+.mask-pop .swiper-pagination-bullet-active {
+    background: #0491F7;
+
+}
+
+/*  */
+.file-info {
+    display: block;
+    margin: 30px 0 20px;
+    font-size: 14px;
+    color: #00B0F9;
+    text-align: center;
+
+}
+
+.file-box {
+    z-index: 2;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding: 20px;
+    width: 70%;
+    max-width: 300px;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 20px;
+
+}
+
+.file-box h3 {
+    text-align: center;
+    font-size: 16px;
+    color: #3A3A3A;
+
+}
+
+.file-box .colsed-btn {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    height: 40px;
+    line-height: 40px;
+    background: linear-gradient(90deg, rgba(32, 124, 249, 1), rgba(0, 205, 250, 1));
+    border-radius: 20px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+}
+
+.file-con {
+    margin: 20px 0;
+    font-size: 14px;
+    color: #777;
+}
+
+.file-con strong {
+    display: block;
+    margin-top: 20px;
+    color: #333;
+}
+
+.file-con p {
+    margin-top: 8px;
+}
+.detailLoading{
+	display: none;
+	background:url('static/images/detail-loading.gif') no-repeat;
+	width: 32px;
+	height: 32px;
+	position: absolute;
+}
+.detailLoading.loading{
+	display: inline-block;
+}
+.myProgress {
+  width: 100%;
+  background-color: #ddd;
+  padding:0;
+}
+#myBar {
+  width: 10%;
+  height: 1.5rem;
+  background-color: #0477f9;
+  text-align: center;
+  color: white;
+  border-radius: .8rem;
+}
+</style>
+<link href="__STATIC__/vip_files/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="__STATIC__/vip_files/reset.css">
+<link rel="stylesheet" href="__STATIC__/vip_files/m.css">
+<link rel="stylesheet" href="__STATIC__/vip_files/m-vip.css">
+</head>
+<body>
+<div id="zong">
+<!-- todo 判断是否在微信浏览器-->
+<if condition="$is_wx || $is_qq">
+	<div class="no_safar">
+		<div class="tip_img">
+			<img src="__TMPL__/public/static/image/safar_<if condition="$device eq 'iphone' || $device eq 'ipad'">bg<else/>anzhuo</if>.png" alt="" class="ios_img">
+		</div>
+		<div class="model"></div>
+	</div>
+<else/>
+	<div id="app">
+		<if condition="$device eq 'iphone' || $device eq 'ipad'">
+			<!--判断是否是safair浏览器-->
+			<if condition="$is_safari==false">
+				<div class="safari-tip">
+					<div class="safari-tip-body">
+						<div class="body-head">
+							<div class="">
+								<img src="/static/images/safari.png" alt="" class="ios_img">
+							</div>
+							<div class="text">
+								<div>该链接只支持<span>safari</span></div>
+								<div>请在<span>safari</span>中打开</div>
+							</div>
+						</div>
+						<div class="body-footer">
+							<div class="text">{$result.er_logo}</div>
+							<button class="btn j-copy" data-clipboard-text="{$result.er_logo}">复制</button>
+						</div>
+					</div>
+					<div class="model"></div>
+				</div>
+			</if>
+			
+			<div class="container">
+				<div class="base-info">
+					<div class="base-info-l">
+						<img src="{$result.img}" alt="" class="icon">
+					</div>
+					<div class="base-info-r">
+						<div class="title">
+							<p>{$result.name}</p>
+						</div>
+						<div class="clr">
+							<a class="arouse install-guide" event-show="gosteptips"><b>?</b>安装教程</a>
+							<if($title)>
+								<span style="background:#ccc;border:1px solid #ccc;" class="install-btn ">
+									{$title}
+								</span>
+							<else/>
+							<div class="state-normal">
+								<a data-id="{$result.id}" href="{$url}" class="install-btn j-ios-install">
+									免费安装
+								</a>
+								<span class="detailLoading"></span>
+							</div>
+							</if>
+						</div>
+					</div>
+					
+				</div>
+				<div class="rate-info">
+					<div class="rate">
+						<strong>4.9</strong>
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+						<p>9999+个评分</p>
+					</div>
+					<div class="classification" style="text-align: center">
+						<strong>4+</strong>
+						<p>年龄</p>
+					</div>
+				</div>
+				<if condition="count($img)">
+				<div class="fourth layui-carousel" id="imgs">
+					<div class="fourthOne" carousel-item>
+						<foreach name="img" item="v"><img alt="{$result.name}" src="{$v.img}"></foreach>
+					</div>
+				</div>
+				</if>
+				<div class="comment-info">
+					<h2  class="comment-info-title">评分及评论</h2>
+					<div class="comment-info-content">
+						<div class="comment-info-l"><strong data-v-5cecdd32="">4.9</strong>
+							<p>满分 5 分</p>
+						</div>
+						<div class="comment-info-r">
+							<ul class="comment-star-list">
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 80%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 0%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 20%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 20%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 0%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 40%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 0%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 60%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 0%;"></div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<if condition="!empty($result['introduce'])">
+					<div class="app-info">
+						<h2 class="app-title">应用介绍</h2>
+						<div class="app-info-con open" style="height: auto;">
+							<p>{$result.introduce}</p>
+						</div>
+					</div>
+				</if>
+				<if condition="!empty($result['instructions'])">
+					<div class="app-info">
+						<h2 class="app-title">版本更新说明</h2>
+						<div class="app-info-con open" style="height: auto;">
+							<p>{$result.instructions}</p>
+						</div>
+					</div>
+				</if>
+				<div class="app-info">
+					<h2 class="app-title">新功能</h2>
+					<div class="app-info-con open" style="height: auto;">
+						<p >版本 {$result.version}</p>
+					</div>
+				</div>
+				<div class="information-info">
+					<h2 class="app-title">信息</h2>
+					<ul  class="information-list">
+						<li>
+							<span class="l">销售商</span>
+							<div class="r">{$result.name}</div>
+						</li>
+						<li>
+							<span class="l">兼容性</span>
+							<div class="r">需要iOS9.0或更高版本</div>
+						</li>
+						<li>
+							<span class="l">语言</span>
+							<div class="r">简体中文</div>
+						</li>
+						<li>
+							<span class="l">大小</span>
+							<div class="r">{$result.big}MB</div>
+						</li>
+						<li>
+							<span class="l">更新时间</span>
+							<div class="r">{$result['addtime'] | date="Y-m-d",###}</div>
+						</li>
+					</ul>
+				</div>
+				<div style="padding: 1rem 1.25rem;font-size: 12px;background-color: #fafafa">
+					<p>免责声明：</p>
+					<p>本网站仅提供下载托管，APP内容相关事项由开发者负责，与本站无关 蜀ICP备16005395号-1</p>
+				</div>
+				<?php if(!empty($result['cnzz'])){?>
+				<div style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+					<script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id={$result.cnzz}&web_id={$result.cnzz}"></script>
+				</div>
+			        <?php }?>
+				<?php if(!empty($result['cnzzs'])){?>
+			<div style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+                <script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id={$result.cnzzs}&web_id={$result.cnzzs}"></script>
+            </div>
+			<?php }?>
+			
+			</div>
+			<if $result['way']==2&&$result['money']>
+			<div class="shade shade-pay" style="display: none;"></div>
+			<div class="vipPay" style="display: none;">
+				<div class="vipPayContainer">
+					<div class="vipPayClose"><i class="fa fa-close"></i>
+					</div>
+					<div class="vipPayContent">
+						<form action="{:url('/user/install/pay')}" id="paypersonal">
+							<div class="amount_type">
+								<ul class="clearfix">
+									<li data-value="0" class="active" style="width:100%;float:none;">
+										<h1>一年</h1> 
+										<h2>原价{$result['money']*1.5}限时{$result['money']}元</h2> 
+										<p>同一设备可免费安装其他游戏</p>
+									</li>
+								</ul>
+							</div>
+							<ul class="pay_type">
+								<li data-value="alipay" class="active">
+									<img src="static/images/zfb.png">支付宝 <i class="fa fa-check"></i> 
+								</li>
+								<li data-value="weixin">
+									<img src="static/images/wx.png">微信 <i class="fa fa-check"></i> 
+								</li>
+							</ul>
+							<div class="vipPayBtn1" onclick="paypersonal()">确认支付</div>
+							<input type="hidden" name="pay" value="alipay">
+							<input type="hidden" name="udid" value="{$udid}">
+							<input type="hidden" name="uid" value="{$result['id']}">
+						</form>
+						<div class="vipPayTips">
+							<h1><i class="fa fa fa-lightbulb-o"></i>购买须知</h1> 
+							<p>1.付费方式1：支付{$result['money']}元后一年内无限次重复下载安装APP和游戏
+								<br>2.付费后只能在一个设备上使用，不同设备需要分别预付安装哦，请确认好常用设备再开通
+								<br>3.价格可能会出现变化,一旦支付不支持退款,确认支付默认同意此条款
+								<br>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			</if>
+			<div class="mask-box step-tips" id="gosteptips" style="display: none;">
+				<div class="mask-bg"></div>
+				<div class="mask-pop">
+					<span class="mask-colsed"><img src="__STATIC__/images/colsed.png" event-close="gosteptips"></span>
+					<div class="swiper-container step-swp swiper-container-initialized swiper-container-horizontal swiper-container-ios">
+						<div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+							<div class="swiper-slide swiper-slide-active" style="width: 300px;">
+								<img src="__STATIC__/images/step1.jpg" alt="">
+								<p>
+									安装引导<br>第一步 允许打开配置描述文件
+								</p>
+							</div>
+							<div class="swiper-slide swiper-slide-next" style="width: 300px;">
+								<img src="__STATIC__/images/step2.jpg" alt="">
+								<p>
+									安装引导<br>第二步 点击右上角安装按钮
+								</p>
+							</div>
+							<div class="swiper-slide" style="width: 300px;">
+								<img src="__STATIC__/images/step3.jpg" alt="">
+								<p>
+									安装引导<br>第三步 输入开机解锁密码
+								</p>
+							</div>
+							<div class="swiper-slide" style="width: 300px;">
+								<img src="__STATIC__/images/step4.jpg" alt="">
+								<p>
+									安装引导<br>第四步 点击下方安装按钮
+								</p>
+							</div>
+						</div>
+						<!-- Add Pagination -->
+						<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets" slot="pagination"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span></div>
+					<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+					<a class="file-info" event-show="gomchelp">什么是描述文件？</a>
+				</div>
+			</div>
+			<div style="display: none;" class="file-box" id="gomchelp">
+				<h3>描述文件</h3>
+				<div class="file-con">
+					<strong>1，什么是描述文件？为什么要安装？</strong>
+					<p>描述文件是经过苹果公司认证的，用来记录用户设备，请放心使用。安装描述文件，是为了将您的设备注册到苹果用户库。是安装苹果APP的必备条件。</p>
+					<strong>2，安装过程中卡在了设置页面，如何解决？</strong>
+					<p>卡顿属于iOS系统的bug。解决方案：双击Home/底部上滑-上滑关掉设置页面-重新安装即可。</p>
+					<strong>3，安装描述文件时为什么要输入密码？输入什么密码？</strong>
+					<p>为了确认是设备主人在操作，安装描述文件时需输入【解锁密码】</p>
+				</div>
+				<div class="colsed-btn" event-close="gomchelp">
+					我知道了
+				</div>
+			</div>
+		<elseif condition="$device eq 'android'"/>
+			
+			<div class="container">
+				<div class="base-info">
+					<div class="base-info-l">
+						<img src="{$result.img}" alt="" class="icon">
+					</div>
+					<div class="base-info-r">
+						<div class="title">
+							<p>{$result.name}</p>
+						</div>
+						<div class="">
+							<if($title)>
+								<span style="background:#ccc;border:1px solid #ccc;" class="install-btn ">
+									{$title}
+								</span>
+							<elseif condition="!empty($result['andriod_url'])">
+								<div data-url="{$result.andriod_url}" data-str="{$result.str_id}" class="j-android-install android-install__btn">
+									<div class="text">免费安装</div>
+									<div class="progress j-android-progress"></div>
+								</div>
+							<else/>
+								<span class="install-btn j-ios-install" style="background-color:#ccc;color:#fff;border:1px solid #ccc">
+									未提供安卓版本
+								</span>
+							</if>
+						</div>
+					</div>
+				</div>
+				<div class="rate-info">
+					<div class="rate">
+						<strong>4.9</strong>
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+						<p>9999+个评分</p>
+					</div>
+					<div class="classification" style="text-align: center">
+						<strong>4+</strong>
+						<p>年龄</p>
+					</div>
+				</div>
+				<if condition="count($img)">
+				<div class="fourth layui-carousel" id="imgs">
+					<div class="fourthOne" carousel-item>
+						<foreach name="img" item="v"><img alt="{$result.name}" src="{$v.img}"></foreach>
+					</div>
+				</div>
+				</if>
+				<div class="comment-info">
+					<h2  class="comment-info-title">评分及评论</h2>
+					<div class="comment-info-content">
+						<div class="comment-info-l"><strong data-v-5cecdd32="">4.9</strong>
+							<p>满分 5 分</p>
+						</div>
+						<div class="comment-info-r">
+							<ul class="comment-star-list">
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 80%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 0%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 20%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 20%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 0%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 40%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 0%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 60%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 0%;"></div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<if condition="!empty($result['introduce'])">
+					<div class="app-info">
+						<h2 class="app-title">应用介绍</h2>
+						<div class="app-info-con open" style="height: auto;">
+							<p>{$result.introduce}</p>
+						</div>
+					</div>
+				</if>
+				<if condition="!empty($result['instructions'])">
+					<div class="app-info">
+						<h2 class="app-title">版本更新说明</h2>
+						<div class="app-info-con open" style="height: auto;">
+							<p>{$result.instructions}</p>
+						</div>
+					</div>
+				</if>
+				<div class="app-info">
+					<h2 class="app-title">新功能</h2>
+					<div class="app-info-con open" style="height: auto;">
+						<p >版本 {$result.version}</p>
+					</div>
+				</div>
+				<div class="information-info">
+					<h2 class="app-title">信息</h2>
+					<ul  class="information-list">
+						<li>
+							<span class="l">销售商</span>
+							<div class="r">{$result.name}</div>
+						</li>
+						<li>
+							<span class="l">兼容性</span>
+							<div class="r">需要安卓5.0或更高版本</div>
+						</li>
+						<li>
+							<span class="l">语言</span>
+							<div class="r">简体中文</div>
+						</li>
+						<li>
+							<span class="l">大小</span>
+							<div class="r">{$result.big}MB</div>
+						</li>
+						<li>
+							<span class="l">更新时间</span>
+							<div class="r">{$result['addtime'] | date="Y-m-d",###}</div>
+						</li>
+					</ul>
+				</div>
+				<div style="padding: 1rem 1.25rem;font-size: 12px;background-color: #fafafa">
+					<p>免责声明：</p>
+					<p>本网站仅提供下载托管，APP内容相关事项由开发者负责，与本站无关 蜀ICP备16005395号-1</p>
+				</div>
+				<?php if(!empty($result['cnzz'])){?>
+				<div style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+					<script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id={$result.cnzz}&web_id={$result.cnzz}"></script>
+				</div>
+				<?php }?>
+				<?php if(!empty($result['cnzzs'])){?>
+			<div style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+                <script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id={$result.cnzzs}&web_id={$result.cnzzs}"></script>
+            </div>
+			<?php }?>
+			</div>
+		<else/>
+			<div class="pc-platform">
+				<div class="pc-platform__logo">
+					<img src="{$result.img}" alt="" class="icon">
+					<p>{$result.name}</p>
+				</div>
+
+				<div class="pc-platform__code">
+					<div class="j-qr-code" date-url="{$result.er_logo}"></div>
+					<p class="code-title">使用相机扫码下载</p>
+				</div>
+			</div>
+		</if>
+	</div>
+</if>
+</div>
+<div id="qqliulanqi" style="display:none">
+    <!-- todo 没有判断是否在微信浏览器-->
+	<if condition="$is_wx || $is_qq">
+	    <div class="no_safar">
+	        <div class="tip_img">
+	            <img src="__TMPL__/public/static/image/safar_<if condition="$device eq 'iphone' || $device eq 'ipad'">bg<else/>anzhuo</if>.png" alt="" class="ios_img">
+	        </div>
+	        <div class="model"></div>
+	    </div>
+    <else/>
+	    <div id="app">
+	        <if condition="$device eq 'iphone' || $device eq 'ipad'">
+	        	<!--判断是否是safair浏览器-->
+	    
+		            <div class="safari-tip">
+		            	<div class="safari-tip-body">
+		            		<div class="body-head">
+			            		<div class="">
+			            			<img src="/static/images/safari.png" alt="" class="ios_img">
+				            	</div>
+				            	<div class="text">
+				            		<div>该链接只支持<span>safari</span></div>
+				            		<div>请在<span>safari</span>中打开</div>
+				            	</div>
+			            	</div>
+			            	<div class="body-footer">
+			            		<div class="text">{$result.er_logo}</div>
+			            		<button class="btn j-copy" data-clipboard-text="{$result.er_logo}">复制</button>
+			            	</div>
+		            	</div>
+		            	
+		            	<div class="model"></div>
+		            </div>
+	 
+	            
+	            			<div class="container">
+				<div class="base-info">
+					<div class="base-info-l">
+						<img src="{$result.img}" alt="" class="icon">
+					</div>
+					<div class="base-info-r">
+						<div class="title">
+							<p>{$result.name}</p>
+						</div>
+						<div class="">
+							<if($title)>
+								<span style="background:#ccc;border:1px solid #ccc;" class="install-btn ">
+									{$title}
+								</span>
+							<else/>
+								<a data-id="{$result.id}" href="{$url}" class="install-btn j-ios-install">
+									免费安装
+								</a>	
+							</if>
+						</div>
+					</div>
+					
+				</div>
+				<div class="rate-info">
+					<div class="rate">
+						<strong>4.9</strong>
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+						<p>9999+个评分</p>
+					</div>
+					<div class="classification" style="text-align: center">
+						<strong>4+</strong>
+						<p>年龄</p>
+					</div>
+				</div>
+				<if condition="count($img)">
+				<div class="fourth layui-carousel" id="imgs">
+					<div class="fourthOne" carousel-item>
+						<foreach name="img" item="v"><img alt="{$result.name}" src="{$v.img}"></foreach>
+					</div>
+				</div>
+				</if>
+				<div class="comment-info">
+					<h2  class="comment-info-title">评分及评论</h2>
+					<div class="comment-info-content">
+						<div class="comment-info-l"><strong data-v-5cecdd32="">4.9</strong>
+							<p>满分 5 分</p>
+						</div>
+						<div class="comment-info-r">
+							<ul class="comment-star-list">
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 80%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 0%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 20%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 20%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 0%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 40%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 0%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 60%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 0%;"></div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<if condition="!empty($result['introduce'])">
+					<div class="app-info">
+						<h2 class="app-title">应用介绍</h2>
+						<div class="app-info-con open" style="height: auto;">
+							<p>{$result.introduce}</p>
+						</div>
+					</div>
+				</if>
+				<if condition="!empty($result['instructions'])">
+					<div class="app-info">
+						<h2 class="app-title">版本更新说明</h2>
+						<div class="app-info-con open" style="height: auto;">
+							<p>{$result.instructions}</p>
+						</div>
+					</div>
+				</if>
+				<div class="app-info">
+					<h2 class="app-title">新功能</h2>
+					<div class="app-info-con open" style="height: auto;">
+						<p >版本 {$result.version}</p>
+					</div>
+				</div>
+				<div class="information-info">
+					<h2 class="app-title">信息</h2>
+					<ul  class="information-list">
+						<li>
+							<span class="l">销售商</span>
+							<div class="r">{$result.name}</div>
+						</li>
+						<li>
+							<span class="l">兼容性</span>
+							<div class="r">需要iOS9.0或更高版本</div>
+						</li>
+						<li>
+							<span class="l">语言</span>
+							<div class="r">简体中文</div>
+						</li>
+						<li>
+							<span class="l">大小</span>
+							<div class="r">{$result.big}MB</div>
+						</li>
+						<li>
+							<span class="l">更新时间</span>
+							<div class="r">{$result['addtime'] | date="Y-m-d",###}</div>
+						</li>
+					</ul>
+				</div>
+				<div style="padding: 1rem 1.25rem;font-size: 12px;background-color: #fafafa">
+					<p>免责声明：</p>
+					<p>本网站仅提供下载托管，APP内容相关事项由开发者负责，与本站无关 蜀ICP备16005395号-1</p>
+				</div>
+				<?php if(!empty($result['cnzz'])){?>
+				<div style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+					<script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id={$result.cnzz}&web_id={$result.cnzz}"></script>
+				</div>
+				<?php }?>
+				<?php if(!empty($result['cnzzs'])){?>
+			<div style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+                <script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id={$result.cnzzs}&web_id={$result.cnzzs}"></script>
+            </div>
+			<?php }?>
+			</div>
+			<if $result['way']==2&&$result['money']>
+			<div class="shade shade-pay" style="display: none;"></div>
+			<div class="vipPay" style="display: none;">
+				<div class="vipPayContainer">
+					<div class="vipPayClose"><i class="fa fa-close"></i>
+					</div>
+					<div class="vipPayContent">
+						<form action="{:url('/user/install/pay')}" id="paypersonal">
+							<div class="amount_type">
+								<ul class="clearfix">
+									<li data-value="0" class="active" style="width:100%;float:none;">
+										<h1>一年</h1> 
+										<h2>原价{$result['money']*1.5}限时{$result['money']}元</h2> 
+										<p>同一设备可免费安装其他游戏</p>
+									</li>
+								</ul>
+							</div>
+							<ul class="pay_type">
+								<li data-value="alipay" class="active">
+									<img src="static/images/zfb.png">支付宝 <i class="fa fa-check"></i> 
+								</li>
+								<li data-value="weixin">
+									<img src="static/images/wx.png">微信 <i class="fa fa-check"></i> 
+								</li>
+							</ul>
+							<div class="vipPayBtn1" onclick="paypersonal()">确认支付</div>
+							<input type="hidden" name="pay" value="alipay">
+							<input type="hidden" name="udid" value="{$udid}">
+							<input type="hidden" name="uid" value="{$result['id']}">
+						</form>
+						<div class="vipPayTips">
+							<h1><i class="fa fa fa-lightbulb-o"></i>购买须知</h1> 
+							<p>1.付费方式1：支付{$result['money']}元后一年内无限次重复下载安装APP和游戏
+								<br>2.付费后只能在一个设备上使用，不同设备需要分别预付安装哦，请确认好常用设备再开通
+								<br>3.价格可能会出现变化,一旦支付不支持退款,确认支付默认同意此条款
+								<br>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			</if>
+		<elseif condition="$device eq 'android'"/>
+			
+			<div class="container">
+				<div class="base-info">
+					<div class="base-info-l">
+						<img src="{$result.img}" alt="" class="icon">
+					</div>
+					<div class="base-info-r">
+						<div class="title">
+							<p>{$result.name}</p>
+						</div>
+						<div class="">
+							<if($title)>
+								<span style="background:#ccc;border:1px solid #ccc;" class="install-btn ">
+									{$title}
+								</span>
+							<elseif condition="!empty($result['andriod_url'])">
+								<div data-url="{$result.andriod_url}" data-str="{$result.str_id}" class="j-android-install android-install__btn">
+									<div class="text">免费安装</div>
+									<div class="progress j-android-progress"></div>
+								</div>
+							<else/>
+								<span class="install-btn j-ios-install" style="background-color:#ccc;color:#fff;border:1px solid #ccc">
+									未提供安卓版本
+								</span>
+							</if>
+						</div>
+					</div>
+				</div>
+				<div class="rate-info">
+					<div class="rate">
+						<strong>4.9</strong>
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+						<p>9999+个评分</p>
+					</div>
+					<div class="classification" style="text-align: center">
+						<strong>4+</strong>
+						<p>年龄</p>
+					</div>
+				</div>
+				<if condition="count($img)">
+				<div class="fourth layui-carousel" id="imgs">
+					<div class="fourthOne" carousel-item>
+						<foreach name="img" item="v"><img alt="{$result.name}" src="{$v.img}"></foreach>
+					</div>
+				</div>
+				</if>
+				<div class="comment-info">
+					<h2  class="comment-info-title">评分及评论</h2>
+					<div class="comment-info-content">
+						<div class="comment-info-l"><strong data-v-5cecdd32="">4.9</strong>
+							<p>满分 5 分</p>
+						</div>
+						<div class="comment-info-r">
+							<ul class="comment-star-list">
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 80%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 0%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 20%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 20%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 0%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 40%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 0%;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="comment-star">
+										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAAgCAYAAAC8eIxyAAADiElEQVR4nNXcvascVRgH4GfXWySKFoIouYJ2gogS1ELFr4hJlPgdP1CihWBhYaOd/4CNEcTSKsZCESxMo3axsBAEtRVUgogfGFEsDFxiMRtyWbI7s3Nmzt3fr9ndmT3vPFu8s+ycszM5+tbbBsh+fDZEoQpJsSY4E4wM5JwOALkXn+KmAWqNnRRrgjPByIDOIZrl9dnjkQFqjZ0Ua4IzwciAztJmuQ77Zs+fw0ZhvTGTYk1wJhgZ2FnaLC9iMnt+Fe4vrDdmUqwJzgQjAztLmmWKZ+e2PV9Qb8ykWBOcCUZGcJY0yz5szm17BJcV1BwrKdYEZ4KREZwlzXKhH0y78VRBzbGSYk1wJhgZwdm3WS7GYwv2rdvVkRRrgjPByEjOVa8O7MYuzZWFSxe8507ciFML9m/h7xWP2ycp1gRngpGRnRu4At/hyiLm+UzwTY9xR3C85T0p1gRngpE1ck7xO04MBOmTs3hNe6OQY01wJhhZI+e53ywv45MdgJzRnFneXGFMijXBmWBkTZzTbRsP46OKkH9wCO+vOC7FmuBMMLImzu1Xw87gGbxbAfIT7sDnPcenWBOcCUbWwHnRgYMPbH99VvN1959mUmdi+HyJ+/BDYZ0Ua4IzwcgOOxfNs7yh+dr7d2DIMc2S6d8GrJliTXAmGNkh57JJyY9xO74fALGFV/GC5qwwdFKsCc4EIzvgbJvB/xa3Krt0dxoP4mhBjS5JsSY4E4xUdnZZ7vIXHsZXPTHvqffX0xRrgjPBSEVn17Vhu3B9T8wTKxxniKRYE5wJRio5u36Y/bikJ2YTt/Uc2ycp1gRngpFKzq7NsmgFZ9ccLhy/SlKsCc4EI5WcXZplAw+VWTxaOL5rUqwJzgQjFZ1dmuUuXL5k/xZOttS4Fnu7gAqTYk1wJhip6OzSLMu+4n7UTOLcrenuX5e8t8ZZJsWa4EwwUtHZ1iyTJUWOaW5c9sXs9QncYPFit0NtmMKkWBOcCUYqO9ua5RZcPbftTzytme2c/0fZH3hSs6z59Ny+vdjTBipIijXBmWCksrOtWea79gNNd37YMu64pqu3r9qc4GDLuJKkWBOcCUYqO9ua5fHZ40nco1ki/UvLmHM5hQN4STPLyvm7A46RFGuCM8FIZedkyV30p3hlBvm6I2BR9uAd3IxrCmtdKCnWBGeCkR1wLmuWMbKJn2sesCAp1gRngpEW5//kXI9EZibN2wAAAABJRU5ErkJggg==" alt="">
+										<div style="width: 60%;"></div>
+									</div>
+									<div class="comment-progress">
+										<div style="width: 0%;"></div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<if condition="!empty($result['introduce'])">
+					<div class="app-info">
+						<h2 class="app-title">应用介绍</h2>
+						<div class="app-info-con open" style="height: auto;">
+							<p>{$result.introduce}</p>
+						</div>
+					</div>
+				</if>
+				<if condition="!empty($result['instructions'])">
+					<div class="app-info">
+						<h2 class="app-title">版本更新说明</h2>
+						<div class="app-info-con open" style="height: auto;">
+							<p>{$result.instructions}</p>
+						</div>
+					</div>
+				</if>
+				<div class="app-info">
+					<h2 class="app-title">新功能</h2>
+					<div class="app-info-con open" style="height: auto;">
+						<p >版本 {$result.version}</p>
+					</div>
+				</div>
+				<div class="information-info">
+					<h2 class="app-title">信息</h2>
+					<ul  class="information-list">
+						<li>
+							<span class="l">销售商</span>
+							<div class="r">{$result.name}</div>
+						</li>
+						<li>
+							<span class="l">兼容性</span>
+							<div class="r">需要安卓5.0或更高版本</div>
+						</li>
+						<li>
+							<span class="l">语言</span>
+							<div class="r">简体中文</div>
+						</li>
+						<li>
+							<span class="l">大小</span>
+							<div class="r">{$result.big}MB</div>
+						</li>
+						<li>
+							<span class="l">更新时间</span>
+							<div class="r">{$result['addtime'] | date="Y-m-d",###}</div>
+						</li>
+					</ul>
+				</div>
+				<div style="padding: 1rem 1.25rem;font-size: 12px;background-color: #fafafa">
+					<p>免责声明：</p>
+					<p>本网站仅提供下载托管，APP内容相关事项由开发者负责，与本站无关</p>
+				</div>
+				<?php if(!empty($result['cnzz'])){?>
+				<div style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+					<script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id={$result.cnzz}&web_id={$result.cnzz}"></script>
+				</div>
+				<?php }?>
+				<?php if(!empty($result['cnzzs'])){?>
+			<div style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+                <script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id={$result.cnzzs}&web_id={$result.cnzzs}"></script>
+            </div>
+			<?php }?>
+			</div>
+		<else/>
+			<div class="pc-platform">
+				<div class="pc-platform__logo">
+					<img src="{$result.img}" alt="" class="icon">
+					<p>{$result.name}</p>
+				</div>
+
+				<div class="pc-platform__code">
+					<div class="j-qr-code" date-url="{$result.er_logo}"></div>
+					<p class="code-title">使用相机扫码下载</p>
+				</div>
+			</div>
+		</if>
+	</div>
+</if>
+</div>
+
+<script src="/themes/simpleboot3/public/assets/js/jquery-1.10.2.min.js"></script>
+<script src="/themes/simpleboot3/public/assets/js/jquery.qrcode.min.js"></script>
+<script src="/static/js/layer/layer.js"></script>
+<script src="/static/js/layui/layui.js"></script>
+<script src="__STATIC__/vip_files/swiper.min.js"></script>
+<script>
+	!function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.ClipboardJS=e():t.ClipboardJS=e()}(this,function(){return function(n){var o={};function r(t){if(o[t])return o[t].exports;var e=o[t]={i:t,l:!1,exports:{}};return n[t].call(e.exports,e,e.exports,r),e.l=!0,e.exports}return r.m=n,r.c=o,r.d=function(t,e,n){r.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:n})},r.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)r.d(n,o,function(t){return e[t]}.bind(null,o));return n},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r.p="",r(r.s=0)}([function(t,e,n){"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},i=function(){function o(t,e){for(var n=0;n<e.length;n++){var o=e[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(t,o.key,o)}}return function(t,e,n){return e&&o(t.prototype,e),n&&o(t,n),t}}(),a=o(n(1)),c=o(n(3)),u=o(n(4));function o(t){return t&&t.__esModule?t:{default:t}}var l=function(t){function o(t,e){!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,o);var n=function(t,e){if(!t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!e||"object"!=typeof e&&"function"!=typeof e?t:e}(this,(o.__proto__||Object.getPrototypeOf(o)).call(this));return n.resolveOptions(e),n.listenClick(t),n}return function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function, not "+typeof e);t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),e&&(Object.setPrototypeOf?Object.setPrototypeOf(t,e):t.__proto__=e)}(o,c.default),i(o,[{key:"resolveOptions",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};this.action="function"==typeof t.action?t.action:this.defaultAction,this.target="function"==typeof t.target?t.target:this.defaultTarget,this.text="function"==typeof t.text?t.text:this.defaultText,this.container="object"===r(t.container)?t.container:document.body}},{key:"listenClick",value:function(t){var e=this;this.listener=(0,u.default)(t,"click",function(t){return e.onClick(t)})}},{key:"onClick",value:function(t){var e=t.delegateTarget||t.currentTarget;this.clipboardAction&&(this.clipboardAction=null),this.clipboardAction=new a.default({action:this.action(e),target:this.target(e),text:this.text(e),container:this.container,trigger:e,emitter:this})}},{key:"defaultAction",value:function(t){return s("action",t)}},{key:"defaultTarget",value:function(t){var e=s("target",t);if(e)return document.querySelector(e)}},{key:"defaultText",value:function(t){return s("text",t)}},{key:"destroy",value:function(){this.listener.destroy(),this.clipboardAction&&(this.clipboardAction.destroy(),this.clipboardAction=null)}}],[{key:"isSupported",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:["copy","cut"],e="string"==typeof t?[t]:t,n=!!document.queryCommandSupported;return e.forEach(function(t){n=n&&!!document.queryCommandSupported(t)}),n}}]),o}();function s(t,e){var n="data-clipboard-"+t;if(e.hasAttribute(n))return e.getAttribute(n)}t.exports=l},function(t,e,n){"use strict";var o,r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},i=function(){function o(t,e){for(var n=0;n<e.length;n++){var o=e[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(t,o.key,o)}}return function(t,e,n){return e&&o(t.prototype,e),n&&o(t,n),t}}(),a=n(2),c=(o=a)&&o.__esModule?o:{default:o};var u=function(){function e(t){!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,e),this.resolveOptions(t),this.initSelection()}return i(e,[{key:"resolveOptions",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};this.action=t.action,this.container=t.container,this.emitter=t.emitter,this.target=t.target,this.text=t.text,this.trigger=t.trigger,this.selectedText=""}},{key:"initSelection",value:function(){this.text?this.selectFake():this.target&&this.selectTarget()}},{key:"selectFake",value:function(){var t=this,e="rtl"==document.documentElement.getAttribute("dir");this.removeFake(),this.fakeHandlerCallback=function(){return t.removeFake()},this.fakeHandler=this.container.addEventListener("click",this.fakeHandlerCallback)||!0,this.fakeElem=document.createElement("textarea"),this.fakeElem.style.fontSize="12pt",this.fakeElem.style.border="0",this.fakeElem.style.padding="0",this.fakeElem.style.margin="0",this.fakeElem.style.position="absolute",this.fakeElem.style[e?"right":"left"]="-9999px";var n=window.pageYOffset||document.documentElement.scrollTop;this.fakeElem.style.top=n+"px",this.fakeElem.setAttribute("readonly",""),this.fakeElem.value=this.text,this.container.appendChild(this.fakeElem),this.selectedText=(0,c.default)(this.fakeElem),this.copyText()}},{key:"removeFake",value:function(){this.fakeHandler&&(this.container.removeEventListener("click",this.fakeHandlerCallback),this.fakeHandler=null,this.fakeHandlerCallback=null),this.fakeElem&&(this.container.removeChild(this.fakeElem),this.fakeElem=null)}},{key:"selectTarget",value:function(){this.selectedText=(0,c.default)(this.target),this.copyText()}},{key:"copyText",value:function(){var e=void 0;try{e=document.execCommand(this.action)}catch(t){e=!1}this.handleResult(e)}},{key:"handleResult",value:function(t){this.emitter.emit(t?"success":"error",{action:this.action,text:this.selectedText,trigger:this.trigger,clearSelection:this.clearSelection.bind(this)})}},{key:"clearSelection",value:function(){this.trigger&&this.trigger.focus(),window.getSelection().removeAllRanges()}},{key:"destroy",value:function(){this.removeFake()}},{key:"action",set:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:"copy";if(this._action=t,"copy"!==this._action&&"cut"!==this._action)throw new Error('Invalid "action" value, use either "copy" or "cut"')},get:function(){return this._action}},{key:"target",set:function(t){if(void 0!==t){if(!t||"object"!==(void 0===t?"undefined":r(t))||1!==t.nodeType)throw new Error('Invalid "target" value, use a valid Element');if("copy"===this.action&&t.hasAttribute("disabled"))throw new Error('Invalid "target" attribute. Please use "readonly" instead of "disabled" attribute');if("cut"===this.action&&(t.hasAttribute("readonly")||t.hasAttribute("disabled")))throw new Error('Invalid "target" attribute. You can\'t cut text from elements with "readonly" or "disabled" attributes');this._target=t}},get:function(){return this._target}}]),e}();t.exports=u},function(t,e){t.exports=function(t){var e;if("SELECT"===t.nodeName)t.focus(),e=t.value;else if("INPUT"===t.nodeName||"TEXTAREA"===t.nodeName){var n=t.hasAttribute("readonly");n||t.setAttribute("readonly",""),t.select(),t.setSelectionRange(0,t.value.length),n||t.removeAttribute("readonly"),e=t.value}else{t.hasAttribute("contenteditable")&&t.focus();var o=window.getSelection(),r=document.createRange();r.selectNodeContents(t),o.removeAllRanges(),o.addRange(r),e=o.toString()}return e}},function(t,e){function n(){}n.prototype={on:function(t,e,n){var o=this.e||(this.e={});return(o[t]||(o[t]=[])).push({fn:e,ctx:n}),this},once:function(t,e,n){var o=this;function r(){o.off(t,r),e.apply(n,arguments)}return r._=e,this.on(t,r,n)},emit:function(t){for(var e=[].slice.call(arguments,1),n=((this.e||(this.e={}))[t]||[]).slice(),o=0,r=n.length;o<r;o++)n[o].fn.apply(n[o].ctx,e);return this},off:function(t,e){var n=this.e||(this.e={}),o=n[t],r=[];if(o&&e)for(var i=0,a=o.length;i<a;i++)o[i].fn!==e&&o[i].fn._!==e&&r.push(o[i]);return r.length?n[t]=r:delete n[t],this}},t.exports=n},function(t,e,n){var d=n(5),h=n(6);t.exports=function(t,e,n){if(!t&&!e&&!n)throw new Error("Missing required arguments");if(!d.string(e))throw new TypeError("Second argument must be a String");if(!d.fn(n))throw new TypeError("Third argument must be a Function");if(d.node(t))return s=e,f=n,(l=t).addEventListener(s,f),{destroy:function(){l.removeEventListener(s,f)}};if(d.nodeList(t))return a=t,c=e,u=n,Array.prototype.forEach.call(a,function(t){t.addEventListener(c,u)}),{destroy:function(){Array.prototype.forEach.call(a,function(t){t.removeEventListener(c,u)})}};if(d.string(t))return o=t,r=e,i=n,h(document.body,o,r,i);throw new TypeError("First argument must be a String, HTMLElement, HTMLCollection, or NodeList");var o,r,i,a,c,u,l,s,f}},function(t,n){n.node=function(t){return void 0!==t&&t instanceof HTMLElement&&1===t.nodeType},n.nodeList=function(t){var e=Object.prototype.toString.call(t);return void 0!==t&&("[object NodeList]"===e||"[object HTMLCollection]"===e)&&"length"in t&&(0===t.length||n.node(t[0]))},n.string=function(t){return"string"==typeof t||t instanceof String},n.fn=function(t){return"[object Function]"===Object.prototype.toString.call(t)}},function(t,e,n){var a=n(7);function i(t,e,n,o,r){var i=function(e,n,t,o){return function(t){t.delegateTarget=a(t.target,n),t.delegateTarget&&o.call(e,t)}}.apply(this,arguments);return t.addEventListener(n,i,r),{destroy:function(){t.removeEventListener(n,i,r)}}}t.exports=function(t,e,n,o,r){return"function"==typeof t.addEventListener?i.apply(null,arguments):"function"==typeof n?i.bind(null,document).apply(null,arguments):("string"==typeof t&&(t=document.querySelectorAll(t)),Array.prototype.map.call(t,function(t){return i(t,e,n,o,r)}))}},function(t,e){if("undefined"!=typeof Element&&!Element.prototype.matches){var n=Element.prototype;n.matches=n.matchesSelector||n.mozMatchesSelector||n.msMatchesSelector||n.oMatchesSelector||n.webkitMatchesSelector}t.exports=function(t,e){for(;t&&9!==t.nodeType;){if("function"==typeof t.matches&&t.matches(e))return t;t=t.parentNode}}}])});
+</script>
+<script src="https://cdn.dingxiang-inc.com/ctu-group/captcha-ui/index.js" crossorigin="anonymous"></script>
+<div id="c1"></div>
+</body>
+<script>
+var uFlag ;
+$(window).on('beforeunload', function() {
+	if(localStorage[uFlag]==1)
+	{
+		layer.msg('加载中，禁止刷新');
+		return false;
+	}
+});
+function yzm(url){
+	var myCaptcha = _dx.Captcha(document.getElementById('c1'), {
+		appId: 'b4f113b21c08e851abc79b753d5c4a0c',
+		style: 'popup',
+		success: function (token) {
+			myCaptcha.hide();
+			pack(url);
+		}
+	});
+	myCaptcha.show();
+}
+function channel(url){
+	var _index = layer.prompt({
+		title: '请输入下载码'
+	}, function(text, index){
+		layer.close(_index);
+		pack(url+'&channel='+text);
+	});	
+}
+function showloading(t) {
+	// if (t) {
+	// 	$(".detailLoading").addClass("loading");
+	// 	localStorage[uFlag] = 1;
+	// } else {
+	// 	$(".detailLoading").removeClass("loading");
+	// 	localStorage[uFlag] = 0;
+	// }
+	$('.j-ios-install').addClass('myProgress');
+	$('.j-ios-install').html("<div id='myBar'>10%</div>");
+	var width = 10;
+	var elem = document.getElementById("myBar");  
+	var id = setInterval(function(){
+		if (width < 100) {
+			width ++; 
+			elem.style.width = width + '%'; 
+			elem.innerHTML = width * 1  + '%';
+		}else{
+			clearInterval(id);
+			$('.j-ios-install').removeClass('myProgress');
+			$('.j-ios-install').html("正在加载中...")
+		}
+	}, 350);
+}
+function pack(url){
+	if($('.j-ios-install').hasClass('active')){
+		return false;
+	}
+	// $('.j-ios-install').addClass('active');
+	// $('.j-ios-install').text('签名中...');
+	showloading(true);
+	$("#app").css({"pointer-events": "none"});
+	$.getJSON(url,function(res){
+		$('.j-ios-install').removeClass('active');
+		$("#app").css({"pointer-events": "auto"});
+		// showloading(false);
+		if (res.code == 0) {
+			var itemService = res.msg;
+			if (itemService != null && itemService != 'null' && itemService != '') {
+				$('.j-ios-install').text('完成');
+				window.location = itemService;
+			} else {
+				$('.j-ios-install').text('免费安装');
+				layer.alert(res.msg);
+			}
+		} else {
+			$('.j-ios-install').text('免费安装');
+			layer.alert(res.msg);
+		}
+	});
+}
+
+function pass(){
+	var _index = layer.prompt({
+		title: '输入安装密码{$text}'
+	}, function(text, index){
+			layer.close(_index);
+			url = '{$result.er_logo}';
+			if(url.indexOf("?") >= 0 ) { 
+				url += "&pass=";
+			} else{
+				 url += "?pass=";
+			}
+		window.location.href = url+text;
+	
+	});
+}
+$(function(){
+	<?php if(!$is_wx&&!$is_qq&&in_array($device,['iphone','ipad'])&&strpos($url,'javascript:mobileconfig')===false){echo 'setTimeout(function(){'.$url.'},500);';}?>
+	uFlag = $("#udid").val()+"_loading";
+	var ua = navigator.userAgent.toLocaleLowerCase(); 
+				
+	if (ua.match(/tencenttraveler/) != null || ua.match(/qqbrowse/) != null) { 
+		
+		$("#qqliulanqi").show();
+		$("#zong").hide();
+		
+	}else{
+		$("#qqliulanqi").hide();
+		$("#zong").show();
+	}
+	
+	var stepSwp = new Swiper('.step-swp', {
+            pagination: {
+                el: '.swiper-pagination',//开启分页器
+                type: 'bullets',//分页器样式
+                clickable :true,//点击切换分页器
+            },
+            observer:true,
+            observeParents:true
+        });
+
+        $('[event-close]').click(function() {
+            var target = $(this).attr('event-close');
+            $('#' + target).hide();
+        });
+        
+        $('[event-show]').click(function () {
+            var target = $(this).attr('event-show');
+            $('#' + target).show();
+        })
+	var clipboard = new ClipboardJS('.j-copy');
+	
+	clipboard.on('success', function(e) {
+		alert('复制成功')
+	});
+	
+	layui.use('carousel', function(){
+	  var carousel = layui.carousel;
+	  //建造实例
+	  carousel.render({
+		elem: '#imgs'
+		,width: '100%'
+		,arrow: 'always'
+		,indicator: 'inside'
+		,anim: 'default' //切换动画方式
+	  });
+	});
+	$(".j-qr-code").qrcode({
+		render : "canvas", //table方式
+		width  : 250, //宽度
+		height : 250, //高度
+		text   : $('.j-qr-code').attr("date-url") //任意内容
+	});
+
+	//安卓下载APK文件
+	$('.j-android-install').click(function(){
+		if($(this).hasClass('active')){
+			return false;
+		}
+		var data = {er_logo:$(this).data('str')};
+		$.post("{:url('install/apk_down_log')}",data);		
+		window.location.href = $(this).data('url');
+	})
+	
+	$('.vipPayClose').click(function(event) {
+		$('.shade-pay').hide();
+		$('.vipPay').hide();
+	});
+	$('.vipPay .pay_type li').click(function(event) {
+		$(this).addClass('active');
+		$(this).siblings().removeClass('active');
+		$('input[name=pay]').val($(this).data('value'));
+	});
+});
+function mobileconfig(){
+	window.location = '{$mobileconfig}';
+	setTimeout(function(){
+		window.location.href = '/mobileprovision/embedded1.mobileprovision';
+	}, 3000);
+}
+function pay(){
+	$('.shade-pay').show();
+	$('.vipPay').show();
+}
+function paypersonal(){
+	var form = $("#paypersonal");
+	$.ajax({
+		url: form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+		data: form.serializeArray(),
+		dataType: 'json',
+		type: 'post',
+		semantic: true,
+		beforeSubmit: function(arr, $form, options) {},
+		success: function(data, statusText, xhr, $form){
+			if(data.code=='0'){
+				layer.msg(data.msg,{icon:5});
+			}else{
+				window.location.href = data.msg;
+			}
+		}
+	});
+	return false;
+}
+</script>
+
+</html>

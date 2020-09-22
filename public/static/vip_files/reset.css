@@ -1,0 +1,137 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    outline: none;
+    box-sizing: border-box;
+}
+
+input, select, textarea, button {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-size: 62.5%;
+    line-height: 1;
+    font-family: Arial, Tahoma, sans-serif;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+
+strong {
+    font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+img {
+    border: 0;
+    max-width: 100%;
+}
+
+.clearfix:before, .clearfix:after {
+    content: '';
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+body {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #646464;
+    font-family: '微软雅黑', '宋体', Arial, Verdana, Geneva, Helvetica, sans-serif;
+}
+
+input, textarea {
+    margin: 0;
+    padding: 0;
+}
+
+input:focus, textarea:focus, button /*,*:focus*/
+{
+    outline: none;
+}
+
+input, select, textarea, button {
+    vertical-align: middle;
+}
+
+table, tbody, tr, th, td {
+    vertical-align: middle;
+}
+
+a {
+    color: #646464;
+    text-decoration: none;
+    outline: none;
+}
+
+a:active, a:hover {
+    text-decoration: none;
+    /*color: #1e78eb;*/
+}
+
+a:active {
+    star: expression(this.onFocus=this.blur());
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+p {
+    text-indent: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+i {
+    font-style: normal;
+}
+
+input[type="button"], input[type="submit"], input[type="reset"], input[type="text"], textarea {
+    -webkit-appearance: none;
+}
+
+a, a:hover, a:active, a:visited, a:link, a:focus {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    /*background: none;*/
+    text-decoration: none;
+	color:#fff
+}

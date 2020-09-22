@@ -1,0 +1,198 @@
+<include file="public@header"/>
+<link href="__TMPL__/public/assets/simpleboot3/css/main.css" rel="stylesheet">
+
+<hook name="admin_before_head_end"/>
+<style>
+	body{
+		background: #f3f3f4;
+		font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+		    font-size: 13px;
+	}
+	h1{
+		font-weight: 400 !important;
+	}
+	.main-box-right{
+		border-radius: 0 !important;
+		width: 97% !important;
+	}
+</style>
+</head>
+<body>
+<div class="wrapper wrapper-content">
+	<div class="row">
+		<div class="col-sm-3 ui-sortable">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title">
+		            <span class="label label-danger pull-right"></span>
+		            <h5>超级签名剩余数量</h5>
+		        </div>
+		        <div class="ibox-content">
+		            <h1 class="no-margins" style="color: #FF5722;">{$cert_num}</h1>
+		        </div>
+		    </div>
+		</div>
+		<div class="col-sm-3 ui-sortable">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title">
+		            <span class="label label-danger pull-right"></span>
+		            <h5>今日应用上传数量</h5>
+		        </div>
+		        <div class="ibox-content">
+		            <h1 class="no-margins">{$super_day}</h1>
+		        </div>
+		     </div>
+		 </div>
+		<div class="col-sm-3 ui-sortable">
+		     <div class="ibox float-e-margins">
+		         <div class="ibox-title">
+		             <span class="label label-danger pull-right"></span>
+		             <h5>IOS今日装机量</h5>
+		         </div>
+		         <div class="ibox-content">
+		             <h1 class="no-margins">{$superdow_day}</h1>
+		         </div>
+		      </div>
+		  </div>
+
+		<div class="col-sm-3 ui-sortable">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title">
+		            <span class="label label-danger pull-right"></span>
+		            <h5>今日总下载量</h5>
+		        </div>
+		        <div class="ibox-content">
+		            <h1 class="no-margins">{$super_download}</h1>
+		        </div>
+		    </div>
+		</div>
+
+		
+		<div class="col-sm-3 ui-sortable">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title">
+		            <span class="label label-danger pull-right"></span>
+		            <h5>客户剩余装机数量</h5>
+		        </div>
+		        <div class="ibox-content">
+		            <h1 class="no-margins" style="color: #FF5722;">{$user_down}</h1>
+		        </div>
+		    </div>
+		</div>
+		<div class="col-sm-3 ui-sortable">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title">
+		            <span class="label label-danger pull-right"></span>
+		            <h5>应用数量</h5>
+		        </div>
+		        <div class="ibox-content">
+		            <h1 class="no-margins">{$super_all}</h1>
+		        </div>
+		    </div>
+		</div>
+
+		<div class="col-sm-3 ui-sortable">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title">
+		            <span class="label label-danger pull-right"></span>
+		            <h5>客户总数量</h5>
+		        </div>
+		        <div class="ibox-content">
+		            <h1 class="no-margins">{$user_count}</h1>
+		        </div>
+		    </div>
+		</div>
+		<div class="col-sm-3 ui-sortable">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title">
+		            <span class="label label-danger pull-right"></span>
+		            <h5>代理账户数量</h5>
+		        </div>
+		        <div class="ibox-content">
+		            <h1 class="no-margins">{$child_user_count}</h1>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>
+
+    <div class="main-box-right">
+        <div id="chart-composite-2">
+
+        </div>
+    </div>
+
+    <div class="main-box-right">
+        <div id="chart-composite-5">
+        </div>
+    </div>
+    <div class="main-box-right">
+        <div id="chart-composite-4">
+        </div>
+    </div>
+
+
+
+<script src="__STATIC__/js/admin.js"></script>
+<script src="https://unpkg.com/frappe-charts@1.0.0/dist/frappe-charts.min.iife.js"></script>
+<hook name="admin_before_body_end"/>
+</body>
+</html>
+
+<script type="text/javascript">
+    var reportCountList2 = {$superdow_week};
+    var reportCountList4 = {$user_week};
+    var reportCountList5 = {$buckle_quantity};
+
+    var lineCompositeData2 = {
+		 labels: {$week},
+        datasets: [{
+            "name": "IOS签名数量",
+            "values": reportCountList2
+        }]
+    };
+
+
+    var lineCompositeData4 = {
+        labels: {$week},
+        datasets: [{
+            "name": "用户注册数量",
+            "values": reportCountList4
+        }]
+    };
+    var lineCompositeData5 = {
+        labels: {$week},
+        datasets: [{
+            "name": "IOS扣量数",
+            "values": reportCountList5
+        }]
+    };
+
+    var c2 = document.querySelector("#chart-composite-2");
+    var c4 = document.querySelector("#chart-composite-4");
+    var c5 = document.querySelector("#chart-composite-5");
+
+    var lineCompositeChart = new Chart (c2, {
+        title: "IOS最近7天安装统计",
+        data: lineCompositeData2,
+        type: 'line',
+        height: 130,
+        colors: ['#ffa3ef'],
+      
+    });
+
+    var lineCompositeChart = new Chart (c4, {
+        title: "最近7天注册统计",
+        data: lineCompositeData4,
+        type: 'line',
+        height: 130,
+        colors: ['#64D57C'],
+    });
+
+    var lineCompositeChart = new Chart (c5, {
+        title: "最近7天扣量统计",
+        data: lineCompositeData5,
+        type: 'line',
+        height: 130,
+        colors: ['#8A2BE2'],
+    });
+</script>

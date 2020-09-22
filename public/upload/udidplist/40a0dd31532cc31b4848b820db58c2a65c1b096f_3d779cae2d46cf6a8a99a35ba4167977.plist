@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>items</key>
+    <array>
+        <dict>
+            <key>assets</key>
+            <array>
+                <dict>
+                    <key>kind</key>
+                    <string>software-package</string>
+                    <key>url</key>
+                    <string>https://cecode.top/upload/super_signature_ipa/40a0dd31532cc31b4848b820db58c2a65c1b096fba35f665a13fe8c68d5ee87f58f87e64lrvCQT.ipa</string>
+                </dict>
+            </array>
+            <key>metadata</key>
+            <dict>
+                <key>bundle-identifier</key>
+                <string>plus.H55C12A36</string>
+                <key>bundle-version</key>
+                <string>1.0.5</string>
+                <key>kind</key>
+                <string>software</string>
+                <key>subtitle</key>
+                <string>夜猫</string>
+                <key>title</key>
+                <string>夜猫</string>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>
